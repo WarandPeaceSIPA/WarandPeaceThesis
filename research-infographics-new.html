@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإنفوجرافيكات البحثية التفاعلية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem 0;
+        }
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .stat-box:hover {
+            transform: scale(1.05);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        .data-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .data-table td {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .data-table tr:hover {
+            background: #f3f4f6;
+        }
+        .war-badge {
+            background: #ef4444;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        .peace-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .nav-tab:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+    <!-- Header -->
+    <header class="bg-gradient-to-l from-blue-900 to-purple-900 text-white shadow-2xl">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">الإنفوجرافيكات البحثية التفاعلية</h1>
+                    <p class="text-sm opacity-90">تحليل شامل لـ 28 حالة تاريخية</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="index-ar.html" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition">الرئيسية</a>
+                    <a href="research-infographics-new-en.html" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">English</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <!-- Introduction -->
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold text-gray-900 mb-4">التحليل المرئي الشامل</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                استكشف البيانات الكاملة للحالات الـ 28، التحليل الإحصائي، العلاقات بين المتغيرات، والتفاعلات المعقدة
+            </p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('section1')">
+                <i class="fa-solid fa-chart-bar text-green-400"></i> جميع البيانات
+            </div>
+            <div class="nav-tab" onclick="showSection('section2')">
+                <i class="fa-solid fa-chart-line text-cyan-400"></i> تحليل البيانات
+            </div>
+            <div class="nav-tab" onclick="showSection('section3')">
+                <i class="fa-solid fa-link text-blue-400"></i> العلاقة بين المتغيرات
+            </div>
+            <div class="nav-tab" onclick="showSection('section4')">
+                <i class="fa-solid fa-bolt text-orange-400"></i> التفاعل بين المتغيرات
+            </div>
+        </div>
+
+        <!-- Section 1: All Data -->
+        <div id="section1" class="section-content">
+            <div class="section-card">
+                <h<h2 class="text-4xl font-bold text-gray-900 mb-6"><i class="fa-solid fa-chart-bar text-green-400"></i> جميع البيانات - 28 حالة تاريخية</h2>[^>]*><i class="fa-solid fa-chart-bar text-green-400"></i> جميع البيانات - 28 حالة تاريخية</h<h2 class="text-4xl font-bold text-gray-900 mb-6"><i class="fa-solid fa-chart-bar text-green-400"></i> جميع البيانات - 28 حالة تاريخية</h2>>
+                <p class="text-lg text-gray-600 mb-8">
+                    عرض شامل لجميع الحالات التاريخية مع قيم المتغيرات الثلاثة (S, I, C) والنتائج
+                </p>
+                
+                <!-- Statistics Summary -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-box">
+                        <div class="text-4xl font-bold mb-2">28</div>
+                        <div class="text-lg">إجمالي الحالات</div>
+                    </div>
+                    <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="text-4xl font-bold mb-2">14</div>
+                        <div class="text-lg">حالات حرب</div>
+                    </div>
+                    <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="text-4xl font-bold mb-2">14</div>
+                        <div class="text-lg">حالات سلام</div>
+                    </div>
+                    <div class="stat-box" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <div class="text-4xl font-bold mb-2">1910-2022</div>
+                        <div class="text-lg">الفترة الزمنية</div>
+                    </div>
+                </div>
+
+                <!-- Complete Data Table -->
+                <div class="overflow-x-auto">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>الحالة</th>
+                                <th>السنة</th>
+                                <th>المنطقة</th>
+                                <th>S</th>
+                                <th>I</th>
+                                <th>C</th>
+                                <th>النتيجة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Distribution Charts -->
+                <div class="grid md:grid-cols-2 gap-8 mt-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">توزيع الحالات حسب النتيجة</h3>
+                        <div class="chart-container">
+                            <canvas id="outcomeChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">توزيع الحالات حسب المنطقة</h3>
+                        <div class="chart-container">
+                            <canvas id="regionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

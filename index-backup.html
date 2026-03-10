@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Informational Conditions for Structural Constraint Effectiveness: Expectation Convergence and the Possibility of Peace - Academic Research in International Relations">
+    <meta name="keywords" content="International Relations, Structural Realism, Information Theory, Peace, War, Bayesian Learning">
+    <meta name="author" content="Zaher Al-Issa">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Informational Conditions for Structural Constraint Effectiveness">
+    <meta property="og:description" content="Academic research integrating structural realism and information theories in international relations">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://warandpeacesipa.github.io/WarandPeaceThesis/">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Informational Conditions for Structural Constraint Effectiveness">
+    <meta name="twitter:description" content="Academic research in international relations">
+    
+    <title>Informational Conditions for Structural Constraint Effectiveness</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter for English, Tajawal for Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #7c3aed;
+            --accent-color: #059669;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Inter', 'Tajawal', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .lang-ar {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+        }
+        
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Hero Gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 50%, #059669 100%);
+        }
+        
+        /* Card Hover Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Skip to Content Link - Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #1e40af;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Focus Visible for Accessibility */
+        *:focus-visible {
+            outline: 3px solid #7c3aed;
+            outline-offset: 2px;
+        }
+        
+        /* Mobile Menu Animation */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+        
+        /* Chapter Number Styling */
+        .chapter-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #e5e7eb;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            z-index: 0;
+        }
+        
+        /* Hypothesis Badge */
+        .hypothesis-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #7c3aed, #1e40af);
+            color: white;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Informational Conditions for Structural Constraint</h1>
+                        <p class="text-sm text-gray-600 lang-ar">الشروط المعلوماتية لفاعلية القيد البنيوي</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#home" class="text-gray-700 hover:text-blue-700 transition font-medium">Home</a>
+                    <a href="#summary" class="text-gray-700 hover:text-blue-700 transition font-medium">Summary</a>
+                    <a href="#chapters" class="text-gray-700 hover:text-blue-700 transition font-medium">Chapters</a>
+                    <a href="#framework" class="text-gray-700 hover:text-blue-700 transition font-medium">Framework</a>
+                    <a href="#database" class="text-gray-700 hover:text-blue-700 transition font-medium">Database</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-700 transition font-medium">Contact</a>
+                    <a href="index-ar.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition" aria-label="Switch to Arabic">
+                        عربي
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 text-2xl" aria-label="Open menu" aria-expanded="false" id="mobile-menu-btn">
+                    </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="mobile-menu md:hidden mt-4" id="mobile-menu">
+                <div class="flex flex-col gap-3">
+                    <a href="#home" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">Home</a>
+                    <a href="#summary" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">Summary</a>
+                    <a href="#chapters" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">Chapters</a>
+                    <a href="#framework" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">Framework</a>
+                    <a href="#database" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">Database</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">Contact</a>
+                    <a href="index-ar.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-left">
+                        عربي (Arabic)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero-gradient text-white py-20 md:py-32" role="banner">
+            <div class="container mx-auto px-4 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Informational Conditions for Structural Constraint Effectiveness
+                    </h2>
+                    <p class="text-xl md:text-2xl mb-4 opacity-90 font-medium">
+                        Expectation Convergence and the Possibility of Peace
+                    </p>
+                    <p class="text-lg md:text-xl mb-8 opacity-80 lang-ar">
+                        تقارب التوقعات وإمكان تحقق السلام
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-12">
+                        <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 text-center">
+                            <p class="text-sm opacity-90">Researcher</p>
+                            <p class="font-bold text-lg">Zaher Al-Issa</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 text-center">
+                            <p class="text-sm opacity-90">Academic Supervisor</p>
+                            <p class="font-bold text-lg">Prof. Saleh Al-Harbi</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 text-center">
+                            <p class="text-sm opacity-90">Academic Advisor</p>
+                            <p class="font-bold text-lg">Dr. Dareen Al-Abdul Mohsen</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 justify-center">
+                        <a href="#summary" class="bg-white text-blue-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                            Read Executive Summary
+                        </a>
+                        <a href="#database" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-700 transition">
+                            Explore Database
+                        </a>
+                        <a href="dashboard-hub-en.html" class="bg-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition shadow-lg">
+                            Interactive Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Executive Summary Section -->
+        <section id="summary" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Executive Summary</h2>
+                        <p class="text-xl text-gray-600 lang-ar">الملخص التنفيذي</p>
+                        <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none">
+                        <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 mb-8 shadow-lg">
+                            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                                Comprehensive Overview of the Academic Research
+                            </h3>
+                            <p class="text-lg leading-relaxed text-gray-800 mb-6">
+                                This research presents a <strong>study integrating structural realism and information theories</strong> in international relations, 
+                                examining how informational conditions can affect the effectiveness of structural constraint in achieving stability and peace.
+                            </p>
+                            <p class="text-lg leading-relaxed text-gray-800 mb-6">
+                                The research is based on a central hypothesis that <strong>expectation convergence between states</strong> 
+                                - resulting from improved information flow and Bayesian learning - can enhance the international structure's ability to regulate aggressive state behavior.
+                            </p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-white rounded-xl p-6 shadow-md border-l-4 border-blue-700">
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">
+                                    Main Academic Contribution
+                                </h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Development of an integrated theoretical framework linking <strong>structural realism</strong> (Waltz, Mearsheimer) 
+                                    and <strong>information theories</strong> (Fearon, Powell), focusing on the role of <strong>Bayesian learning</strong> 
+                                    in shaping strategic expectations and reducing conflict probabilities.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-6 shadow-md border-l-4 border-purple-700">
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">
+                                    Research Structure
+                                </h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    The research covers <strong>seven main chapters</strong> addressing theoretical foundations, 
+                                    research methodology, and applied case studies, focusing on historical cases 
+                                    that witnessed transformations in the informational environment and their implications for international behavior.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-xl p-6 border-l-4 border-green-600">
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">
+                                Practical Applications
+                            </h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                The research provides applied analyses of contemporary conflicts such as <strong>US-China relations</strong>, 
+                                <strong>Russia and NATO</strong>, <strong>Iran's nuclear file</strong>, and <strong>North Korea</strong>, 
+                                with historical case studies including <strong>World War I</strong>, <strong>Cuban Missile Crisis</strong>, 
+                                and the <strong>2022 Ukraine War</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Chapters Section -->
+        <section id="chapters" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Thesis Chapters</h2>
+                    <p class="text-xl text-gray-600 lang-ar">فصول الرسالة</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    <p class="text-lg text-gray-600 mt-4">An academic journey through seven integrated chapters</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Chapter 1 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">01</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Introduction</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">المقدمة</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                General framework, research question, central argument, theoretical and policy significance
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 2 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">02</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Literature Review</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">مراجعة الأدبيات</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Structural realism, bargaining theories, Bayesian learning, expectation convergence
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 3 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">03</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Theoretical Framework</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">الإطار النظري</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Formal model, four hypotheses, testable propositions
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 4 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">04</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Methodology</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">المنهجية</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Mixed-method design, data and variables, causal identification strategy
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 5 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">05</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Policy Applications</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">التطبيقات السياساتية</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                China-US, Russia-NATO, Iran, North Korea
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 6 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">06</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Case Studies</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">دراسات الحالة</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                World War I, Cuban Missile Crisis, Ukraine 2022
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 7 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">07</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">Conclusion</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">الخاتمة</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                Summary of findings, theoretical contributions, policy implications, future research
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Theoretical Framework Section -->
+        <section id="framework" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Formal Theoretical Framework</h2>
+                    <p class="text-xl text-gray-600 lang-ar">الإطار النظري الرسمي</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    <p class="text-lg text-gray-600 mt-4">An integrated mathematical model for international relations</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto">
+                    <!-- Mathematical Model -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 mb-12 shadow-lg text-center">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Core Mathematical Model</h3>
+                        <p class="text-lg text-gray-700 mb-8">Peace Probability Equation</p>
+                        <div class="bg-white rounded-xl p-8 shadow-md inline-block">
+                            <p class="text-3xl md:text-4xl font-bold text-blue-700 mb-6">P(Peace) = f(S, I, C)</p>
+                            <div class="grid md:grid-cols-3 gap-6 text-left">
+                                <div>
+                                    <p class="text-2xl font-bold text-gray-900 mb-2">S</p>
+                                    <p class="text-sm text-gray-600 mb-1">Structural Constraint Strength</p>
+                                    <p class="text-xs text-gray-500 lang-ar">قوة القيد البنيوي</p>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-gray-900 mb-2">I</p>
+                                    <p class="text-sm text-gray-600 mb-1">Information Quality</p>
+                                    <p class="text-xs text-gray-500 lang-ar">جودة البيئة المعلوماتية</p>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-gray-900 mb-2">C</p>
+                                    <p class="text-sm text-gray-600 mb-1">Convergence Level</p>
+                                    <p class="text-xs text-gray-500 lang-ar">مستوى تقارب التوقعات</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Four Hypotheses -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- H1 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-700">
+                            <span class="hypothesis-badge">H1</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Hypothesis One</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">الفرضية الأولى</p>
+                            <h5 class="font-bold text-blue-700 mb-2">Insufficient Informational Convergence</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                Mere expectation convergence between rival states is insufficient to achieve peace without effective structural constraint.
+                            </p>
+                        </div>
+                        
+                        <!-- H2 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-purple-700">
+                            <span class="hypothesis-badge">H2</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Hypothesis Two</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">الفرضية الثانية</p>
+                            <h5 class="font-bold text-purple-700 mb-2">Determinants of Convergence Rate</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                The rate of expectation convergence is determined by information quality, communication channels, and parties' capacity for Bayesian learning.
+                            </p>
+                        </div>
+                        
+                        <!-- H3 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-700">
+                            <span class="hypothesis-badge">H3</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Hypothesis Three</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">الفرضية الثالثة</p>
+                            <h5 class="font-bold text-green-700 mb-2">Structure-Information Interaction</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                Structural constraint effectiveness increases critically when synchronized with high expectation convergence rates.
+                            </p>
+                        </div>
+                        
+                        <!-- H4 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-700">
+                            <span class="hypothesis-badge">H4</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">Hypothesis Four</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-ar">الفرضية الرابعة</p>
+                            <h5 class="font-bold text-red-700 mb-2">Critical Informational Threshold</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                There exists a critical informational threshold below which structural constraint fails to prevent war, and above which it becomes highly effective.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Database Section -->
+        <section id="database" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Academic Database</h2>
+                    <p class="text-xl text-gray-600 lang-ar">قاعدة البيانات الأكاديمية</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    <p class="text-lg text-gray-600 mt-4">50 carefully selected research papers</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto">
+                    <!-- Statistics -->
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <div class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+                            <div class="text-5xl font-bold text-blue-700 mb-2">50</div>
+                            <p class="text-gray-700 font-medium">Research Papers</p>
+                            <p class="text-sm text-gray-500 lang-ar">ورقة بحثية</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+                            <div class="text-5xl font-bold text-purple-700 mb-2">25+</div>
+                            <p class="text-gray-700 font-medium">Leading Scholars</p>
+                            <p class="text-sm text-gray-500 lang-ar">باحث رائد</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+                            <div class="text-5xl font-bold text-green-700 mb-2">7</div>
+                            <p class="text-gray-700 font-medium">Research Fields</p>
+                            <p class="text-sm text-gray-500 lang-ar">مجالات بحثية</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Research Fields -->
+                    <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Main Research Fields</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Structural Realism</h4>
+                                    <p class="text-sm text-gray-600">Waltz, Mearsheimer, Labs</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Bargaining Theories</h4>
+                                    <p class="text-sm text-gray-600">Fearon, Powell, Reiter</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Information Theory</h4>
+                                    <p class="text-sm text-gray-600">Shannon, Bayes, Kullback</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Peace Studies</h4>
+                                    <p class="text-sm text-gray-600">Galtung, Boulding, Deutsch</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Strategic Learning</h4>
+                                    <p class="text-sm text-gray-600">Levy, Jervis, Tetlock</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Game Theory</h4>
+                                    <p class="text-sm text-gray-600">Schelling, Aumann, Harsanyi</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">Political Economy</h4>
+                                    <p class="text-sm text-gray-600">Keohane, Gilpin, Krasner</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 text-center">
+                            <p class="text-gray-700 mb-4">Database available for researchers and academics</p>
+                            <a href="#contact" class="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+                                Request Database Access
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Contact</h2>
+                    <p class="text-xl text-gray-600 lang-ar">التواصل</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    <p class="text-lg text-gray-600 mt-4">For academic inquiries and research collaboration</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <!-- Researcher -->
+                        <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                            <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Zaher Al-Issa</h3>
+                            <p class="text-sm text-gray-600 mb-3">Researcher</p>
+                            <p class="text-xs text-gray-500 mb-4">Researcher in International Relations Theories and Future Wars</p>
+                            <a href="mailto:zmalessi@dah.edu.sa" class="text-blue-700 hover:text-blue-800 font-medium">
+                                zmalessi@dah.edu.sa
+                            </a>
+                        </div>
+                        
+                        <!-- Supervisor -->
+                        <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Dr. Saleh Al-Harbi</h3>
+                            <p class="text-sm text-gray-600 mb-3">Academic Supervisor</p>
+                            <p class="text-xs text-gray-500 mb-4">Professor of International Relations - King Abdulaziz University</p>
+                            <a href="mailto:sharbi@dah.edu.sa" class="text-purple-700 hover:text-purple-800 font-medium">
+                                sharbi@dah.edu.sa
+                            </a>
+                        </div>
+                        
+                        <!-- Academic Advisor -->
+                        <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Dr. Dareen Abdulmohsen</h3>
+                            <p class="text-sm text-gray-600 mb-3">Academic Advisor</p>
+                            <p class="text-xs text-gray-500 mb-4">Head of International Relations and Diplomacy Department - Dar Al-Hekma University</p>
+                            <a href="mailto:dabdulmohsen@dah.edu.sa" class="text-green-700 hover:text-green-800 font-medium">
+                                dabdulmohsen@dah.edu.sa
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Send a Message</h3>
+                        <form class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-medium mb-2">
+                                        Full Name <span class="text-red-600">*</span>
+                                    </label>
+                                    <input type="text" id="name" name="name" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                           placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-medium mb-2">
+                                        Email <span class="text-red-600">*</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                           placeholder="example@email.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">
+                                    Subject <span class="text-red-600">*</span>
+                                </label>
+                                <input type="text" id="subject" name="subject" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                       placeholder="Message subject">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">
+                                    Message <span class="text-red-600">*</span>
+                                </label>
+                                <textarea id="message" name="message" rows="6" required 
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                          placeholder="Write your message here..."></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="bg-blue-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+        <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About the Research</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        An academic study integrating structural realism and information theories in international relations
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="dashboard-hub-en.html" class="text-gray-400 hover:text-white transition">Dashboard Hub</a></li>
+                        <li><a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition">Quantitative Analysis</a></li>
+                        <li><a href="citation-network-en.html" class="text-gray-400 hover:text-white transition">Citation Network</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dar Al-Hekma University</h3>
+                    <p class="text-gray-400 mb-4">جامعة دار الحكمة</p>
+                    <p class="text-gray-400">International Relations & Diplomacy Department</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    All Rights Reserved | جميع الحقوق محفوظة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" id="backToTop" 
+            class="fixed bottom-8 right-8 bg-blue-700 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-800 transition opacity-0 pointer-events-none"
+            aria-label="Back to top">
+        </button>
+    
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            menu.classList.toggle('active');
+            const isExpanded = menu.classList.contains('active');
+            btn.setAttribute('aria-expanded', isExpanded);
+        }
+        
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will respond soon.\nشكراً لتواصلك! سنرد عليك قريباً.');
+            event.target.reset();
+        }
+        
+        // Back to Top Button
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Show/Hide Back to Top Button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.pointerEvents = 'auto';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.pointerEvents = 'none';
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
+</body>
+</html>

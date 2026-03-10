@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخريطة التفاعلية لهيكل النظام الدولي | Interactive System Structure Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        #map {
+            height: 70vh;
+            width: 100%;
+            z-index: 1;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .timeline-container {
+            position: relative;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .timeline-slider {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #ef4444 0%, #f59e0b 50%, #10b981 100%);
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .timeline-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+        
+        .timeline-slider::-moz-range-thumb {
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+        
+        .case-marker {
+            transition: all 0.3s ease;
+        }
+        
+        .case-marker:hover {
+            transform: scale(1.2);
+        }
+        
+        .variable-bar {
+            height: 20px;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        /* Custom Popup Styling */
+        .leaflet-popup-content-wrapper {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .leaflet-popup-content {
+            margin: 15px;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        /* Legend Styling */
+        .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-left: 10px;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        /* Control Panel */
+        .control-panel {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .filter-btn.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .mini-chart {
+            width: 100%;
+            height: 150px;
+            margin-top: 15px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="hero-gradient text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">الخريطة التفاعلية لهيكل النظام الدولي</h1>
+                    <p class="text-sm md:text-base mt-1 opacity-90">Interactive System Structure Map (1910-2022)</p>
+                </div>
+                <div class="flex gap-3">
+                    <a href="index-ar.html" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        الرئيسية
+                    </a>
+                    <a href="dashboard-hub.html" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        لوحة التحكم
+                    </a>
+                    <a href="interactive-system-structure-en.html" class="px-4 py-2 bg-white text-purple-700 rounded-lg hover:bg-gray-100 transition font-semibold">
+                        English
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Instructions Banner -->
+    <div class="bg-blue-50 border-b-4 border-blue-500 p-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-start gap-4">
+                <div class="text-4xl">🗺️</div>
+                <div>
+                    <h3 class="text-lg font-bold text-blue-900 mb-2">كيفية استخدام الخريطة التفاعلية</h3>
+                    <ul class="text-sm text-blue-800 space-y-1">
+                        <li>• استخدم شريط الزمن أسفل الخريطة للتنقل بين الفترات التاريخية (1910-2022)</li>
+                        <li>• انقر على أي علامة على الخريطة لعرض تفاصيل الحالة وتوازن المتغيرات (S, I, C)</li>
+                        <li>• استخدم أزرار التصفية لعرض حالات الحرب أو السلام فقط</li>
+                        <li>• شاهد الرسوم البيانية التفاعلية لكل حالة في النافذة المنبثقة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Container -->
+    <div class="relative">
+        <div id="map"></div>
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <h3 class="text-xl font-bold mb-4 text-gray-800">
+                التحكم والتصفية
+            </h3>
+            
+            <!-- Filters -->
+            <div class="mb-4">
+                <p class="text-sm font-semibold text-gray-600 mb-2">تصفية النتائج:</p>
+                <button onclick="filterCases('all')" class="filter-btn active" id="filter-all">
+                    الكل (28)
+                </button>
+                <button onclick="filterCases('war')" class="filter-btn" id="filter-war">
+                    🔴 حرب (14)
+                </button>
+                <button onclick="filterCases('peace')" class="filter-btn" id="filter-peace">
+                    🟢 سلام (14)
+                </button>
+            </div>
+            
+            <!-- Current Case Info -->
+            <div class="stats-card">
+                <h4 class="font-bold text-gray-800 mb-2">الحالة الحالية:</h4>
+                <p id="current-case-name" class="text-lg font-bold text-purple-700">اختر حالة من الخريطة</p>
+                <p id="current-case-year" class="text-sm text-gray-600"></p>
+            </div>
+            
+            <!-- Mini Chart -->
+            <canvas id="miniChart" class="mini-chart"></canvas>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend" style="position: absolute; bottom: 120px; right: 20px; z-index: 1000;">
+            <h4 class="font-bold text-gray-800 mb-3">المفتاح:</h4>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ef4444;"></div>
+                <span class="text-sm">حالات حرب (14)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #10b981;"></div>
+                <span class="text-sm">حالات سلام (14)</span>
+            </div>
+            <div class="mt-3 pt-3 border-t">
+                <p class="text-xs text-gray-600 mb-2">حجم الدائرة = قوة القيد (S)</p>
+                <p class="text-xs text-gray-600">شفافية اللون = جودة المعلومات (I)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline Section -->
+    <div class="timeline-container">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">
+                الخط الزمني التفاعلي (1910-2022)
+            </h3>
+            
+            <div class="flex items-center gap-4 mb-4">
+                <span class="text-sm font-semibold text-gray-600">1910</span>
+                <input type="range" id="timeline" class="timeline-slider flex-1" min="0" max="27" value="0" step="1">
+                <span class="text-sm font-semibold text-gray-600">2022</span>
+            </div>
+            
+            <div class="text-center">
+                <div id="timeline-year" class="text-4xl font-bold text-purple-700 mb-2">1914</div>
+                <div id="timeline-case" class="text-xl text-gray-700 font-semibold">الحرب العالمية الأولى</div>
+                <div id="timeline-outcome" class="mt-2">
+                    <span class="px-4 py-2 rounded-full bg-red-100 text-red-700 font-semibold">حرب</span>
+                </div>
+            </div>
+            
+            <!-- Variables Display -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <!-- S Variable -->
+                <div class="bg-white p-4 rounded-xl shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-gray-800">
+                            القيد البنيوي (S)
+                        </h4>
+                        <span id="s-value" class="text-2xl font-bold text-blue-600">3</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-4">
+                        <div id="s-bar" class="variable-bar bg-gradient-to-r from-blue-400 to-blue-600" style="width: 30%"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">قوة القيود الهيكلية في النظام الدولي</p>
+                </div>
+                
+                <!-- I Variable -->
+                <div class="bg-white p-4 rounded-xl shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-gray-800">
+                            جودة المعلومات (I)
+                        </h4>
+                        <span id="i-value" class="text-2xl font-bold text-green-600">2</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-4">
+                        <div id="i-bar" class="variable-bar bg-gradient-to-r from-green-400 to-green-600" style="width: 20%"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">جودة المعلومات المتاحة لصناع القرار</p>
+                </div>
+                
+                <!-- C Variable -->
+                <div class="bg-white p-4 rounded-xl shadow-md">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-gray-800">
+                            التقارب (C)
+                        </h4>
+                        <span id="c-value" class="text-2xl font-bold text-purple-600">1</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-4">
+                        <div id="c-bar" class="variable-bar bg-gradient-to-r from-purple-400 to-purple-600" style="width: 10%"></div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">درجة التقارب بين التوقعات والواقع</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+                <i class="fa-solid fa-chart-bar text-green-400"></i> إحصائيات النظام الدولي عبر الزمن
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="stats-card text-center">
+                    <div class="text-5xl font-bold text-blue-700 mb-2">28</div>
+                    <p class="text-gray-700 font-semibold">حالة تاريخية</p>
+                    <p class="text-sm text-gray-600 mt-1">1910-2022</p>
+                </div>
+                
+                <div class="stats-card text-center">
+                    <div class="text-5xl font-bold text-red-600 mb-2">14</div>
+                    <p class="text-gray-700 font-semibold">حالة حرب</p>
+                    <p class="text-sm text-gray-600 mt-1">50% من الحالات</p>
+                </div>
+                
+                <div class="stats-card text-center">
+                    <div class="text-5xl font-bold text-green-600 mb-2">14</div>
+                    <p class="text-gray-700 font-semibold">حالة سلام</p>
+                    <p class="text-sm text-gray-600 mt-1">50% من الحالات</p>
+                </div>
+                
+                <div class="stats-card text-center">
+                    <div class="text-5xl font-bold text-purple-700 mb-2">112</div>
+                    <p class="text-gray-700 font-semibold">سنة من البيانات</p>
+                    <p class="text-sm text-gray-600 mt-1">قرن من التاريخ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">عن البحث</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        دراسة أكاديمية تدمج الواقعية البنيوية ونظريات المعلومات في العلاقات الدولية
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-ar.html" class="text-gray-400 hover:text-white transition">الصفحة الرئيسية</a></li>
+                        <li><a href="dashboard-hub.html" class="text-gray-400 hover:text-white transition">لوحة التحكم</a></li>
+                        <li><a href="quantitative-analysis.html" class="text-gray-400 hover:text-white transition">التحليل الكمي</a></li>
+                        <li><a href="citation-network.html" class="text-gray-400 hover:text-white transition">شبكة الاستشهادات</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">جامعة دار الحكمة</h3>
+                    <p class="text-gray-400 mb-4">Dar Al-Hekma University</p>
+                    <p class="text-gray-400">قسم العلاقات الدولية والدبلوماسية</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    جميع الحقوق محفوظة | All Rights Reserved
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data-28-cases.js"></script>
+    <script>
+        // Initialize Map
+        const map = L.map('map', {
+            center: [30, 20],
+            zoom: 2,
+            minZoom: 2,
+            maxZoom: 6,
+            zoomControl: true
+        });
+
+        // Add tile layer with modern dark theme
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Geographic coordinates for regions
+        const regionCoords = {
+            'Europe': [50, 10],
+            'Asia': [35, 105],
+            'Middle East': [29, 45],
+            'North America': [40, -100],
+            'South America': [-15, -60],
+            'Africa': [0, 20]
+        };
+
+        // Store markers
+        let markers = [];
+        let currentFilter = 'all';
+        let miniChartInstance = null;
+
+        // Create markers for all cases
+        function createMarkers() {
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+
+            casesData.forEach((caseData, index) => {
+                if (currentFilter !== 'all' && caseData.outcome !== currentFilter) return;
+
+                const coords = regionCoords[caseData.region] || [0, 0];
+                // Add some randomness to avoid overlapping
+                const lat = coords[0] + (Math.random() - 0.5) * 10;
+                const lng = coords[1] + (Math.random() - 0.5) * 20;
+
+                const color = caseData.outcome === 'war' ? '#ef4444' : '#10b981';
+                const radius = 10 + (caseData.s * 3); // Size based on S value
+                const opacity = 0.4 + (caseData.i / 10) * 0.6; // Opacity based on I value
+
+                const marker = L.circleMarker([lat, lng], {
+                    radius: radius,
+                    fillColor: color,
+                    color: '#fff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: opacity,
+                    className: 'case-marker'
+                }).addTo(map);
+
+                // Create popup content
+                const popupContent = `
+                    <div style="min-width: 300px; font-family: 'Cairo', sans-serif;">
+                        <h3 style="font-size: 18px; font-weight: bold; color: ${color}; margin-bottom: 10px;">
+                            ${caseData.nameAr}
+                        </h3>
+                        <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                            ${caseData.nameEn} (${caseData.year})
+                        </p>
+                        
+                        <div style="background: #f3f4f6; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                            <h4 style="font-weight: bold; margin-bottom: 10px;">توازن المتغيرات:</h4>
+                            
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                    <span style="font-size: 14px;">القيد البنيوي (S)</span>
+                                    <span style="font-weight: bold; color: #3b82f6;">${caseData.s}/10</span>
+                                </div>
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px;">
+                                    <div style="background: linear-gradient(90deg, #3b82f6, #1d4ed8); width: ${caseData.s * 10}%; height: 100%; border-radius: 10px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                    <span style="font-size: 14px;">جودة المعلومات (I)</span>
+                                    <span style="font-weight: bold; color: #10b981;">${caseData.i}/10</span>
+                                </div>
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px;">
+                                    <div style="background: linear-gradient(90deg, #10b981, #059669); width: ${caseData.i * 10}%; height: 100%; border-radius: 10px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                    <span style="font-size: 14px;">التقارب (C)</span>
+                                    <span style="font-weight: bold; color: #8b5cf6;">${caseData.c}/10</span>
+                                </div>
+                                <div style="background: #e5e7eb; border-radius: 10px; height: 8px;">
+                                    <div style="background: linear-gradient(90deg, #8b5cf6, #6d28d9); width: ${caseData.c * 10}%; height: 100%; border-radius: 10px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <span style="padding: 8px 20px; border-radius: 20px; background: ${color}; color: white; font-weight: bold; display: inline-block;">
+                                ${caseData.outcome === 'war' ? '⚔️ حرب' : '🕊️ سلام'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+
+                marker.bindPopup(popupContent, {
+                    maxWidth: 350,
+                    className: 'custom-popup'
+                });
+
+                marker.on('click', () => {
+                    updateCurrentCase(caseData);
+                });
+
+                markers.push(marker);
+            });
+        }
+
+        // Update current case display
+        function updateCurrentCase(caseData) {
+            document.getElementById('current-case-name').textContent = caseData.nameAr;
+            document.getElementById('current-case-year').textContent = `${caseData.year} - ${caseData.region}`;
+            
+            // Update mini chart
+            updateMiniChart(caseData);
+        }
+
+        // Update mini chart
+        function updateMiniChart(caseData) {
+            const ctx = document.getElementById('miniChart').getContext('2d');
+            
+            if (miniChartInstance) {
+                miniChartInstance.destroy();
+            }
+            
+            miniChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['القيد (S)', 'المعلومات (I)', 'التقارب (C)'],
+                    datasets: [{
+                        label: caseData.nameAr,
+                        data: [caseData.s, caseData.i, caseData.c],
+                        backgroundColor: caseData.outcome === 'war' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+                        borderColor: caseData.outcome === 'war' ? '#ef4444' : '#10b981',
+                        borderWidth: 2,
+                        pointBackgroundColor: caseData.outcome === 'war' ? '#ef4444' : '#10b981',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: caseData.outcome === 'war' ? '#ef4444' : '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: {
+                                stepSize: 2,
+                                font: { family: 'Cairo' }
+                            },
+                            pointLabels: {
+                                font: { family: 'Cairo', size: 11 }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Filter cases
+        function filterCases(filter) {
+            currentFilter = filter;
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`filter-${filter}`).classList.add('active');
+            
+            createMarkers();
+        }
+
+        // Timeline functionality
+        const timeline = document.getElementById('timeline');
+        const timelineYear = document.getElementById('timeline-year');
+        const timelineCase = document.getElementById('timeline-case');
+        const timelineOutcome = document.getElementById('timeline-outcome');
+        const sValue = document.getElementById('s-value');
+        const iValue = document.getElementById('i-value');
+        const cValue = document.getElementById('c-value');
+        const sBar = document.getElementById('s-bar');
+        const iBar = document.getElementById('i-bar');
+        const cBar = document.getElementById('c-bar');
+
+        timeline.addEventListener('input', function() {
+            const index = parseInt(this.value);
+            const caseData = casesData[index];
+            
+            // Update timeline display
+            timelineYear.textContent = caseData.year;
+            timelineCase.textContent = caseData.nameAr;
+            
+            const outcomeColor = caseData.outcome === 'war' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700';
+            const outcomeText = caseData.outcome === 'war' ? '⚔️ حرب' : '🕊️ سلام';
+            timelineOutcome.innerHTML = `<span class="px-4 py-2 rounded-full ${outcomeColor} font-semibold">${outcomeText}</span>`;
+            
+            // Update variable values
+            sValue.textContent = caseData.s;
+            iValue.textContent = caseData.i;
+            cValue.textContent = caseData.c;
+            
+            // Update bars
+            sBar.style.width = (caseData.s * 10) + '%';
+            iBar.style.width = (caseData.i * 10) + '%';
+            cBar.style.width = (caseData.c * 10) + '%';
+            
+            // Highlight marker on map
+            const marker = markers[index];
+            if (marker) {
+                map.setView(marker.getLatLng(), 4, { animate: true });
+                marker.openPopup();
+            }
+        });
+
+        // Initialize
+        createMarkers();
+        
+        // Set initial case
+        updateCurrentCase(casesData[0]);
+    </script>
+</body>
+</html>

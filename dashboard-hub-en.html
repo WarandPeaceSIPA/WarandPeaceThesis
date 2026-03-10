@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard Hub | Informational Conditions for Structural Constraint Effectiveness</title>
+    <meta name="description" content="Explore all interactive tools and research analytics for the thesis">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .dashboard-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .badge-new {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        .badge-fixed {
+            background-color: #3b82f6;
+            color: white;
+        }
+    </style>
+    <!-- Theme System CSS -->
+    </head>
+<body class="bg-gray-900 text-white">
+    <!-- Header -->
+    <header class="bg-gray-800 shadow-lg sticky top-0 z-50 border-b border-gray-700">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <a href="index-en.html" class="text-xl font-bold text-purple-400 hover:text-purple-300 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Homepage
+                    </a>
+                </div>
+                <a href="dashboard-hub.html" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-colors">
+                    العربية
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16 md:py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-6">
+                <i class="fas fa-chart-line text-8xl opacity-90"></i>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                Interactive Dashboard Hub
+            </h1>
+            <p class="text-xl md:text-2xl mb-4 max-w-3xl mx-auto">
+                Explore All Interactive Tools and Research Analytics
+            </p>
+            <p class="text-lg opacity-90 max-w-2xl mx-auto">
+                A comprehensive center for all interactive materials, visualizations, and analytical tools related to the thesis
+            </p>
+            
+            <!-- Statistics -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto mt-8">
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                    <div class="text-3xl font-bold">6</div>
+                    <div class="text-sm opacity-80">Interactive Tools</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                    <div class="text-3xl font-bold">313</div>
+                    <div class="text-sm opacity-80">References</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                    <div class="text-3xl font-bold">28</div>
+                    <div class="text-sm opacity-80">Historical Cases</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Cards -->
+    <section class="py-16 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Dashboard & Statistics -->
+                <div class="dashboard-card rounded-2xl overflow-hidden bg-gray-800 border border-gray-700" onclick="window.location.href='dashboard-en.html'">
+                    <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-white text-center">
+                        <i class="fas fa-chart-bar card-icon text-blue-200"></i>
+                        <h3 class="text-2xl font-bold">Dashboard & Statistics</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Explore interactive statistics and quantitative data of the research with dynamic charts and visualizations
+                        </p>
+                        <div class="mb-4">
+                            <span class="badge badge-fixed">Updated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Interactive Infographic -->
+                <div class="dashboard-card rounded-2xl overflow-hidden bg-gray-800 border border-gray-700" onclick="window.location.href='infographic-en.html'">
+                    <div class="bg-gradient-to-br from-purple-600 to-purple-800 p-8 text-white text-center">
+                        <i class="fas fa-paint-brush card-icon text-purple-200"></i>
+                        <h3 class="text-2xl font-bold">Interactive Infographic</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Explore the mathematical model interactively with comprehensive historical case studies
+                        </p>
+                        <div class="mb-4">
+                            <span class="badge badge-fixed">Updated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Citation Network -->
+                <div class="dashboard-card rounded-2xl overflow-hidden bg-gray-800 border border-gray-700" onclick="window.location.href='citation-network-en.html'">
+                    <div class="bg-gradient-to-br from-red-600 to-red-800 p-8 text-white text-center">
+                        <i class="fas fa-project-diagram card-icon text-red-200"></i>
+                        <h3 class="text-2xl font-bold">Interactive Citation Network</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Explore relationships between 313 academic references and research citations interactively
+                        </p>
+                        <div class="mb-4">
+                            <span class="badge badge-fixed">Updated</span>
+                        </div>
+                        <div class="text-sm text-gray-400 space-y-1">
+                            <div><strong class="text-white">313</strong> Academic References</div>
+                            <div><strong class="text-white">313</strong> Research Citations</div>
+                            <div><strong class="text-white">12</strong> Research Fields</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: 3D Surface Plot -->
+                <div class="dashboard-card rounded-2xl overflow-hidden bg-gray-800 border border-gray-700" onclick="window.location.href='3d-surface-plot.html'">
+                    <div class="bg-gradient-to-br from-cyan-600 to-cyan-800 p-8 text-white text-center">
+                        <i class="fas fa-cube card-icon text-cyan-200"></i>
+                        <h3 class="text-2xl font-bold">3D Surface Plot</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Interactive 3D visualization of the S×I×C mathematical model showing war probability surface
+                        </p>
+                        <div class="mb-4">
+                            <span class="badge badge-new">New</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Quantitative Analysis -->
+                <div class="dashboard-card rounded-2xl overflow-hidden bg-gray-800 border-4 border-green-500">
+                    <div class="bg-gradient-to-br from-orange-600 to-orange-800 p-8 text-white text-center">
+                        <i class="fas fa-chart-line card-icon text-orange-200"></i>
+                        <h3 class="text-2xl font-bold">Interactive Quantitative Analysis</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            6 interactive charts showing quantitative analysis results of 28 historical cases
+                        </p>
+                        <div class="mb-4">
+                            <span class="badge badge-fixed">Updated</span>
+                        </div>
+                        <div class="text-sm text-gray-400 space-y-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Detailed coding criteria
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                Correlations with war probability
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                28 historical cases
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button disabled class="w-full px-6 py-3 bg-gray-700 text-gray-400 rounded-lg cursor-not-allowed font-semibold">
+                                Under Development
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: Research Infographics -->
+                <div class="dashboard-card rounded-2xl overflow-hidden bg-gray-800 border-4 border-green-500" onclick="window.location.href='research-infographics-en.html'">
+                    <div class="bg-gradient-to-br from-pink-600 to-pink-800 p-8 text-white text-center">
+                        <i class="fas fa-images card-icon text-pink-200"></i>
+                        <h3 class="text-2xl font-bold">Research Infographics</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            9 interactive research infographics explaining methodology, theoretical framework, and research design
+                        </p>
+                        <div class="mb-4">
+                            <span class="badge badge-fixed">Updated</span>
+                        </div>
+                        <div class="text-sm text-gray-400 space-y-1">
+                            <div><i class="fa-solid fa-check-circle text-green-400"></i> Analytical Framework • Bayesian Learning</div>
+                            <div><i class="fa-solid fa-check-circle text-green-400"></i> Case Selection Criteria</div>
+                            <div><i class="fa-solid fa-check-circle text-green-400"></i> Causal Mechanism • Data Collection</div>
+                            <div><i class="fa-solid fa-check-circle text-green-400"></i> Expectation Convergence Model</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About the Research</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        An academic study integrating structural realism and information theories in international relations
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="index-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-home text-blue-400 mr-2"></i>Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="dashboard-hub-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-chart-line text-green-400 mr-2"></i>Dashboard Hub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mathematical-framework.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-square-root-alt text-purple-400 mr-2"></i>Mathematical Framework
+                            </a>
+                        </li>
+                        <li>
+                            <a href="3d-surface-plot.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-cube text-blue-500 mr-2"></i>3D Surface Plot
+                            </a>
+                        </li>
+                        <li>
+                            <a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-chart-bar text-cyan-400 mr-2"></i>Quantitative Analysis
+                            </a>
+                        </li>
+                        <li>
+                            <a href="citation-network-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-project-diagram text-red-400 mr-2"></i>Citation Network
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dar Al-Hekma University</h3>
+                    <p class="text-gray-400 mb-4">جامعة دار الحكمة</p>
+                    <p class="text-gray-400">International Relations & Diplomacy Department</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    All Rights Reserved | جميع الحقوق محفوظة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

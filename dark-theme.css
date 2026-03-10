@@ -1,0 +1,410 @@
+/* ===================================
+   DARK ELEGANT THEME
+   Professional & Sophisticated Design
+   =================================== */
+
+:root {
+    /* Dark Background Colors */
+    --bg-primary: #0f172a;      /* Deep navy black */
+    --bg-secondary: #1e293b;    /* Slate dark */
+    --bg-card: #1e293b;         /* Card background */
+    --bg-card-hover: #334155;   /* Card hover state */
+    
+    /* Accent Colors - Elegant & Calm */
+    --accent-blue: #60a5fa;     /* Soft blue */
+    --accent-green: #34d399;    /* Mint green */
+    --accent-purple: #a78bfa;   /* Lavender purple */
+    --accent-gold: #fbbf24;     /* Warm gold */
+    --accent-cyan: #22d3ee;     /* Bright cyan */
+    
+    /* Text Colors */
+    --text-primary: #ffffff;    /* Pure white */
+    --text-secondary: #e2e8f0;  /* Light gray */
+    --text-muted: #94a3b8;      /* Muted gray */
+    
+    /* Border & Divider */
+    --border-color: #334155;
+    --divider-color: #475569;
+    
+    /* Gradient Backgrounds */
+    --gradient-hero: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
+    --gradient-card: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    --gradient-blue: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    --gradient-green: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+/* ===================================
+   GLOBAL STYLES
+   =================================== */
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Tajawal', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Override Tailwind backgrounds */
+.bg-white {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Force text colors on white backgrounds */
+.bg-white * {
+    color: var(--text-primary) !important;
+}
+
+.bg-white h1,
+.bg-white h2,
+.bg-white h3,
+.bg-white h4,
+.bg-white h5,
+.bg-white h6 {
+    color: var(--text-primary) !important;
+}
+
+.bg-white p,
+.bg-white span,
+.bg-white div {
+    color: var(--text-secondary) !important;
+}
+
+.bg-white a {
+    color: var(--accent-blue) !important;
+}
+
+.bg-gray-50,
+.bg-gray-100 {
+    background-color: var(--bg-secondary) !important;
+}
+
+.bg-gradient-to-br {
+    background: var(--gradient-hero) !important;
+}
+
+/* ===================================
+   TEXT COLORS
+   =================================== */
+
+.text-gray-900,
+.text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-700,
+.text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+.text-gray-500,
+.text-gray-400 {
+    color: var(--text-muted) !important;
+}
+
+/* ===================================
+   CARDS & CONTAINERS
+   =================================== */
+
+.card-hover,
+.section-card,
+.infographic-card,
+.dashboard-card {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover,
+.infographic-card:hover {
+    background: var(--bg-card-hover) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================
+   NAVIGATION & HEADER
+   =================================== */
+
+header,
+.sticky-nav {
+    background: rgba(15, 23, 42, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+nav a {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent-blue);
+}
+
+/* ===================================
+   BUTTONS & LINKS
+   =================================== */
+
+.bg-blue-600,
+.bg-blue-700 {
+    background: var(--gradient-blue) !important;
+}
+
+.bg-purple-600,
+.bg-purple-700 {
+    background: var(--gradient-purple) !important;
+}
+
+.bg-green-600,
+.bg-green-700 {
+    background: var(--gradient-green) !important;
+}
+
+.bg-orange-600,
+.bg-orange-700,
+.bg-yellow-600 {
+    background: var(--gradient-gold) !important;
+}
+
+button,
+.btn {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ===================================
+   STATISTICS & BADGES
+   =================================== */
+
+.stat-box {
+    background: var(--gradient-card) !important;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.badge {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.badge-fixed {
+    background: var(--gradient-green) !important;
+    color: white !important;
+}
+
+/* ===================================
+   TABLES
+   =================================== */
+
+.data-table {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background: var(--gradient-blue) !important;
+    color: white !important;
+}
+
+.data-table td {
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.data-table tr:hover {
+    background: var(--bg-card-hover) !important;
+}
+
+/* ===================================
+   MODALS & POPUPS
+   =================================== */
+
+.modal-content {
+    background: var(--bg-card) !important;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+#copyrightPopup {
+    background: var(--bg-card) !important;
+}
+
+/* ===================================
+   CHARTS & VISUALIZATIONS
+   =================================== */
+
+.chart-container {
+    background: var(--bg-card);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+canvas {
+    filter: brightness(1.1);
+}
+
+/* ===================================
+   ICON CONTAINERS
+   =================================== */
+
+.icon-container {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+
+footer {
+    background: var(--bg-primary) !important;
+    border-top: 1px solid var(--border-color);
+}
+
+/* ===================================
+   SPECIAL EFFECTS
+   =================================== */
+
+/* Glow effect for important elements */
+.glow-blue {
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+}
+
+.glow-green {
+    box-shadow: 0 0 20px rgba(52, 211, 153, 0.3);
+}
+
+.glow-purple {
+    box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+}
+
+/* Animated gradient borders */
+.gradient-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: var(--bg-card);
+    background-clip: padding-box;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-green));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* ===================================
+   SCROLLBAR STYLING
+   =================================== */
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-card-hover);
+    border-radius: 6px;
+    border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
+
+@media (max-width: 768px) {
+    .card-hover:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* ===================================
+   ACCESSIBILITY
+   =================================== */
+
+a:focus,
+button:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+/* ===================================
+   LOADING & ANIMATIONS
+   =================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ===================================
+   CUSTOM GRADIENT BACKGROUNDS
+   =================================== */
+
+.hero-gradient {
+    background: linear-gradient(135deg, 
+        #1e293b 0%, 
+        #0f172a 25%,
+        #1e40af 50%,
+        #7c3aed 75%,
+        #1e293b 100%) !important;
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===================================
+   GLASS MORPHISM EFFECTS
+   =================================== */
+
+.glass-effect {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===================================
+   SPECIAL SECTION BACKGROUNDS
+   =================================== */
+
+.section-alt {
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}

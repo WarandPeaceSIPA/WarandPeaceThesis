@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم التفاعلية | الشروط المعلوماتية للقيد البنيوي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+        }
+        .lang-en {
+            font-family: 'Inter', 'Cairo', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .slider:hover {
+            opacity: 1;
+        }
+    </style>
+    <!-- Theme System CSS -->
+    </head>
+<body class="bg-gray-900 text-white">
+    
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold mb-2 flex items-center">
+                        <i class="fas fa-chart-bar ml-3"></i>لوحة التحكم التفاعلية
+                    </h1>
+                    <p class="text-sm opacity-90 lang-en">Interactive Dashboard</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="index-ar.html" class="px-4 py-2 hover:bg-white/10 rounded-lg transition">
+                        <i class="fas fa-home ml-2"></i>الرئيسية
+                    </a>
+                    <a href="dashboard-en.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition">
+                        English
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold text-white mb-4">
+                لوحة بيانات البحث
+            </h2>
+            <p class="text-xl text-gray-300">
+                تصور الشروط المعلوماتية لفاعلية القيد البنيوي
+            </p>
+        </section>
+        
+        <!-- Key Metrics -->
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">أوراق بحثية</p>
+                        <p class="text-3xl font-bold text-blue-400">50+</p>
+                    </div>
+                    <div class="bg-blue-900/50 rounded-full p-4">
+                        <i class="fas fa-file-alt text-2xl text-blue-400"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">باحثون رائدون</p>
+                        <p class="text-3xl font-bold text-purple-400">25+</p>
+                    </div>
+                    <div class="bg-purple-900/50 rounded-full p-4">
+                        <i class="fas fa-users text-2xl text-purple-400"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">مجالات بحثية</p>
+                        <p class="text-3xl font-bold text-green-400">7</p>
+                    </div>
+                    <div class="bg-green-900/50 rounded-full p-4">
+                        <i class="fas fa-layer-group text-2xl text-green-400"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">دراسات حالة</p>
+                        <p class="text-3xl font-bold text-red-400">3</p>
+                    </div>
+                    <div class="bg-red-900/50 rounded-full p-4">
+                        <i class="fas fa-book text-2xl text-red-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts Row 1 -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-chart-pie text-blue-400 ml-3"></i>توزيع المجالات البحثية
+                </h3>
+                <div class="chart-container">
+                    <canvas id="fieldsChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-network-wired text-purple-400 ml-3"></i>النموذج الرياضي: متغيرات السلام
+                </h3>
+                <div class="chart-container">
+                    <canvas id="peaceModelChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts Row 2 -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-history text-green-400 ml-3"></i>دراسات الحالة: مستوى التقارب المعلوماتي
+                </h3>
+                <div class="chart-container">
+                    <canvas id="caseStudiesChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-check-circle text-orange-400 ml-3"></i>الفرضيات الأربع: نسب التحقق
+                </h3>
+                <div class="chart-container">
+                    <canvas id="hypothesesChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Model -->
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-8 mb-8">
+            <h3 class="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center">
+                <i class="fas fa-sliders-h text-cyan-400 ml-3"></i>النموذج التفاعلي: احتمال السلام
+            </h3>
+            <p class="text-center text-gray-300 mb-8 lang-en">P(Peace) = f(S, I, C)</p>
+            
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div>
+                    <label class="block text-gray-200 font-medium mb-2">
+                        <span>القيد البنيوي (S): </span>
+                        <span id="sValue" class="text-blue-400 font-bold">50</span>%
+                    </label>
+                    <input type="range" id="sSlider" min="0" max="100" value="50" 
+                           class="slider"
+                           oninput="updateModel()">
+                    <p class="text-sm text-gray-400 mt-2">العوامل المادية والبنيوية</p>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-200 font-medium mb-2">
+                        <span>جودة المعلومات (I): </span>
+                        <span id="iValue" class="text-purple-400 font-bold">50</span>%
+                    </label>
+                    <input type="range" id="iSlider" min="0" max="100" value="50" 
+                           class="slider"
+                           oninput="updateModel()">
+                    <p class="text-sm text-gray-400 mt-2">توفر ودقة المعلومات</p>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-200 font-medium mb-2">
+                        <span>تقارب التوقعات (C): </span>
+                        <span id="cValue" class="text-green-400 font-bold">50</span>%
+                    </label>
+                    <input type="range" id="cSlider" min="0" max="100" value="50" 
+                           class="slider"
+                           oninput="updateModel()">
+                    <p class="text-sm text-gray-400 mt-2">فعالية الاتصال</p>
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-xl p-8 text-center border border-gray-700">
+                    <h4 class="text-lg font-bold text-white mb-4 flex items-center justify-center">
+                        <i class="fas fa-calculator text-yellow-400 ml-3"></i>نتائج النموذج
+                    </h4>
+                    <p class="text-gray-400 mb-2">احتمال السلام</p>
+                    <div class="text-5xl font-bold mb-4 text-green-400" id="peaceResult">50%</div>
+                    <div class="w-full bg-gray-700 rounded-full h-4">
+                        <div id="peaceBar" class="bg-gradient-to-r from-green-500 to-blue-500 h-4 rounded-full transition-all duration-300" style="width: 50%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Research Timeline -->
+        <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-white mb-8 text-center flex items-center justify-center">
+                <i class="fas fa-timeline text-pink-400 ml-3"></i>الخط الزمني للبحث
+            </h3>
+            <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 border-4 border-gray-900">
+                        <i class="fas fa-book-open text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-1">المقدمة والإطار العام</h4>
+                        <p class="text-gray-400 text-sm">تحديد السؤال البحثي والحجة المركزية</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 border-4 border-gray-900">
+                        <i class="fas fa-search text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-1">مراجعة الأدبيات النظرية</h4>
+                        <p class="text-gray-400 text-sm">دراسة 50 ورقة بحثية عبر 7 مجالات</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0 border-4 border-gray-900">
+                        <i class="fas fa-project-diagram text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-1">بناء الإطار النظري والنموذج الرياضي</h4>
+                        <p class="text-gray-400 text-sm">تطوير الفرضيات الأربع والمعادلة الأساسية</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 border-4 border-gray-900">
+                        <i class="fas fa-cogs text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-1">المنهجية والتصميم البحثي</h4>
+                        <p class="text-gray-400 text-sm">منهج مختلط كمي-نوعي</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 border-4 border-gray-900">
+                        <i class="fas fa-globe text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-1">التطبيقات والتحليل</h4>
+                        <p class="text-gray-400 text-sm">دراسة حالات معاصرة وتاريخية</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0 border-4 border-gray-900">
+                        <i class="fas fa-check-circle text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-white mb-1">النتائج والخاتمة</h4>
+                        <p class="text-gray-400 text-sm">المساهمات النظرية والتوصيات السياساتية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-12 border-t border-gray-800 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">عن البحث</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        دراسة أكاديمية تدمج بين الواقعية البنيوية ونظريات المعلومات في العلاقات الدولية
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="index-ar.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-home text-blue-400 ml-2"></i>الصفحة الرئيسية
+                            </a>
+                        </li>
+                        <li>
+                            <a href="dashboard-hub.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-chart-line text-green-400 ml-2"></i>لوحة التحكم
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mathematical-framework-ar.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-square-root-alt text-purple-400 ml-2"></i>الإطار الرياضي
+                            </a>
+                        </li>
+                        <li>
+                            <a href="3d-surface-plot-ar.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-cube text-blue-500 ml-2"></i>الرسم ثلاثي الأبعاد
+                            </a>
+                        </li>
+                        <li>
+                            <a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-chart-bar text-cyan-400 ml-2"></i>التحليل الكمي
+                            </a>
+                        </li>
+                        <li>
+                            <a href="citation-network.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-project-diagram text-red-400 ml-2"></i>شبكة الاقتباسات
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">جامعة دار الحكمة</h3>
+                    <p class="text-gray-400 mb-4 lang-en">Dar Al-Hekma University</p>
+                    <p class="text-gray-400">قسم العلاقات الدولية والدبلوماسية</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 جامعة دار الحكمة | DAR AL-HEKMA UNIVERSITY
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    جميع الحقوق محفوظة | All Rights Reserved
+                </p>
+                <p class="text-gray-500 text-sm mt-2 lang-en">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Chart.js Configuration with dark theme
+        Chart.defaults.color = '#9CA3AF'; // Gray-400
+        Chart.defaults.borderColor = '#374151'; // Gray-700
+        
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#D1D5DB',
+                        padding: 15,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            }
+        };
+        
+        // Research Fields Distribution Chart
+        const fieldsCtx = document.getElementById('fieldsChart').getContext('2d');
+        new Chart(fieldsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['الواقعية البنيوية', 'نظريات المساومة', 'نظرية المعلومات', 'دراسات السلام', 'التعلم الاستراتيجي', 'نظرية الألعاب', 'الاقتصاد السياسي'],
+                datasets: [{
+                    data: [18, 15, 12, 10, 13, 16, 16],
+                    backgroundColor: [
+                        '#1e40af',
+                        '#7c3aed',
+                        '#059669',
+                        '#eab308',
+                        '#dc2626',
+                        '#6366f1',
+                        '#ec4899'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#1F2937'
+                }]
+            },
+            options: chartOptions
+        });
+        
+        // Peace Model Variables Chart
+        const peaceCtx = document.getElementById('peaceModelChart').getContext('2d');
+        new Chart(peaceCtx, {
+            type: 'radar',
+            data: {
+                labels: ['القيد البنيوي', 'جودة المعلومات', 'تقارب التوقعات', 'الاستقرار', 'الثقة المتبادلة'],
+                datasets: [{
+                    label: 'النموذج المثالي',
+                    data: [85, 90, 88, 92, 87],
+                    borderColor: '#1e40af',
+                    backgroundColor: 'rgba(30, 64, 175, 0.3)',
+                    borderWidth: 2
+                }, {
+                    label: 'المتوسط الحالي',
+                    data: [65, 60, 55, 58, 62],
+                    borderColor: '#dc2626',
+                    backgroundColor: 'rgba(220, 38, 38, 0.3)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#9CA3AF',
+                            backdropColor: 'transparent'
+                        },
+                        grid: {
+                            color: '#374151'
+                        },
+                        pointLabels: {
+                            color: '#D1D5DB'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Case Studies Chart
+        const caseCtx = document.getElementById('caseStudiesChart').getContext('2d');
+        new Chart(caseCtx, {
+            type: 'bar',
+            data: {
+                labels: ['الحرب العالمية الأولى', 'أزمة الصواريخ الكوبية', 'أوكرانيا 2022'],
+                datasets: [{
+                    label: 'مستوى التقارب المعلوماتي',
+                    data: [25, 75, 45],
+                    backgroundColor: ['#dc2626', '#059669', '#eab308'],
+                    borderWidth: 1,
+                    borderColor: ['#b91c1c', '#047857', '#ca8a04']
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#9CA3AF'
+                        },
+                        grid: {
+                            color: '#374151'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#9CA3AF'
+                        },
+                        grid: {
+                            color: '#374151'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Hypotheses Verification Chart
+        const hypCtx = document.getElementById('hypothesesChart').getContext('2d');
+        new Chart(hypCtx, {
+            type: 'polarArea',
+            data: {
+                labels: ['الفرضية الأولى', 'الفرضية الثانية', 'الفرضية الثالثة', 'الفرضية الرابعة'],
+                datasets: [{
+                    data: [88, 92, 85, 90],
+                    backgroundColor: [
+                        'rgba(30, 64, 175, 0.7)',
+                        'rgba(124, 58, 237, 0.7)',
+                        'rgba(5, 150, 105, 0.7)',
+                        'rgba(220, 38, 38, 0.7)'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#1F2937'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    r: {
+                        ticks: {
+                            color: '#9CA3AF',
+                            backdropColor: 'transparent'
+                        },
+                        grid: {
+                            color: '#374151'
+                        },
+                        pointLabels: {
+                            color: '#D1D5DB'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Interactive Model Update
+        function updateModel() {
+            const s = document.getElementById('sSlider').value;
+            const i = document.getElementById('iSlider').value;
+            const c = document.getElementById('cSlider').value;
+            
+            document.getElementById('sValue').textContent = s;
+            document.getElementById('iValue').textContent = i;
+            document.getElementById('cValue').textContent = c;
+            
+            // Simple peace calculation formula
+            const peace = Math.round((parseInt(s) * 0.3 + parseInt(i) * 0.35 + parseInt(c) * 0.35));
+            
+            document.getElementById('peaceResult').textContent = peace + '%';
+            document.getElementById('peaceBar').style.width = peace + '%';
+            
+            // Change color based on value
+            const bar = document.getElementById('peaceBar');
+            if (peace < 40) {
+                bar.className = 'bg-gradient-to-r from-red-500 to-orange-500 h-4 rounded-full transition-all duration-300';
+            } else if (peace < 70) {
+                bar.className = 'bg-gradient-to-r from-yellow-500 to-blue-500 h-4 rounded-full transition-all duration-300';
+            } else {
+                bar.className = 'bg-gradient-to-r from-green-500 to-blue-500 h-4 rounded-full transition-all duration-300';
+            }
+        }
+        
+        // Initialize
+        updateModel();
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

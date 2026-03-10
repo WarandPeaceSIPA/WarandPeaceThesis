@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الجدول الزمني التفاعلي - أهم 5 حالات تاريخية</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #7c3aed;
+            --war-color: #ef4444;
+            --peace-color: #10b981;
+        }
+        
+        body {
+            font-family: 'Inter', 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: calc(100% - 100px);
+            background: linear-gradient(180deg, var(--war-color) 0%, var(--peace-color) 100%);
+            top: 80px;
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.7s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.9s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .timeline-item.left .timeline-content {
+            margin-right: calc(50% + 40px);
+            text-align: right;
+        }
+        
+        .timeline-item.right .timeline-content {
+            margin-left: calc(50% + 40px);
+            text-align: left;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            z-index: 10;
+            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-icon.war {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        .timeline-icon.peace {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        .timeline-item:hover .timeline-icon {
+            transform: translate(-50%, -50%) scale(1.2) rotate(360deg);
+        }
+        
+        .year-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .year-badge.war {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            color: #991b1b;
+        }
+        
+        .year-badge.peace {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #065f46;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .stat-item {
+            background: #f3f4f6;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        
+        .stat-value.s { color: #2563eb; }
+        .stat-value.i { color: #10b981; }
+        .stat-value.c { color: #8b5cf6; }
+        
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-item.left .timeline-content,
+            .timeline-item.right .timeline-content {
+                margin-left: 70px;
+                margin-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-icon {
+                left: 30px;
+            }
+        }
+        
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <a href="interactive-timeline.html" class="bg-white text-purple-700 px-6 py-3 rounded-lg font-bold hover:bg-purple-50 transition shadow-lg flex items-center gap-2">
+            <i class="fas fa-language"></i>
+            English
+        </a>
+    </div>
+    
+    <!-- Header -->
+    <div class="text-center py-12">
+        <h1 class="text-5xl font-bold text-white mb-4">
+            الجدول الزمني التفاعلي
+        </h1>
+        <p class="text-xl text-white opacity-90">
+            أهم 5 حالات تاريخية (1939-2022)
+        </p>
+        <div class="mt-6 flex justify-center gap-4">
+            <div class="flex items-center gap-2 bg-white bg-opacity-20 px-4 py-2 rounded-lg backdrop-blur-md">
+                <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                <span class="text-white font-semibold">حالات الحرب</span>
+            </div>
+            <div class="flex items-center gap-2 bg-white bg-opacity-20 px-4 py-2 rounded-lg backdrop-blur-md">
+                <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+                <span class="text-white font-semibold">حالات السلام</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Timeline Container -->
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        
+        <!-- Case 1: World War II (1939) - War -->
+        <div class="timeline-item left">
+            <div class="timeline-icon war">
+                <i class="fas fa-bomb"></i>
+            </div>
+            <div class="timeline-content">
+                <span class="year-badge war">1939</span>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                    World War II
+                </h2>
+                <p class="text-gray-600 mb-4">
+                    The most devastating conflict in human history, involving over 30 countries and resulting in over 70 million casualties. Low information quality (I=2) and weak structural constraints (S=3) failed to prevent escalation.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">S</div>
+                        <div class="stat-value s">3</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">I</div>
+                        <div class="stat-value i">2</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">C</div>
+                        <div class="stat-value c">1</div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Europe</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Case 2: Cuban Missile Crisis (1962) - Peace -->
+        <div class="timeline-item right">
+            <div class="timeline-icon peace">
+                <i class="fas fa-dove"></i>
+            </div>
+            <div class="timeline-content">
+                <span class="year-badge peace">1962</span>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                    Cuban Missile Crisis
+                </h2>
+                <p class="text-gray-600 mb-4">
+                    The closest the world came to nuclear war. High information quality (I=8) through direct US-Soviet communication channels enabled peaceful resolution. Strong structural constraints (S=9) and convergence (C=7) prevented escalation.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">S</div>
+                        <div class="stat-value s">9</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">I</div>
+                        <div class="stat-value i">8</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">C</div>
+                        <div class="stat-value c">7</div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>North America</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Case 3: Vietnam War (1965) - War -->
+        <div class="timeline-item left">
+            <div class="timeline-icon war">
+                <i class="fas fa-helicopter"></i>
+            </div>
+            <div class="timeline-content">
+                <span class="year-badge war">1965</span>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                    Vietnam War
+                </h2>
+                <p class="text-gray-600 mb-4">
+                    A prolonged conflict marked by misperceptions and information failures. Low information quality (I=3) and moderate structural constraints (S=4) could not prevent war. The conflict lasted nearly two decades.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">S</div>
+                        <div class="stat-value s">4</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">I</div>
+                        <div class="stat-value i">3</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">C</div>
+                        <div class="stat-value c">2</div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Asia</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Case 4: Egypt-Israel Peace Treaty (1979) - Peace -->
+        <div class="timeline-item right">
+            <div class="timeline-icon peace">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <div class="timeline-content">
+                <span class="year-badge peace">1979</span>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                    Egypt-Israel Peace Treaty
+                </h2>
+                <p class="text-gray-600 mb-4">
+                    A historic peace agreement ending 30 years of conflict. High information quality (I=8) through Camp David negotiations and strong structural constraints (S=8) enabled lasting peace. Convergence (C=7) was achieved through diplomatic channels.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">S</div>
+                        <div class="stat-value s">8</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">I</div>
+                        <div class="stat-value i">8</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">C</div>
+                        <div class="stat-value c">7</div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Middle East</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Case 5: Russo-Ukrainian War (2022) - War -->
+        <div class="timeline-item left">
+            <div class="timeline-icon war">
+                <i class="fas fa-explosion"></i>
+            </div>
+            <div class="timeline-content">
+                <span class="year-badge war">2022</span>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                    Russo-Ukrainian War
+                </h2>
+                <p class="text-gray-600 mb-4">
+                    A major European conflict in the 21st century. Despite high structural constraints (S=6), moderate information quality (I=5) was insufficient to prevent war. The case demonstrates that I≥7 threshold is critical for peace.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">S</div>
+                        <div class="stat-value s">6</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">I</div>
+                        <div class="stat-value i">5</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">C</div>
+                        <div class="stat-value c">3</div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center gap-2 text-sm text-gray-500">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Europe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Key Findings -->
+    <div class="max-w-4xl mx-auto px-4 pb-12">
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">
+                <i class="fas fa-lightbulb text-yellow-500"></i>
+                Key Research Findings
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-red-900 mb-3">
+                        <i class="fas fa-times-circle"></i> War Cases Pattern
+                    </h3>
+                    <p class="text-red-800">
+                        All war cases show <strong>I &lt; 7</strong>, regardless of structural constraint levels. Low information quality prevents expectation convergence.
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-green-900 mb-3">
+                        <i class="fas fa-check-circle"></i> Peace Cases Pattern
+                    </h3>
+                    <p class="text-green-800">
+                        All peace cases show <strong>I ≥ 7</strong>, demonstrating that high information quality is the determining variable for peace.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-6 bg-purple-50 p-6 rounded-xl">
+                <h3 class="text-xl font-bold text-purple-900 mb-3 text-center">
+                    <i class="fas fa-chart-line"></i> Critical Threshold: I = 7
+                </h3>
+                <p class="text-purple-800 text-center">
+                    The research identifies <strong>I=7</strong> as the critical threshold separating war from peace outcomes with <strong>100% accuracy</strong> across all 28 historical cases.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="text-center pb-12">
+        <a href="index-en.html" class="inline-block bg-white text-purple-700 px-8 py-4 rounded-lg font-bold hover:bg-purple-50 transition shadow-lg">
+            <i class="fas fa-home"></i>
+            Back to Homepage
+        </a>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 bg-opacity-50 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-300">
+                © 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+            </p>
+            <p class="text-gray-400 text-sm mt-2">
+                All Rights Reserved | جميع الحقوق محفوظة
+            </p>
+            <p class="text-gray-400 text-sm mt-2">
+                International Relations Research
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

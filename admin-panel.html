@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الإدارية | Admin Control Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // التحقق من تسجيل الدخول عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            const loginTime = sessionStorage.getItem('adminLoginTime');
+            
+            // إذا لم يكن مسجل دخول أو انتهت الجلسة، إعادة التوجيه لصفحة تسجيل الدخول
+            if (isLoggedIn !== 'true' || !loginTime) {
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // التحقق من صلاحية الجلسة (24 ساعة)
+            const now = new Date().getTime();
+            const elapsed = now - parseInt(loginTime);
+            const hours = elapsed / (1000 * 60 * 60);
+            
+            if (hours >= 24) {
+                // انتهت صلاحية الجلسة
+                sessionStorage.removeItem('adminLoggedIn');
+                sessionStorage.removeItem('adminLoginTime');
+                window.location.href = 'admin-login.html';
+            }
+        });
+        
+        // دالة تسجيل الخروج
+        function logout() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                sessionStorage.removeItem('adminLoggedIn');
+                sessionStorage.removeItem('adminLoginTime');
+                localStorage.removeItem('adminRemember');
+                window.location.href = 'admin-login.html';
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .admin-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .admin-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+        }
+        .section-header {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+            border-left: 4px solid #3b82f6;
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #3b82f6;
+            outline: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transform: scale(1.05);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .btn-success:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .toggle-switch.active {
+            background: #10b981;
+        }
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .toggle-switch.active .toggle-slider {
+            left: 33px;
+        }
+        .stat-badge {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            background: #10b981;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .tab-button {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-color: #3b82f6;
+        }
+    </style>
+    <!-- Theme System CSS -->
+    </head>
+<body class="min-h-screen text-white">
+    
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle mr-2"></i>
+        <span id="notificationText">تم الحفظ بنجاح!</span>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-shield-alt text-4xl text-blue-400"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">لوحة التحكم الإدارية</h1>
+                        <p class="text-sm text-gray-400">Admin Control Panel</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleLanguage()" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                        <i class="fas fa-language mr-2"></i>
+                        <span id="langToggle">English</span>
+                    </button>
+                    <a href="index.html" class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-home mr-2"></i>
+                        العودة للموقع
+                    </a>
+                    <button onclick="logout()" class="px-4 py-2 bg-red-600 rounded-lg hover:bg-red-700 transition">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        
+        <!-- Statistics Dashboard -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="admin-card rounded-xl p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">إجمالي الصفحات</p>
+                        <h3 class="text-3xl font-bold text-blue-400" id="totalPages">15</h3>
+                    </div>
+                    <i class="fas fa-file-alt text-4xl text-blue-400/30"></i>
+                </div>
+            </div>
+            <div class="admin-card rounded-xl p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">البطاقات النشطة</p>
+                        <h3 class="text-3xl font-bold text-green-400" id="activeCards">24</h3>
+                    </div>
+                    <i class="fas fa-th-large text-4xl text-green-400/30"></i>
+                </div>
+            </div>
+            <div class="admin-card rounded-xl p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">الروابط</p>
+                        <h3 class="text-3xl font-bold text-purple-400" id="totalLinks">48</h3>
+                    </div>
+                    <i class="fas fa-link text-4xl text-purple-400/30"></i>
+                </div>
+            </div>
+            <div class="admin-card rounded-xl p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">آخر تحديث</p>
+                        <h3 class="text-lg font-bold text-yellow-400" id="lastUpdate">10/03/2026</h3>
+                    </div>
+                    <i class="fas fa-clock text-4xl text-yellow-400/30"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="flex gap-2 mb-6 overflow-x-auto">
+            <button class="tab-button active rounded-t-lg" onclick="showTab('navigation')">
+                <i class="fas fa-bars mr-2"></i>روابط التنقل
+            </button>
+            <button class="tab-button rounded-t-lg" onclick="showTab('cards')">
+                <i class="fas fa-th-large mr-2"></i>البطاقات
+            </button>
+            <button class="tab-button rounded-t-lg" onclick="showTab('team')">
+                <i class="fas fa-users mr-2"></i>فريق البحث
+            </button>
+            <button class="tab-button rounded-t-lg" onclick="showTab('footer')">
+                <i class="fas fa-shoe-prints mr-2"></i>روابط التذييل
+            </button>
+            <button class="tab-button rounded-t-lg" onclick="showTab('settings')">
+                <i class="fas fa-cog mr-2"></i>الإعدادات
+            </button>
+        </div>
+
+        <!-- Tab: Navigation Links -->
+        <div id="tab-navigation" class="tab-content">
+            <div class="admin-card rounded-xl p-6 mb-6">
+                <div class="section-header p-4 rounded-lg mb-6">
+                    <h2 class="text-xl font-bold flex items-center gap-3">
+                        <i class="fas fa-bars"></i>
+                        إدارة روابط التنقل الرئيسية
+                    </h2>
+                </div>
+                
+                <div class="space-y-4" id="navigationLinks">
+                    <!-- Navigation items will be loaded here -->
+                </div>
+                
+                <button onclick="addNavigationLink()" class="mt-6 px-6 py-3 btn-primary rounded-lg text-white font-bold">
+                    <i class="fas fa-plus mr-2"></i>إضافة رابط جديد
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab: Cards Management -->
+        <div id="tab-cards" class="tab-content hidden">
+            <div class="admin-card rounded-xl p-6 mb-6">
+                <div class="section-header p-4 rounded-lg mb-6">
+                    <h2 class="text-xl font-bold flex items-center gap-3">
+                        <i class="fas fa-th-large"></i>
+                        إدارة البطاقات في الصفحة الرئيسية
+                    </h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="cardsContainer">
+                    <!-- Cards will be loaded here -->
+                </div>
+                
+                <button onclick="addNewCard()" class="mt-6 px-6 py-3 btn-success rounded-lg text-white font-bold">
+                    <i class="fas fa-plus mr-2"></i>إضافة بطاقة جديدة
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab: Team Management -->
+        <div id="tab-team" class="tab-content hidden">
+            <div class="admin-card rounded-xl p-6 mb-6">
+                <div class="section-header p-4 rounded-lg mb-6">
+                    <h2 class="text-xl font-bold flex items-center gap-3">
+                        <i class="fas fa-users"></i>
+                        إدارة معلومات فريق البحث
+                    </h2>
+                </div>
+                
+                <div class="space-y-6" id="teamMembers">
+                    <!-- Team members will be loaded here -->
+                </div>
+                
+                <button onclick="saveTeamInfo()" class="mt-6 px-6 py-3 btn-primary rounded-lg text-white font-bold">
+                    <i class="fas fa-save mr-2"></i>حفظ التغييرات
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab: Footer Links -->
+        <div id="tab-footer" class="tab-content hidden">
+            <div class="admin-card rounded-xl p-6 mb-6">
+                <div class="section-header p-4 rounded-lg mb-6">
+                    <h2 class="text-xl font-bold flex items-center gap-3">
+                        <i class="fas fa-shoe-prints"></i>
+                        إدارة روابط التذييل
+                    </h2>
+                </div>
+                
+                <div class="space-y-4" id="footerLinks">
+                    <!-- Footer links will be loaded here -->
+                </div>
+                
+                <button onclick="addFooterLink()" class="mt-6 px-6 py-3 btn-primary rounded-lg text-white font-bold">
+                    <i class="fas fa-plus mr-2"></i>إضافة رابط تذييل
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab: Settings -->
+        <div id="tab-settings" class="tab-content hidden">
+            <div class="admin-card rounded-xl p-6 mb-6">
+                <div class="section-header p-4 rounded-lg mb-6">
+                    <h2 class="text-xl font-bold flex items-center gap-3">
+                        <i class="fas fa-cog"></i>
+                        الإعدادات العامة
+                    </h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="border-b border-white/10 pb-6">
+                        <h3 class="text-lg font-bold mb-4">إعدادات اللغة</h3>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold">اللغة الافتراضية</p>
+                                <p class="text-sm text-gray-400">تحديد اللغة التي تظهر عند فتح الموقع</p>
+                            </div>
+                            <select class="input-field px-4 py-2 rounded-lg">
+                                <option value="ar">العربية</option>
+                                <option value="en" selected>English</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="border-b border-white/10 pb-6">
+                        <h3 class="text-lg font-bold mb-4">إعدادات العرض</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-semibold">عرض رسالة حقوق النشر</p>
+                                    <p class="text-sm text-gray-400">إظهار تنبيه حقوق النشر عند الدخول</p>
+                                </div>
+                                <div class="toggle-switch active" onclick="toggleSetting(this)">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-semibold">تفعيل الوضع الداكن</p>
+                                    <p class="text-sm text-gray-400">استخدام المظهر الداكن</p>
+                                </div>
+                                <div class="toggle-switch active" onclick="toggleSetting(this)">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-b border-white/10 pb-6">
+                        <h3 class="text-lg font-bold mb-4">معلومات الموقع</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">عنوان البحث (عربي)</label>
+                                <input type="text" class="input-field w-full px-4 py-3 rounded-lg" value="الشروط المعلوماتية لفاعلية القيد البنيوي">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">عنوان البحث (إنجليزي)</label>
+                                <input type="text" class="input-field w-full px-4 py-3 rounded-lg" value="INFORMATIONAL CONDITIONS FOR STRUCTURAL CONSTRAINT EFFECTIVENESS">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">اسم الجامعة</label>
+                                <input type="text" class="input-field w-full px-4 py-3 rounded-lg" value="DAR AL-HEKMA UNIVERSITY">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">إحصائيات قاعدة البيانات</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">عدد المراجع</label>
+                                <input type="number" class="input-field w-full px-4 py-3 rounded-lg" value="313">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">عدد الاستشهادات</label>
+                                <input type="number" class="input-field w-full px-4 py-3 rounded-lg" value="237">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">عدد الحالات</label>
+                                <input type="number" class="input-field w-full px-4 py-3 rounded-lg" value="28">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="saveSettings()" class="mt-6 px-6 py-3 btn-success rounded-lg text-white font-bold">
+                    <i class="fas fa-save mr-2"></i>حفظ جميع الإعدادات
+                </button>
+            </div>
+        </div>
+
+        <!-- Export/Import Section -->
+        <div class="admin-card rounded-xl p-6 mt-8">
+            <div class="section-header p-4 rounded-lg mb-6">
+                <h2 class="text-xl font-bold flex items-center gap-3">
+                    <i class="fas fa-download"></i>
+                    تصدير واستيراد البيانات
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <button onclick="exportData()" class="px-6 py-4 btn-primary rounded-lg text-white font-bold flex items-center justify-center gap-3">
+                    <i class="fas fa-file-export text-2xl"></i>
+                    <div class="text-right">
+                        <p class="font-bold">تصدير البيانات</p>
+                        <p class="text-sm opacity-75">حفظ جميع الإعدادات كملف JSON</p>
+                    </div>
+                </button>
+                <button onclick="importData()" class="px-6 py-4 btn-success rounded-lg text-white font-bold flex items-center justify-center gap-3">
+                    <i class="fas fa-file-import text-2xl"></i>
+                    <div class="text-right">
+                        <p class="font-bold">استيراد البيانات</p>
+                        <p class="text-sm opacity-75">تحميل الإعدادات من ملف JSON</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data structure
+        const websiteData = {
+            navigationLinks: [
+                { id: 1, nameAr: 'الرئيسية', nameEn: 'Home', url: 'index.html', icon: 'fa-home', active: true },
+                { id: 2, nameAr: 'لوحة التحكم', nameEn: 'Dashboard', url: 'dashboard-hub.html', icon: 'fa-chart-line', active: true },
+                { id: 3, nameAr: 'الإطار الرياضي', nameEn: 'Mathematical Framework', url: 'mathematical-framework.html', icon: 'fa-square-root-alt', active: true },
+                { id: 4, nameAr: 'الرسم ثلاثي الأبعاد', nameEn: '3D Surface Plot', url: '3d-surface-plot.html', icon: 'fa-cube', active: true },
+                { id: 5, nameAr: 'التحليل الكمي', nameEn: 'Quantitative Analysis', url: 'quantitative-analysis.html', icon: 'fa-chart-bar', active: true },
+                { id: 6, nameAr: 'شبكة الاستشهادات', nameEn: 'Citation Network', url: 'citation-network.html', icon: 'fa-project-diagram', active: true }
+            ],
+            cards: [
+                { id: 1, titleAr: 'اقرأ الملخص', titleEn: 'Read Summary', icon: 'fa-book-open', color: 'white', link: '#summary', active: true },
+                { id: 2, titleAr: 'الإطار الرياضي', titleEn: 'Mathematical Framework', icon: 'fa-square-root-alt', color: 'purple', link: 'mathematical-framework.html', active: true },
+                { id: 3, titleAr: 'الرسم ثلاثي الأبعاد', titleEn: '3D Surface Plot', icon: 'fa-cube', color: 'blue', link: '3d-surface-plot.html', active: true },
+                { id: 4, titleAr: 'استكشف قاعدة البيانات', titleEn: 'Explore Database', icon: 'fa-database', color: 'transparent', link: '#database', active: true },
+                { id: 5, titleAr: 'لوحة التحكم', titleEn: 'Dashboard', icon: 'fa-chart-line', color: 'green', link: 'dashboard-hub.html', active: true }
+            ],
+            team: [
+                { id: 1, nameAr: 'زاهر العيسي', nameEn: 'ZAHER ALESSI', roleAr: 'الباحث', roleEn: 'RESEARCHER', email: 'zaher@example.com' },
+                { id: 2, nameAr: 'د. صالح الحربي', nameEn: 'PROF. SALEH AL-HARBI', roleAr: 'المشرف الأكاديمي', roleEn: 'ACADEMIC SUPERVISOR', email: 'saleh@example.com' },
+                { id: 3, nameAr: 'د. دارين عبدالمحسن', nameEn: 'DR. DAREEN ABDULMOHSEN', roleAr: 'المستشار الأكاديمي', roleEn: 'ACADEMIC ADVISOR', email: 'dareen@example.com' }
+            ],
+            footerLinks: [
+                { id: 1, nameAr: 'الرئيسية', nameEn: 'Home', url: 'index.html', active: true },
+                { id: 2, nameAr: 'لوحة التحكم', nameEn: 'Dashboard Hub', url: 'dashboard-hub.html', active: true },
+                { id: 3, nameAr: 'الإطار الرياضي', nameEn: 'Mathematical Framework', url: 'mathematical-framework.html', active: true },
+                { id: 4, nameAr: 'الرسم ثلاثي الأبعاد', nameEn: '3D Surface Plot', url: '3d-surface-plot.html', active: true },
+                { id: 5, nameAr: 'التحليل الكمي', nameEn: 'Quantitative Analysis', url: 'quantitative-analysis.html', active: true },
+                { id: 6, nameAr: 'شبكة الاستشهادات', nameEn: 'Citation Network', url: 'citation-network.html', active: true }
+            ]
+        };
+
+        // Load Navigation Links
+        function loadNavigationLinks() {
+            const container = document.getElementById('navigationLinks');
+            container.innerHTML = '';
+            
+            websiteData.navigationLinks.forEach((link, index) => {
+                container.innerHTML += `
+                    <div class="admin-card rounded-lg p-4 flex items-center gap-4">
+                        <div class="flex-shrink-0">
+                            <i class="fas ${link.icon} text-2xl text-blue-400"></i>
+                        </div>
+                        <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <input type="text" value="${link.nameAr}" class="input-field px-3 py-2 rounded" placeholder="الاسم بالعربية">
+                            <input type="text" value="${link.nameEn}" class="input-field px-3 py-2 rounded" placeholder="Name in English">
+                            <input type="text" value="${link.url}" class="input-field px-3 py-2 rounded" placeholder="URL">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="toggle-switch ${link.active ? 'active' : ''}" onclick="toggleSetting(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                            <button onclick="deleteItem(${index}, 'navigation')" class="px-3 py-2 btn-danger rounded text-sm">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Load Cards
+        function loadCards() {
+            const container = document.getElementById('cardsContainer');
+            container.innerHTML = '';
+            
+            websiteData.cards.forEach((card, index) => {
+                container.innerHTML += `
+                    <div class="admin-card rounded-lg p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fas ${card.icon} text-3xl text-blue-400"></i>
+                            <div class="toggle-switch ${card.active ? 'active' : ''}" onclick="toggleSetting(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <input type="text" value="${card.titleAr}" class="input-field w-full px-3 py-2 rounded" placeholder="العنوان بالعربية">
+                            <input type="text" value="${card.titleEn}" class="input-field w-full px-3 py-2 rounded" placeholder="Title in English">
+                            <input type="text" value="${card.link}" class="input-field w-full px-3 py-2 rounded" placeholder="Link URL">
+                            <div class="flex gap-2">
+                                <input type="text" value="${card.icon}" class="input-field flex-1 px-3 py-2 rounded text-sm" placeholder="Icon class">
+                                <input type="text" value="${card.color}" class="input-field flex-1 px-3 py-2 rounded text-sm" placeholder="Color">
+                            </div>
+                        </div>
+                        <button onclick="deleteItem(${index}, 'cards')" class="mt-4 w-full px-3 py-2 btn-danger rounded text-sm">
+                            <i class="fas fa-trash mr-2"></i>حذف البطاقة
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // Load Team Members
+        function loadTeamMembers() {
+            const container = document.getElementById('teamMembers');
+            container.innerHTML = '';
+            
+            websiteData.team.forEach((member, index) => {
+                container.innerHTML += `
+                    <div class="admin-card rounded-lg p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-blue-400">عضو ${index + 1}</h3>
+                            <button onclick="deleteItem(${index}, 'team')" class="px-3 py-2 btn-danger rounded text-sm">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">الاسم بالعربية</label>
+                                <input type="text" value="${member.nameAr}" class="input-field w-full px-3 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Name in English</label>
+                                <input type="text" value="${member.nameEn}" class="input-field w-full px-3 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">الدور بالعربية</label>
+                                <input type="text" value="${member.roleAr}" class="input-field w-full px-3 py-2 rounded">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-2">Role in English</label>
+                                <input type="text" value="${member.roleEn}" class="input-field w-full px-3 py-2 rounded">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-semibold mb-2">البريد الإلكتروني</label>
+                                <input type="email" value="${member.email}" class="input-field w-full px-3 py-2 rounded">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Load Footer Links
+        function loadFooterLinks() {
+            const container = document.getElementById('footerLinks');
+            container.innerHTML = '';
+            
+            websiteData.footerLinks.forEach((link, index) => {
+                container.innerHTML += `
+                    <div class="admin-card rounded-lg p-4 flex items-center gap-4">
+                        <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <input type="text" value="${link.nameAr}" class="input-field px-3 py-2 rounded" placeholder="الاسم بالعربية">
+                            <input type="text" value="${link.nameEn}" class="input-field px-3 py-2 rounded" placeholder="Name in English">
+                            <input type="text" value="${link.url}" class="input-field px-3 py-2 rounded" placeholder="URL">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="toggle-switch ${link.active ? 'active' : ''}" onclick="toggleSetting(this)">
+                                <div class="toggle-slider"></div>
+                            </div>
+                            <button onclick="deleteItem(${index}, 'footer')" class="px-3 py-2 btn-danger rounded text-sm">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Toggle setting
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+            showNotification('تم تحديث الإعداد');
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            notificationText.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Add new navigation link
+        function addNavigationLink() {
+            websiteData.navigationLinks.push({
+                id: Date.now(),
+                nameAr: 'رابط جديد',
+                nameEn: 'New Link',
+                url: '#',
+                icon: 'fa-link',
+                active: true
+            });
+            loadNavigationLinks();
+            showNotification('تم إضافة رابط جديد');
+        }
+
+        // Add new card
+        function addNewCard() {
+            websiteData.cards.push({
+                id: Date.now(),
+                titleAr: 'بطاقة جديدة',
+                titleEn: 'New Card',
+                icon: 'fa-star',
+                color: 'blue',
+                link: '#',
+                active: true
+            });
+            loadCards();
+            showNotification('تم إضافة بطاقة جديدة');
+        }
+
+        // Add footer link
+        function addFooterLink() {
+            websiteData.footerLinks.push({
+                id: Date.now(),
+                nameAr: 'رابط جديد',
+                nameEn: 'New Link',
+                url: '#',
+                active: true
+            });
+            loadFooterLinks();
+            showNotification('تم إضافة رابط تذييل جديد');
+        }
+
+        // Delete item
+        function deleteItem(index, type) {
+            if (confirm('هل أنت متأكد من الحذف؟')) {
+                if (type === 'navigation') {
+                    websiteData.navigationLinks.splice(index, 1);
+                    loadNavigationLinks();
+                } else if (type === 'cards') {
+                    websiteData.cards.splice(index, 1);
+                    loadCards();
+                } else if (type === 'team') {
+                    websiteData.team.splice(index, 1);
+                    loadTeamMembers();
+                } else if (type === 'footer') {
+                    websiteData.footerLinks.splice(index, 1);
+                    loadFooterLinks();
+                }
+                showNotification('تم الحذف بنجاح');
+            }
+        }
+
+        // Save team info
+        function saveTeamInfo() {
+            showNotification('تم حفظ معلومات الفريق بنجاح');
+        }
+
+        // Save settings
+        function saveSettings() {
+            showNotification('تم حفظ جميع الإعدادات بنجاح');
+        }
+
+        // Export data
+        function exportData() {
+            const dataStr = JSON.stringify(websiteData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'website-data-backup-' + new Date().toISOString().split('T')[0] + '.json';
+            link.click();
+            showNotification('تم تصدير البيانات بنجاح');
+        }
+
+        // Import data
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const importedData = JSON.parse(event.target.result);
+                        Object.assign(websiteData, importedData);
+                        loadNavigationLinks();
+                        loadCards();
+                        loadTeamMembers();
+                        loadFooterLinks();
+                        showNotification('تم استيراد البيانات بنجاح');
+                    } catch (error) {
+                        alert('خطأ في قراءة الملف');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Toggle language
+        function toggleLanguage() {
+            const langToggle = document.getElementById('langToggle');
+            if (langToggle.textContent === 'English') {
+                langToggle.textContent = 'عربي';
+                // Switch to English interface
+            } else {
+                langToggle.textContent = 'English';
+                // Switch to Arabic interface
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNavigationLinks();
+            loadCards();
+            loadTeamMembers();
+            loadFooterLinks();
+        });
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

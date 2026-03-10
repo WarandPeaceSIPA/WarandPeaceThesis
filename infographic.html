@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإنفوجرافيك التفاعلي | الشروط المعلوماتية للقيد البنيوي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+        }
+        .lang-en {
+            font-family: 'Inter', 'Tajawal', sans-serif;
+        }
+        .info-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .info-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        .connection-line {
+            stroke: #7c3aed;
+            stroke-width: 3;
+            stroke-dasharray: 5, 5;
+            animation: dash 20s linear infinite;
+        }
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -100;
+            }
+        }
+    </style>
+    <!-- Theme System CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-green-50 min-h-screen">
+    
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-700 to-purple-700 text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold mb-2">الإنفوجرافيك التفاعلي</h1>
+                    <p class="text-sm opacity-90 lang-en">Interactive Infographic</p>
+                </div>
+                <a href="index-ar.html" class="bg-white text-blue-700 px-6 py-2 rounded-lg font-bold hover:bg-gray-100 transition">
+                    العودة للرئيسية
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- Main Model Visualization -->
+        <div class="bg-white rounded-2xl shadow-2xl p-12 mb-12">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-8">النموذج الرياضي للسلام</h2>
+            <p class="text-center text-2xl text-gray-700 mb-12 lang-en">P(Peace) = f(S, I, C)</p>
+            
+            <div class="relative">
+                <!-- SVG Connections (decorative) -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+                    <line x1="50%" y1="20%" x2="20%" y2="80%" class="connection-line" />
+                    <line x1="50%" y1="20%" x2="50%" y2="80%" class="connection-line" />
+                    <line x1="50%" y1="20%" x2="80%" y2="80%" class="connection-line" />
+                </svg>
+                
+                <div class="relative z-10 grid md:grid-cols-3 gap-8 mb-12">
+                    <!-- Central Peace Node -->
+                    <div class="md:col-span-3 flex justify-center mb-8">
+                        <div class="bg-gradient-to-br from-green-500 to-blue-500 text-white rounded-full w-48 h-48 flex flex-col items-center justify-center shadow-2xl">
+                            <p class="text-2xl font-bold">السلام</p>
+                            <p class="text-sm opacity-90 lang-en">Peace</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Variable S -->
+                    <div class="info-card bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl p-6 shadow-lg" onclick="showInfo('s')">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-blue-700 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+                                S
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">القيد البنيوي</h3>
+                            <p class="text-sm text-gray-700 mb-3 lang-en">Structural Constraint</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                قوة البنية الدولية في ضبط سلوك الدول
+                            </p>
+                            <div class="mt-4">
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Variable I -->
+                    <div class="info-card bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl p-6 shadow-lg" onclick="showInfo('i')">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-purple-700 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+                                I
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">جودة المعلومات</h3>
+                            <p class="text-sm text-gray-700 mb-3 lang-en">Information Quality</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                نوعية وتدفق المعلومات بين الدول
+                            </p>
+                            <div class="mt-4">
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Variable C -->
+                    <div class="info-card bg-gradient-to-br from-green-100 to-green-200 rounded-xl p-6 shadow-lg" onclick="showInfo('c')">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-green-700 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+                                C
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">تقارب التوقعات</h3>
+                            <p class="text-sm text-gray-700 mb-3 lang-en">Convergence Level</p>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                درجة التوافق في التوقعات الاستراتيجية
+                            </p>
+                            <div class="mt-4">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Historical Case Studies -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">دراسات الحالة التاريخية</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- WWI -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-red-600">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-900">الحرب العالمية الأولى</h3>
+                        </div>
+                    <p class="text-sm text-gray-600 mb-4 lang-en">World War I (1914-1918)</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">القيد البنيوي</span>
+                                <span class="text-sm font-bold text-red-600">30%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-600 h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">جودة المعلومات</span>
+                                <span class="text-sm font-bold text-red-600">20%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-600 h-2 rounded-full" style="width: 20%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">تقارب التوقعات</span>
+                                <span class="text-sm font-bold text-red-600">25%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-600 h-2 rounded-full" style="width: 25%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-red-50 rounded-lg p-4">
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            <strong>النتيجة:</strong> فشل في منع الحرب بسبب ضعف البيئة المعلوماتية وانعدام التقارب
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Cuban Missile Crisis -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-green-600">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-900">أزمة الصواريخ الكوبية</h3>
+                        </div>
+                    <p class="text-sm text-gray-600 mb-4 lang-en">Cuban Missile Crisis (1962)</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">القيد البنيوي</span>
+                                <span class="text-sm font-bold text-green-600">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">جودة المعلومات</span>
+                                <span class="text-sm font-bold text-green-600">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">تقارب التوقعات</span>
+                                <span class="text-sm font-bold text-green-600">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-green-50 rounded-lg p-4">
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            <strong>النتيجة:</strong> نجاح في تجنب الحرب بفضل التواصل المباشر والتقارب السريع
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Ukraine 2022 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-yellow-600">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-900">الحرب الأوكرانية</h3>
+                        </div>
+                    <p class="text-sm text-gray-600 mb-4 lang-en">Ukraine War (2022)</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">القيد البنيوي</span>
+                                <span class="text-sm font-bold text-yellow-600">50%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-600 h-2 rounded-full" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">جودة المعلومات</span>
+                                <span class="text-sm font-bold text-yellow-600">40%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-600 h-2 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm text-gray-700">تقارب التوقعات</span>
+                                <span class="text-sm font-bold text-yellow-600">45%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-yellow-600 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 bg-yellow-50 rounded-lg p-4">
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            <strong>النتيجة:</strong> فشل جزئي بسبب سوء تقدير المعلومات والتوقعات المتباينة
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Four Hypotheses Visualization -->
+        <div class="bg-white rounded-2xl shadow-2xl p-12">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">الفرضيات الأربع</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border-r-4 border-blue-700">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-700 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                            H1
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">عدم كفاية التقارب</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        التقارب المعلوماتي وحده غير كافٍ لتحقيق السلام دون قيد بنيوي فاعل
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border-r-4 border-purple-700">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-purple-700 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                            H2
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">محددات معدل التقارب</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        معدل التقارب يتحدد بنوعية المعلومات وقنوات الاتصال والتعلم البايزي
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border-r-4 border-green-700">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-green-700 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                            H3
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">التفاعل التآزري</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        فاعلية القيد البنيوي تزداد حاسماً عند التزامن مع تقارب عالٍ للتوقعات
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 border-r-4 border-red-700">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-red-700 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                            H4
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">العتبة الحرجة</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        توجد عتبة معلوماتية حرجة تحتها يفشل القيد وفوقها يصبح فاعلاً
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+    
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2026 جميع الحقوق محفوظة | زاهر العيسى</p>
+        </div>
+    </footer>
+    
+    <!-- Modal for detailed info -->
+    <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="closeModal()">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl mx-4" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-6">
+                <h3 id="modalTitle" class="text-2xl font-bold text-gray-900"></h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                    </button>
+            </div>
+            <div id="modalContent" class="text-gray-700 leading-relaxed"></div>
+        </div>
+    </div>
+    
+    <script>
+        function showInfo(variable) {
+            const modal = document.getElementById('infoModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            const info = {
+                s: {
+                    title: 'القيد البنيوي (Structural Constraint)',
+                    content: `
+                        <p class="mb-4"><strong>التعريف:</strong> قوة البنية الدولية في ضبط وتقييد سلوك الدول العدواني.</p>
+                        <p class="mb-4"><strong>المكونات:</strong></p>
+                        <ul class="list-disc list-inside mb-4 space-y-2">
+                            <li>توازن القوى بين الدول الكبرى</li>
+                            <li>المؤسسات الدولية والقانون الدولي</li>
+                            <li>الردع النووي والتكاليف المحتملة للحرب</li>
+                            <li>الترابط الاقتصادي والتجاري</li>
+                        </ul>
+                        <p><strong>الأهمية:</strong> يشكل الأساس الواقعي لمنع الحرب، لكنه غير كافٍ بمفرده.</p>
+                    `
+                },
+                i: {
+                    title: 'جودة المعلومات (Information Quality)',
+                    content: `
+                        <p class="mb-4"><strong>التعريف:</strong> نوعية وتدفق المعلومات بين الدول المتنافسة.</p>
+                        <p class="mb-4"><strong>المكونات:</strong></p>
+                        <ul class="list-disc list-inside mb-4 space-y-2">
+                            <li>دقة المعلومات الاستخباراتية</li>
+                            <li>شفافية النوايا والقدرات</li>
+                            <li>قنوات الاتصال المباشرة وغير المباشرة</li>
+                            <li>سرعة نقل المعلومات وتحديثها</li>
+                        </ul>
+                        <p><strong>الأهمية:</strong> تقلل من عدم اليقين وسوء التقدير الذي يؤدي للحروب.</p>
+                    `
+                },
+                c: {
+                    title: 'تقارب التوقعات (Convergence Level)',
+                    content: `
+                        <p class="mb-4"><strong>التعريف:</strong> درجة التوافق والتقارب في التوقعات الاستراتيجية بين الدول.</p>
+                        <p class="mb-4"><strong>المكونات:</strong></p>
+                        <ul class="list-disc list-inside mb-4 space-y-2">
+                            <li>التعلم البايزي وتحديث المعتقدات</li>
+                            <li>التوقعات حول نوايا وقدرات الطرف الآخر</li>
+                            <li>الفهم المشترك للمخاطر والتكاليف</li>
+                            <li>التقييم المتماثل للبدائل المتاحة</li>
+                        </ul>
+                        <p><strong>الأهمية:</strong> يمكّن من التفاوض الفعال وتجنب الحروب غير الضرورية.</p>
+                    `
+                }
+            };
+            
+            title.textContent = info[variable].title;
+            content.innerHTML = info[variable].content;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">عن البحث</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        دراسة أكاديمية تدمج بين الواقعية البنيوية ونظريات المعلومات في العلاقات الدولية
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-ar.html" class="text-gray-400 hover:text-white transition">الصفحة الرئيسية</a></li>
+                        <li><a href="dashboard-hub.html" class="text-gray-400 hover:text-white transition">لوحة التحكم</a></li>
+                        <li><a href="quantitative-analysis.html" class="text-gray-400 hover:text-white transition">التحليل الكمي</a></li>
+                        <li><a href="citation-network.html" class="text-gray-400 hover:text-white transition">شبكة الاستشهادات</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">جامعة دار الحكمة</h3>
+                    <p class="text-gray-400 mb-4 lang-en">Dar Al-Hekma University</p>
+                    <p class="text-gray-400">قسم العلاقات الدولية والدبلوماسية</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 جامعة دار الحكمة | DAR AL-HEKMA UNIVERSITY
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    جميع الحقوق محفوظة | All Rights Reserved
+                </p>
+                <p class="text-gray-500 text-sm mt-2 lang-en">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

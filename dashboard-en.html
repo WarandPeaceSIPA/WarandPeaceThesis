@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Dashboard - Informational Conditions for Structural Constraint Effectiveness">
+    <title>Interactive Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+        .slider-container {
+            margin: 1.5rem 0;
+        }
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .slider:hover {
+            opacity: 1;
+        }
+    </style>
+    <!-- Theme System CSS -->
+    </head>
+<body class="bg-gray-900 text-white">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index-en.html" class="text-2xl font-bold flex items-center">
+                        <i class="fas fa-chart-bar mr-3"></i>Interactive Dashboard
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index-en.html" class="px-4 py-2 hover:bg-white/10 rounded-lg transition">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="infographic-en.html" class="px-4 py-2 hover:bg-white/10 rounded-lg transition">
+                        <i class="fas fa-paint-brush mr-2"></i>Infographic
+                    </a>
+                    <a href="dashboard.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition" aria-label="Switch Language">
+                        العربية
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <h1 class="text-4xl font-bold text-white mb-4">
+                Research Data Dashboard
+            </h1>
+            <p class="text-xl text-gray-300">
+                Visualizing the informational conditions for structural constraint effectiveness
+            </p>
+        </section>
+
+        <!-- Key Metrics -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">Research Papers</p>
+                        <p class="text-3xl font-bold text-blue-400">50+</p>
+                    </div>
+                    <div class="bg-blue-900/50 rounded-full p-4">
+                        <i class="fas fa-file-alt text-2xl text-blue-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">Scholars Referenced</p>
+                        <p class="text-3xl font-bold text-purple-400">25+</p>
+                    </div>
+                    <div class="bg-purple-900/50 rounded-full p-4">
+                        <i class="fas fa-users text-2xl text-purple-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">Research Fields</p>
+                        <p class="text-3xl font-bold text-green-400">7</p>
+                    </div>
+                    <div class="bg-green-900/50 rounded-full p-4">
+                        <i class="fas fa-layer-group text-2xl text-green-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm mb-1">Case Studies</p>
+                        <p class="text-3xl font-bold text-red-400">3</p>
+                    </div>
+                    <div class="bg-red-900/50 rounded-full p-4">
+                        <i class="fas fa-book text-2xl text-red-400"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Research Distribution -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-chart-pie text-blue-400 mr-3"></i>Research Distribution
+                </h3>
+                <div class="chart-container">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Theoretical Framework -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-network-wired text-purple-400 mr-3"></i>Theoretical Framework
+                </h3>
+                <div class="chart-container">
+                    <canvas id="frameworkChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Historical Analysis -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-history text-green-400 mr-3"></i>Historical Case Studies
+                </h3>
+                <div class="chart-container">
+                    <canvas id="historicalChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Variable Impact -->
+            <div class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-6 card-hover">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-cogs text-orange-400 mr-3"></i>Variable Impact
+                </h3>
+                <div class="chart-container">
+                    <canvas id="variableChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Model -->
+        <section class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-8 mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-sliders-h text-cyan-400 mr-3"></i>Interactive Peace Model
+            </h2>
+            <p class="text-gray-300 mb-8">
+                Adjust the variables to see their impact on structural constraint effectiveness
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Structural Constraint (S) -->
+                <div class="slider-container">
+                    <label class="block text-gray-200 font-semibold mb-2">
+                        Structural Constraint (S): <span id="sValue" class="text-blue-400">50</span>%
+                    </label>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="sSlider">
+                    <p class="text-sm text-gray-400 mt-2">Material and structural factors</p>
+                </div>
+
+                <!-- Information Availability (I) -->
+                <div class="slider-container">
+                    <label class="block text-gray-200 font-semibold mb-2">
+                        Information (I): <span id="iValue" class="text-purple-400">50</span>%
+                    </label>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="iSlider">
+                    <p class="text-sm text-gray-400 mt-2">Information availability and accuracy</p>
+                </div>
+
+                <!-- Communication (C) -->
+                <div class="slider-container">
+                    <label class="block text-gray-200 font-semibold mb-2">
+                        Communication (C): <span id="cValue" class="text-green-400">50</span>%
+                    </label>
+                    <input type="range" min="0" max="100" value="50" class="slider" id="cSlider">
+                    <p class="text-sm text-gray-400 mt-2">Communication effectiveness</p>
+                </div>
+            </div>
+
+            <!-- Results Display -->
+            <div class="mt-8 p-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg border border-gray-700">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <i class="fas fa-calculator text-yellow-400 mr-3"></i>Model Results
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-400">Peace Probability</p>
+                        <p class="text-3xl font-bold text-green-400" id="peaceResult">50%</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400">Constraint Effectiveness</p>
+                        <p class="text-3xl font-bold text-blue-400" id="effectivenessResult">Medium</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Timeline -->
+        <section class="bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-timeline text-pink-400 mr-3"></i>Research Timeline
+            </h2>
+            <div class="relative">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+                
+                <div class="space-y-8">
+                    <div class="flex items-center">
+                        <div class="flex-1 text-right pr-8">
+                            <h3 class="text-lg font-bold text-white">Literature Review</h3>
+                            <p class="text-gray-400">Analysis of 50+ research papers</p>
+                        </div>
+                        <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full border-4 border-gray-900">
+                            <i class="fas fa-book-open text-white"></i>
+                        </div>
+                        <div class="flex-1 pl-8">
+                            <p class="text-sm text-gray-500">Phase 1</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="flex-1 text-right pr-8">
+                            <p class="text-sm text-gray-500">Phase 2</p>
+                        </div>
+                        <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-purple-600 rounded-full border-4 border-gray-900">
+                            <i class="fas fa-project-diagram text-white"></i>
+                        </div>
+                        <div class="flex-1 pl-8">
+                            <h3 class="text-lg font-bold text-white">Theoretical Framework</h3>
+                            <p class="text-gray-400">Development of peace model</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="flex-1 text-right pr-8">
+                            <h3 class="text-lg font-bold text-white">Historical Analysis</h3>
+                            <p class="text-gray-400">3 major case studies</p>
+                        </div>
+                        <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-green-600 rounded-full border-4 border-gray-900">
+                            <i class="fas fa-globe text-white"></i>
+                        </div>
+                        <div class="flex-1 pl-8">
+                            <p class="text-sm text-gray-500">Phase 3</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center">
+                        <div class="flex-1 text-right pr-8">
+                            <p class="text-sm text-gray-500">Phase 4</p>
+                        </div>
+                        <div class="relative z-10 flex items-center justify-center w-12 h-12 bg-red-600 rounded-full border-4 border-gray-900">
+                            <i class="fas fa-check-circle text-white"></i>
+                        </div>
+                        <div class="flex-1 pl-8">
+                            <h3 class="text-lg font-bold text-white">Conclusions</h3>
+                            <p class="text-gray-400">Synthesis and recommendations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-12 border-t border-gray-800 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About the Research</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        An academic study integrating structural realism and information theories in international relations
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="index-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-home text-blue-400 mr-2"></i>Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="dashboard-hub-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-chart-line text-green-400 mr-2"></i>Dashboard Hub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mathematical-framework.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-square-root-alt text-purple-400 mr-2"></i>Mathematical Framework
+                            </a>
+                        </li>
+                        <li>
+                            <a href="3d-surface-plot.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-cube text-blue-500 mr-2"></i>3D Surface Plot
+                            </a>
+                        </li>
+                        <li>
+                            <a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-chart-bar text-cyan-400 mr-2"></i>Quantitative Analysis
+                            </a>
+                        </li>
+                        <li>
+                            <a href="citation-network-en.html" class="text-gray-400 hover:text-white transition flex items-center">
+                                <i class="fas fa-project-diagram text-red-400 mr-2"></i>Citation Network
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dar Al-Hekma University</h3>
+                    <p class="text-gray-400 mb-4">جامعة دار الحكمة</p>
+                    <p class="text-gray-400">International Relations & Diplomacy Department</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    All Rights Reserved | جميع الحقوق محفوظة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Chart.js Configuration with dark theme
+        Chart.defaults.color = '#9CA3AF'; // Gray-400
+        Chart.defaults.borderColor = '#374151'; // Gray-700
+        
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#D1D5DB', // Gray-300
+                        padding: 15,
+                        font: {
+                            size: 12
+                        }
+                    }
+                }
+            }
+        };
+
+        // Research Distribution Chart
+        const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+        new Chart(distributionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Peace Theory', 'Structural Realism', 'Information Theory', 'Historical Analysis', 'Case Studies', 'Methodology', 'Conclusions'],
+                datasets: [{
+                    data: [20, 18, 15, 12, 15, 10, 10],
+                    backgroundColor: [
+                        '#667eea',
+                        '#764ba2',
+                        '#f093fb',
+                        '#4facfe',
+                        '#43e97b',
+                        '#fa709a',
+                        '#fee140'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#1F2937'
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Theoretical Framework Chart
+        const frameworkCtx = document.getElementById('frameworkChart').getContext('2d');
+        new Chart(frameworkCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Structural Constraint', 'Information Quality', 'Communication', 'Historical Context', 'Actor Rationality'],
+                datasets: [{
+                    label: 'Framework Components',
+                    data: [85, 90, 75, 80, 70],
+                    backgroundColor: 'rgba(102, 126, 234, 0.3)',
+                    borderColor: '#667eea',
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#667eea',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#9CA3AF',
+                            backdropColor: 'transparent'
+                        },
+                        grid: {
+                            color: '#374151'
+                        },
+                        pointLabels: {
+                            color: '#D1D5DB'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Historical Analysis Chart
+        const historicalCtx = document.getElementById('historicalChart').getContext('2d');
+        new Chart(historicalCtx, {
+            type: 'bar',
+            data: {
+                labels: ['WWI', 'Cuban Missile Crisis', 'Ukraine 2022'],
+                datasets: [
+                    {
+                        label: 'Structural Constraint',
+                        data: [40, 85, 60],
+                        backgroundColor: '#667eea',
+                        borderWidth: 1,
+                        borderColor: '#4F5FD8'
+                    },
+                    {
+                        label: 'Information',
+                        data: [30, 70, 80],
+                        backgroundColor: '#764ba2',
+                        borderWidth: 1,
+                        borderColor: '#5E3C82'
+                    },
+                    {
+                        label: 'Communication',
+                        data: [20, 90, 65],
+                        backgroundColor: '#43e97b',
+                        borderWidth: 1,
+                        borderColor: '#2FD167'
+                    }
+                ]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: '#9CA3AF'
+                        },
+                        grid: {
+                            color: '#374151'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#9CA3AF'
+                        },
+                        grid: {
+                            color: '#374151'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Variable Impact Chart
+        const variableCtx = document.getElementById('variableChart').getContext('2d');
+        new Chart(variableCtx, {
+            type: 'polarArea',
+            data: {
+                labels: ['Military Power', 'Economic Ties', 'Information Flow', 'Diplomatic Channels', 'Public Opinion'],
+                datasets: [{
+                    data: [75, 65, 90, 80, 70],
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.7)',
+                        'rgba(118, 75, 162, 0.7)',
+                        'rgba(240, 147, 251, 0.7)',
+                        'rgba(79, 172, 254, 0.7)',
+                        'rgba(67, 233, 123, 0.7)'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#1F2937'
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    r: {
+                        ticks: {
+                            color: '#9CA3AF',
+                            backdropColor: 'transparent'
+                        },
+                        grid: {
+                            color: '#374151'
+                        },
+                        pointLabels: {
+                            color: '#D1D5DB'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Interactive Model
+        const sSlider = document.getElementById('sSlider');
+        const iSlider = document.getElementById('iSlider');
+        const cSlider = document.getElementById('cSlider');
+        const sValue = document.getElementById('sValue');
+        const iValue = document.getElementById('iValue');
+        const cValue = document.getElementById('cValue');
+        const peaceResult = document.getElementById('peaceResult');
+        const effectivenessResult = document.getElementById('effectivenessResult');
+
+        function updateModel() {
+            const s = parseInt(sSlider.value);
+            const i = parseInt(iSlider.value);
+            const c = parseInt(cSlider.value);
+
+            sValue.textContent = s;
+            iValue.textContent = i;
+            cValue.textContent = c;
+
+            // Calculate peace probability (weighted formula)
+            const peaceProbability = Math.round((s * 0.3 + i * 0.4 + c * 0.3));
+            peaceResult.textContent = peaceProbability + '%';
+
+            // Determine effectiveness level
+            let effectiveness;
+            if (peaceProbability >= 75) effectiveness = 'Very High';
+            else if (peaceProbability >= 60) effectiveness = 'High';
+            else if (peaceProbability >= 40) effectiveness = 'Medium';
+            else if (peaceProbability >= 25) effectiveness = 'Low';
+            else effectiveness = 'Very Low';
+
+            effectivenessResult.textContent = effectiveness;
+        }
+
+        sSlider.addEventListener('input', updateModel);
+        iSlider.addEventListener('input', updateModel);
+        cSlider.addEventListener('input', updateModel);
+
+        // Initialize
+        updateModel();
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

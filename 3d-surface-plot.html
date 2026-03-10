@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Surface Plot: S×I×C Relationship | Master's Thesis</title>
+    
+    <!-- Plotly.js Library -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .home-link {
+            color: #4fc3f7;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .home-link:hover {
+            color: #81d4fa;
+            transform: translateX(-5px);
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .lang-toggle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .lang-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Info Boxes */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .info-box.blue { border-color: #2196F3; }
+        .info-box.green { border-color: #4CAF50; }
+        .info-box.purple { border-color: #9C27B0; }
+        .info-box.red { border-color: #f44336; }
+
+        .info-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box p {
+            color: #c0c0c0;
+            font-size: 1rem;
+        }
+
+        .variable-label {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .label-s { background: #2196F3; color: white; }
+        .label-i { background: #4CAF50; color: white; }
+        .label-c { background: #9C27B0; color: white; }
+
+        /* Plot Container */
+        .plot-container {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .plot-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .plot-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .plot-header p {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        #plot3d {
+            width: 100%;
+            height: 700px;
+            border-radius: 15px;
+            background: rgba(15, 12, 41, 0.9);
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+        }
+
+        /* Key Findings */
+        .findings {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .findings h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .finding-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #4CAF50;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+        }
+
+        .finding-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #4fc3f7;
+        }
+
+        .finding-item p {
+            color: #c0c0c0;
+            font-size: 1rem;
+        }
+
+        .equation {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #81d4fa;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .legend-color.peace { background: #4CAF50; }
+        .legend-color.war { background: #f44336; }
+        .legend-color.threshold { background: rgba(255, 215, 0, 0.3); border: 2px solid #FFD700; }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: #b0b0b0;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .page-title {
+                font-size: 1rem;
+            }
+
+            #plot3d {
+                height: 500px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .control-btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <!-- Theme System CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <a href="index-en.html" class="home-link">← Back to Home</a>
+            <span class="page-title">3D Surface Plot Visualization</span>
+        </div>
+        <button class="lang-toggle" onclick="window.location.href='3d-surface-plot-ar.html'">العربية</button>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Interactive 3D Surface Plot</h1>
+            <p>Visualizing the relationship between Structural Constraint (S), Information Quality (I), and Convergence (C) across 28 historical cases (1910-2022)</p>
+        </div>
+
+        <!-- Variable Info Grid -->
+        <div class="info-grid">
+            <div class="info-box blue">
+                <h3><span class="variable-label label-s">S</span> Structural Constraint</h3>
+                <p>The degree of structural pressure or constraint in the international system (0-10 scale). Higher values indicate stronger structural pressures.</p>
+            </div>
+            <div class="info-box green">
+                <h3><span class="variable-label label-i">I</span> Information Quality</h3>
+                <p>The quality and accuracy of information available to decision-makers (0-10 scale). <strong>I ≥ 7 predicts peace with 100% accuracy.</strong></p>
+            </div>
+            <div class="info-box purple">
+                <h3><span class="variable-label label-c">C</span> Convergence</h3>
+                <p>The degree of convergence between actors' beliefs and expectations (0-10 scale). Calculated as: C = αS + βI + γ(S × I)</p>
+            </div>
+            <div class="info-box red">
+                <h<h3><i class="fa-solid fa-bullseye text-red-400"></i> Critical Threshold</h3>[^>]*><i class="fa-solid fa-bullseye text-red-400"></i> Critical Threshold</h<h3><i class="fa-solid fa-bullseye text-red-400"></i> Critical Threshold</h3>>
+                <p><strong>I ≥ 7 = Peace</strong> (100% accuracy across 14 peace cases)<br><strong>I < 7 = War</strong> (100% accuracy across 14 war cases)</p>
+            </div>
+        </div>
+
+        <!-- 3D Plot -->
+        <div class="plot-container">
+            <div class="plot-header">
+                <h2>3D Visualization: S × I × C Relationship</h2>
+                <p>Rotate, zoom, and hover to explore the data points</p>
+            </div>
+            <div id="plot3d"></div>
+            
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color peace"></div>
+                    <span>Peace Cases (14)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color war"></div>
+                    <span>War Cases (14)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color threshold"></div>
+                    <span>Critical Threshold (I = 7)</span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="control-btn active" onclick="resetView()">🔄 Reset View</button>
+                <button class="control-btn" onclick="showPeaceCases()"><i class="fa-solid fa-check-circle text-green-400"></i> Show Peace Cases Only</button>
+                <button class="control-btn" onclick="showWarCases()"><i class="fa-solid fa-exclamation-triangle text-yellow-400"></i> Show War Cases Only</button>
+                <button class="control-btn" onclick="showAllCases()"><i class="fa-solid fa-chart-bar text-green-400"></i> Show All Cases</button>
+            </div>
+        </div>
+
+        <!-- Key Findings -->
+        <div class="findings">
+            <h2>Key Research Findings</h2>
+            
+            <div class="finding-item">
+                <h3>1. Information Quality (I) is the Determining Variable</h3>
+                <p>The 3D visualization clearly shows that <strong>Information Quality (I)</strong> is the critical factor determining peace or war outcomes. The vertical separation at I = 7 creates a perfect boundary between peace and war cases.</p>
+                <div class="equation">I ≥ 7 ⟹ Peace (100% accuracy)</div>
+            </div>
+
+            <div class="finding-item">
+                <h3>2. Interaction Term S × I Proves I Amplifies S</h3>
+                <p>The convergence function includes an interaction term showing that Information Quality amplifies the effect of Structural Constraints:</p>
+                <div class="equation">C = αS + βI + γ(S × I)</div>
+                <p>This means structural constraints alone are NOT sufficient—high information quality is required to translate structural pressures into peaceful convergence.</p>
+            </div>
+
+            <div class="finding-item">
+                <h3>3. Perfect Predictive Accuracy Across 28 Cases</h3>
+                <p>The model achieves 100% accuracy in predicting outcomes:</p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem; color: #c0c0c0;">
+                    <li><strong>14 Peace Cases:</strong> All have I ≥ 7 (Cuban Missile Crisis, Maastricht Treaty, Iran Nuclear Deal, etc.)</li>
+                    <li><strong>14 War Cases:</strong> All have I < 7 (WWI, WWII, Ukraine 2022, Syrian Civil War, etc.)</li>
+                </ul>
+            </div>
+
+            <div class="finding-item">
+                <h3>4. Structural Constraints Vary, But I Remains Decisive</h3>
+                <p>Even when structural constraints (S) are high (e.g., Cuban Missile Crisis with S=9), peace prevails if I ≥ 7. Conversely, even with moderate structural pressures, war occurs when I < 7.</p>
+            </div>
+
+            <div class="finding-item">
+                <h3>5. Empirical Validation Through Statistical Analysis</h3>
+                <p>Logistic regression analysis confirms that Information Quality (I) has the highest coefficient (βI) in predicting outcomes:</p>
+                <div class="equation">P(Peace) = 1 / (1 + e^-(β₀ + βS·S + βI·I + βC·C))</div>
+                <p>Where βI > βS > βC, proving that I is the most influential variable.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 DAR AL-HEKMA UNIVERSITY | Master's Thesis Research</p>
+        <p>Researcher: Zaher Al-Issa | Supervisor: Prof. Saleh Al-Harbi | Advisor: Dr. Dareen Al-Abdul Mohsen</p>
+    </footer>
+
+    <!-- Load Data -->
+    <script src="data-28-cases.js"></script>
+
+    <!-- 3D Plot Script -->
+    <script>
+        // Extract data from casesData
+        const warCases = casesData.filter(c => c.outcome === 'war');
+        const peaceCases = casesData.filter(c => c.outcome === 'peace');
+
+        // Prepare data for Plotly
+        const warTrace = {
+            x: warCases.map(c => c.s),
+            y: warCases.map(c => c.i),
+            z: warCases.map(c => c.c),
+            mode: 'markers',
+            type: 'scatter3d',
+            name: 'War Cases',
+            marker: {
+                size: 12,
+                color: '#f44336',
+                symbol: 'circle',
+                line: {
+                    color: '#ffffff',
+                    width: 2
+                },
+                opacity: 0.9
+            },
+            text: warCases.map(c => `${c.nameEn}<br>Year: ${c.year}<br>S: ${c.s}, I: ${c.i}, C: ${c.c}<br>Outcome: War`),
+            hoverinfo: 'text',
+            hovertemplate: '<b>%{text}</b><extra></extra>'
+        };
+
+        const peaceTrace = {
+            x: peaceCases.map(c => c.s),
+            y: peaceCases.map(c => c.i),
+            z: peaceCases.map(c => c.c),
+            mode: 'markers',
+            type: 'scatter3d',
+            name: 'Peace Cases',
+            marker: {
+                size: 12,
+                color: '#4CAF50',
+                symbol: 'circle',
+                line: {
+                    color: '#ffffff',
+                    width: 2
+                },
+                opacity: 0.9
+            },
+            text: peaceCases.map(c => `${c.nameEn}<br>Year: ${c.year}<br>S: ${c.s}, I: ${c.i}, C: ${c.c}<br>Outcome: Peace`),
+            hoverinfo: 'text',
+            hovertemplate: '<b>%{text}</b><extra></extra>'
+        };
+
+        // Create threshold plane at I = 7 using mesh3d
+        const sRange = [0, 3, 6, 9, 10];
+        const cRange = [0, 3, 6, 9, 10];
+        const thresholdX = [];
+        const thresholdY = [];
+        const thresholdZ = [];
+
+        sRange.forEach(s => {
+            cRange.forEach(c => {
+                thresholdX.push(s);
+                thresholdY.push(7);
+                thresholdZ.push(c);
+            });
+        });
+
+        const thresholdPlane = {
+            x: thresholdX,
+            y: thresholdY,
+            z: thresholdZ,
+            type: 'mesh3d',
+            name: 'Critical Threshold (I=7)',
+            opacity: 0.15,
+            color: '#FFD700',
+            hoverinfo: 'name',
+            showlegend: true,
+            alphahull: 0,
+            delaunayaxis: 'y'
+        };
+
+        // Layout configuration
+        const layout = {
+            title: {
+                text: 'S × I × C Relationship: 28 Historical Cases (1910-2022)',
+                font: {
+                    size: 18,
+                    color: '#ffffff',
+                    family: 'Segoe UI, sans-serif'
+                }
+            },
+            scene: {
+                xaxis: {
+                    title: {
+                        text: 'S (Structural Constraint)',
+                        font: { color: '#2196F3', size: 13 }
+                    },
+                    range: [0, 10],
+                    gridcolor: 'rgba(255, 255, 255, 0.1)',
+                    showbackground: true,
+                    backgroundcolor: 'rgba(0, 0, 0, 0.3)',
+                    tickfont: { color: '#ffffff', size: 10 }
+                },
+                yaxis: {
+                    title: {
+                        text: 'I (Information Quality)',
+                        font: { color: '#4CAF50', size: 13 }
+                    },
+                    range: [0, 10],
+                    gridcolor: 'rgba(255, 255, 255, 0.1)',
+                    showbackground: true,
+                    backgroundcolor: 'rgba(0, 0, 0, 0.3)',
+                    tickfont: { color: '#ffffff', size: 10 }
+                },
+                zaxis: {
+                    title: {
+                        text: 'C (Convergence)',
+                        font: { color: '#9C27B0', size: 13 }
+                    },
+                    range: [0, 10],
+                    gridcolor: 'rgba(255, 255, 255, 0.1)',
+                    showbackground: true,
+                    backgroundcolor: 'rgba(0, 0, 0, 0.3)',
+                    tickfont: { color: '#ffffff', size: 10 }
+                },
+                camera: {
+                    eye: { x: 1.5, y: 1.5, z: 1.3 },
+                    center: { x: 0, y: 0, z: 0 }
+                },
+                bgcolor: 'rgba(15, 12, 41, 0.9)'
+            },
+            paper_bgcolor: 'rgba(0, 0, 0, 0)',
+            plot_bgcolor: 'rgba(0, 0, 0, 0)',
+            showlegend: true,
+            legend: {
+                x: 0.02,
+                y: 0.98,
+                font: {
+                    color: '#ffffff',
+                    size: 11
+                },
+                bgcolor: 'rgba(0, 0, 0, 0.6)',
+                bordercolor: 'rgba(255, 255, 255, 0.2)',
+                borderwidth: 1
+            },
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 50
+            },
+            hovermode: 'closest'
+        };
+
+        // Plot configuration
+        const config = {
+            responsive: true,
+            displayModeBar: true,
+            displaylogo: false,
+            modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],
+            modeBarButtonsToAdd: [{
+                name: 'Download as PNG',
+                icon: Plotly.Icons.camera,
+                click: function(gd) {
+                    Plotly.downloadImage(gd, {
+                        format: 'png',
+                        width: 1920,
+                        height: 1080,
+                        filename: '3d-surface-plot-thesis'
+                    });
+                }
+            }]
+        };
+
+        // Initial plot
+        let currentData = [warTrace, peaceTrace, thresholdPlane];
+        
+        // Try to create the plot with error handling
+        try {
+            Plotly.newPlot('plot3d', currentData, layout, config);
+            console.log('3D plot created successfully');
+        } catch (error) {
+            console.error('Error creating 3D plot:', error);
+            document.getElementById('plot3d').innerHTML = `
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; color: #ffffff; text-align: center; padding: 2rem;">
+                    <h<h3 style="color: #f44336; margin-bottom: 1rem;"><i class="fa-solid fa-exclamation-triangle text-yellow-400"></i> WebGL Not Supported</h3>[^>]*><i class="fa-solid fa-exclamation-triangle text-yellow-400"></i> WebGL Not Supported</h<h3 style="color: #f44336; margin-bottom: 1rem;"><i class="fa-solid fa-exclamation-triangle text-yellow-400"></i> WebGL Not Supported</h3>>
+                    <p style="color: #c0c0c0; margin-bottom: 1.5rem;">Your browser does not support WebGL, which is required for 3D visualization.</p>
+                    <p style="color: #b0b0b0;">Please try:</p>
+                    <ul style="list-style: none; padding: 0; color: #81d4fa;">
+                        <li>• Using a modern browser (Chrome, Firefox, Edge)</li>
+                        <li>• Enabling hardware acceleration in your browser settings</li>
+                        <li>• Updating your graphics drivers</li>
+                    </ul>
+                    <a href="index-en.html" style="margin-top: 2rem; padding: 0.8rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 25px;">Back to Home</a>
+                </div>
+            `;
+        }
+
+        // Control functions
+        function resetView() {
+            currentData = [warTrace, peaceTrace, thresholdPlane];
+            try {
+                Plotly.react('plot3d', currentData, layout, config);
+                updateActiveButton(0);
+            } catch (error) {
+                console.error('Error resetting view:', error);
+            }
+        }
+
+        function showPeaceCases() {
+            currentData = [peaceTrace, thresholdPlane];
+            try {
+                Plotly.react('plot3d', currentData, layout, config);
+                updateActiveButton(1);
+            } catch (error) {
+                console.error('Error showing peace cases:', error);
+            }
+        }
+
+        function showWarCases() {
+            currentData = [warTrace, thresholdPlane];
+            try {
+                Plotly.react('plot3d', currentData, layout, config);
+                updateActiveButton(2);
+            } catch (error) {
+                console.error('Error showing war cases:', error);
+            }
+        }
+
+        function showAllCases() {
+            currentData = [warTrace, peaceTrace, thresholdPlane];
+            try {
+                Plotly.react('plot3d', currentData, layout, config);
+                updateActiveButton(3);
+            } catch (error) {
+                console.error('Error showing all cases:', error);
+            }
+        }
+
+        function updateActiveButton(index) {
+            const buttons = document.querySelectorAll('.control-btn');
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Make plot responsive
+        window.addEventListener('resize', function() {
+            try {
+                Plotly.Plots.resize('plot3d');
+            } catch (error) {
+                console.error('Error resizing plot:', error);
+            }
+        });
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

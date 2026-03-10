@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="الشروط المعلوماتية لفاعلية القيد البنيوي: تقارب التوقعات وإمكان تحقق السلام - بحث أكاديمي في العلاقات الدولية">
+    <meta name="keywords" content="العلاقات الدولية, الواقعية البنيوية, نظريات المعلومات, السلام, الحرب, التعلم البايزي">
+    <meta name="author" content="زاهر العيسي">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="الشروط المعلوماتية لفاعلية القيد البنيوي">
+    <meta property="og:description" content="بحث أكاديمي يدمج الواقعية البنيوية ونظريات المعلومات في العلاقات الدولية">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://warandpeacesipa.github.io/WarandPeaceThesis/">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="الشروط المعلوماتية لفاعلية القيد البنيوي">
+    <meta name="twitter:description" content="بحث أكاديمي في العلاقات الدولية">
+    
+    <title>الشروط المعلوماتية لفاعلية القيد البنيوي</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Tajawal for Arabic, Inter for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #7c3aed;
+            --accent-color: #059669;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .lang-en {
+            font-family: 'Inter', 'Tajawal', sans-serif;
+        }
+        
+        /* Sticky Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Hero Gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 50%, #059669 100%);
+        }
+        
+        /* Card Hover Effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Skip to Content Link - Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #1e40af;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Focus Visible for Accessibility */
+        *:focus-visible {
+            outline: 3px solid #7c3aed;
+            outline-offset: 2px;
+        }
+        
+        /* Mobile Menu Animation */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+        
+        /* Chapter Number Styling */
+        .chapter-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #e5e7eb;
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            z-index: 0;
+        }
+        
+        /* Hypothesis Badge */
+        .hypothesis-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #7c3aed, #1e40af);
+            color: white;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Copyright Modal */
+        .copyright-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .copyright-modal.active {
+            display: flex;
+        }
+        
+        .copyright-modal-content {
+            background: white;
+            border-radius: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.4s ease;
+            position: relative;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+    <!-- Theme System CSS -->
+    </head>
+<body class="bg-gray-50 text-gray-900">
+    
+    <!-- Copyright Notice Modal -->
+    <div id="copyrightModal" class="copyright-modal active">
+        <div class="copyright-modal-content">
+            <!-- Header with gradient -->
+            <div class="bg-gradient-to-r from-blue-700 via-purple-700 to-blue-700 text-white p-8 rounded-t-3xl text-center">
+                <div class="mb-4">
+                    </div>
+                <h2 class="text-3xl font-bold mb-2">تنبيه حقوق الملكية الفكرية</h2>
+                <p class="text-lg opacity-90 lang-en">Intellectual Property Rights Notice</p>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-8 text-right">
+                <div class="mb-6">
+                    <div class="bg-yellow-50 border-r-4 border-yellow-500 p-4 rounded-lg mb-6">
+                        <div class="flex items-start gap-3">
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-xl mb-2">إشعار مهم</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    جميع محتويات هذا الموقع محمية بموجب قوانين حقوق الملكية الفكرية الدولية والمحلية
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">
+                        حقوق الملكية الفكرية
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        هذا البحث الأكاديمي ومحتوياته (النصوص، الرسوم البيانية، التحليلات، قاعدة البيانات، والنماذج الرياضية) هي ملكية فكرية حصرية للفريق البحثي:
+                    </p>
+                    
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-6">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <p class="font-bold text-gray-900">الباحث: زاهر العيسى</p>
+                                    <p class="text-sm text-gray-600 lang-en">Researcher: Zaher Al-Issa</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <p class="font-bold text-gray-900">المشرف الأكاديمي: د. صالح الحربي</p>
+                                    <p class="text-sm text-gray-600 lang-en">Academic Supervisor: Dr. Saleh Al-Harbi</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <p class="font-bold text-gray-900">المرشدة الأكاديمية: د. دارين عبدالمحسن</p>
+                                    <p class="text-sm text-gray-600 lang-en">Academic Advisor: Dr. Dareen Al-Abdul Mohsen</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-100 rounded-lg p-4 mb-6 text-center">
+                        <p class="text-gray-700 font-medium mb-2">
+                            جامعة دار الحكمة
+                        </p>
+                        <p class="text-sm text-gray-600 lang-en">DAR AL-HEKMA UNIVERSITY</p>
+                        <p class="text-sm text-gray-600 mt-2">قسم العلاقات الدولية والدبلوماسية</p>
+                        <p class="text-sm text-gray-500 mt-1">© 2024-2026 جميع الحقوق محفوظة</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <p class="text-sm text-gray-700 text-center">
+                            للاستفسارات حول الاستخدام والترخيص، يُرجى التواصل عبر قسم الاتصال
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Footer Buttons -->
+                <div class="flex gap-4">
+                    <button onclick="acceptCopyright()" class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition shadow-lg">
+                        فهمت وأوافق على الشروط
+                    </button>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-4">
+                    بالنقر على "فهمت وأوافق"، فإنك تقر بقراءة وفهم شروط حقوق الملكية الفكرية
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Skip to Content Link for Accessibility -->
+    <a href="#main-content" class="skip-link">تخطى إلى المحتوى الرئيسي</a>
+    
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav" role="navigation" aria-label="القائمة الرئيسية">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">الشروط المعلوماتية للقيد البنيوي</h1>
+                        <p class="text-sm text-gray-600 lang-en">Informational Conditions for Structural Constraint</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#home" class="text-gray-700 hover:text-blue-700 transition font-medium">الرئيسية</a>
+                    <a href="#summary" class="text-gray-700 hover:text-blue-700 transition font-medium">الملخص</a>
+                    <a href="#chapters" class="text-gray-700 hover:text-blue-700 transition font-medium">الفصول</a>
+                    <a href="#framework" class="text-gray-700 hover:text-blue-700 transition font-medium">الإطار النظري</a>
+                    <a href="#database" class="text-gray-700 hover:text-blue-700 transition font-medium">قاعدة البيانات</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-700 transition font-medium">التواصل</a>
+                    <a href="index.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition lang-en" aria-label="تبديل اللغة">
+                        EN
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 text-2xl" aria-label="فتح القائمة" aria-expanded="false" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="mobile-menu md:hidden mt-4" id="mobile-menu">
+                <div class="flex flex-col gap-3">
+                    <a href="#home" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">الرئيسية</a>
+                    <a href="#summary" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">الملخص</a>
+                    <a href="#chapters" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">الفصول</a>
+                    <a href="#framework" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">الإطار النظري</a>
+                    <a href="#database" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">قاعدة البيانات</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-700 transition font-medium py-2">التواصل</a>
+                    <a href="index.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-right lang-en block text-center">
+                        English
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero-gradient text-white py-20 md:py-32" role="banner">
+            <div class="container mx-auto px-4 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        الشروط المعلوماتية لفاعلية القيد البنيوي
+                    </h2>
+                    <p class="text-xl md:text-2xl mb-4 opacity-90 font-medium">
+                        تقارب التوقعات وإمكان تحقق السلام
+                    </p>
+                    <p class="text-lg md:text-xl mb-8 opacity-80 lang-en">
+                        Informational Conditions for Structural Constraint Effectiveness: Expectation Convergence and the Possibility of Peace
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-12">
+                        <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 text-center">
+                            <p class="text-sm opacity-90">الباحث</p>
+                            <p class="font-bold text-lg">زاهر العيسي</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 text-center">
+                            <p class="text-sm opacity-90">المشرف الأكاديمي</p>
+                            <p class="font-bold text-lg">د. صالح الحربي</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-xl p-4 text-center">
+                            <p class="text-sm opacity-90">المرشدة الأكاديمية</p>
+                            <p class="font-bold text-lg">د. دارين عبدالمحسن</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-4 justify-center">
+                        <a href="#summary" class="bg-white text-blue-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg flex items-center gap-2">
+                            <i class="fas fa-book-open"></i>
+                            اقرأ الملخص
+                        </a>
+                        <a href="mathematical-framework-ar.html" class="bg-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-purple-700 transition shadow-lg flex items-center gap-2">
+                            <i class="fas fa-square-root-alt"></i>
+                            الإطار الرياضي
+                        </a>
+                        <a href="3d-surface-plot-ar.html" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center gap-2">
+                            <i class="fas fa-cube"></i>
+                            الرسم ثلاثي الأبعاد
+                        </a>
+                        <a href="#database" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-700 transition shadow-lg flex items-center gap-2">
+                            <i class="fas fa-database"></i>
+                            استكشف قاعدة البيانات
+                        </a>
+                        <a href="dashboard-hub.html" class="bg-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition shadow-lg flex items-center gap-2">
+                            <i class="fas fa-chart-line"></i>
+                            لوحة التحكم
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Executive Summary Section -->
+        <section id="summary" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">الملخص التنفيذي</h2>
+                        <p class="text-xl text-gray-600 lang-en">Executive Summary</p>
+                        <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none">
+                        <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 mb-8 shadow-lg">
+                            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+                                نظرة شاملة على البحث الأكاديمي
+                            </h3>
+                            <p class="text-lg leading-relaxed text-gray-800 mb-6">
+                                يقدم هذا البحث <strong>دراسة تدمج بين الواقعية البنيوية ونظريات المعلومات</strong> في العلاقات الدولية، 
+                                حيث تفحص كيف يمكن للشروط المعلوماتية أن تؤثر على فاعلية القيد البنيوي في تحقيق الاستقرار والسلام.
+                            </p>
+                            <p class="text-lg leading-relaxed text-gray-800 mb-6">
+                                يستند البحث إلى فرضية مركزية مفادها أن <strong>تقارب التوقعات بين الدول</strong> 
+                                - الناتج عن تحسن تدفق المعلومات والتعلم البايزي - يمكن أن يعزز من قدرة البنية الدولية على ضبط السلوك العدواني للدول.
+                            </p>
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-white rounded-xl p-6 shadow-md border-r-4 border-blue-700">
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">
+                                    الإسهام الأكاديمي الرئيسي
+                                </h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    تطوير إطار نظري متكامل يربط بين <strong>الواقعية البنيوية</strong> (والتز، ميرشايمر) 
+                                    و <strong>نظريات المعلومات</strong> (فيرون، باول)، مع التركيز على دور <strong>التعلم البايزي</strong> 
+                                    في تشكيل التوقعات الاستراتيجية وتقليل احتمالات الصراع.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-white rounded-xl p-6 shadow-md border-r-4 border-purple-700">
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">
+                                    الهيكل البحثي
+                                </h4>
+                                <p class="text-gray-700 leading-relaxed">
+                                    يتناول البحث <strong>سبعة فصول رئيسية</strong> تغطي الأسس النظرية، 
+                                    والمنهجية البحثية، ودراسات الحالة التطبيقية، مع التركيز على الحالات التاريخية 
+                                    التي شهدت تحولات في البيئة المعلوماتية وانعكاساتها على السلوك الدولي.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 rounded-xl p-6 border-r-4 border-green-600">
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">
+                                التطبيقات العملية
+                            </h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                يقدم البحث تحليلات تطبيقية على صراعات معاصرة مثل <strong>العلاقات الصينية-الأمريكية</strong>، 
+                                <strong>روسيا والناتو</strong>، <strong>الملف النووي الإيراني</strong>، و<strong>كوريا الشمالية</strong>، 
+                                مع دراسات حالة تاريخية تشمل <strong>الحرب العالمية الأولى</strong>، <strong>أزمة الصواريخ الكوبية</strong>، 
+                                و<strong>الحرب الأوكرانية 2022</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Chapters Section -->
+        <section id="chapters" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">فصول الرسالة</h2>
+                    <p class="text-xl text-gray-600 lang-en">Thesis Chapters</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    <p class="text-lg text-gray-600 mt-4">رحلة أكاديمية عبر سبعة فصول متكاملة</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Chapter 1 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">01</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">المقدمة</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Introduction</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                الإطار العام للبحث، السؤال البحثي، الحجة المركزية، الأهمية النظرية والسياساتية
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 2 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">02</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">مراجعة الأدبيات</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Literature Review</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                الواقعية البنيوية، نظريات المساومة، التعلم البايزي، تقارب التوقعات
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 3 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">03</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">الإطار النظري</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Theoretical Framework</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                النموذج الرسمي، الفرضيات الأربع، الفرضيات القابلة للاختبار
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 4 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">04</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">المنهجية</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Methodology</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                التصميم المختلط، البيانات والمتغيرات، استراتيجية التحديد السببي
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 5 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">05</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">التطبيقات السياساتية</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Policy Applications</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                الصين-أمريكا، روسيا-الناتو، إيران، كوريا الشمالية
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 6 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">06</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">دراسات الحالة</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Case Studies</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                الحرب العالمية الأولى، أزمة الصواريخ الكوبية، أوكرانيا 2022
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter 7 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 card-hover relative overflow-hidden">
+                        <span class="chapter-number">07</span>
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-4">
+                                </div>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-3">الخاتمة</h3>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Conclusion</p>
+                            <p class="text-gray-700 leading-relaxed">
+                                ملخص النتائج، المساهمات النظرية، التداعيات السياساتية، البحوث المستقبلية
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Theoretical Framework Section -->
+        <section id="framework" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">الإطار النظري الرسمي</h2>
+                    <p class="text-xl text-gray-600 lang-en">Formal Theoretical Framework</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    <p class="text-lg text-gray-600 mt-4">نموذج رياضي متكامل للعلاقات الدولية</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto">
+                    <!-- Mathematical Model -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 mb-12 shadow-lg text-center">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">النموذج الرياضي الأساسي</h3>
+                        <p class="text-lg text-gray-700 mb-8">معادلة احتمال السلام</p>
+                        <div class="bg-white rounded-xl p-8 shadow-md inline-block">
+                            <p class="text-3xl md:text-4xl font-bold text-blue-700 mb-6 lang-en">P(Peace) = f(S, I, C)</p>
+                            <div class="grid md:grid-cols-3 gap-6 text-right">
+                                <div>
+                                    <p class="text-2xl font-bold text-gray-900 mb-2 lang-en">S</p>
+                                    <p class="text-sm text-gray-600 mb-1">قوة القيد البنيوي</p>
+                                    <p class="text-xs text-gray-500 lang-en">Structural Constraint</p>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-gray-900 mb-2 lang-en">I</p>
+                                    <p class="text-sm text-gray-600 mb-1">جودة البيئة المعلوماتية</p>
+                                    <p class="text-xs text-gray-500 lang-en">Information Quality</p>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-gray-900 mb-2 lang-en">C</p>
+                                    <p class="text-sm text-gray-600 mb-1">مستوى تقارب التوقعات</p>
+                                    <p class="text-xs text-gray-500 lang-en">Convergence Level</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Four Hypotheses -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- H1 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-r-4 border-blue-700">
+                            <span class="hypothesis-badge">H1</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">الفرضية الأولى</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Hypothesis One</p>
+                            <h5 class="font-bold text-blue-700 mb-2">عدم كفاية التقارب المعلوماتي</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                مجرد تقارب التوقعات بين الدول المتنافسة ليس كافياً لتحقيق السلام دون وجود قيد بنيوي فاعل.
+                            </p>
+                        </div>
+                        
+                        <!-- H2 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-r-4 border-purple-700">
+                            <span class="hypothesis-badge">H2</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">الفرضية الثانية</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Hypothesis Two</p>
+                            <h5 class="font-bold text-purple-700 mb-2">محددات معدل التقارب</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                معدل تقارب التوقعات يتحدد بنوعية المعلومات المتاحة، قنوات الاتصال، وقدرة الأطراف على التعلم البايزي.
+                            </p>
+                        </div>
+                        
+                        <!-- H3 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-r-4 border-green-700">
+                            <span class="hypothesis-badge">H3</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">الفرضية الثالثة</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Hypothesis Three</p>
+                            <h5 class="font-bold text-green-700 mb-2">التفاعل بين البنية والمعلومات</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                فاعلية القيد البنيوي تزداد بشكل حاسم عندما تتزامن مع معدل عالٍ من تقارب التوقعات.
+                            </p>
+                        </div>
+                        
+                        <!-- H4 -->
+                        <div class="bg-white rounded-xl shadow-md p-6 border-r-4 border-red-700">
+                            <span class="hypothesis-badge">H4</span>
+                            <h4 class="text-xl font-bold text-gray-900 mb-3">الفرضية الرابعة</h4>
+                            <p class="text-sm text-gray-600 mb-3 lang-en">Hypothesis Four</p>
+                            <h5 class="font-bold text-red-700 mb-2">الشروط المعلوماتية الحرجة</h5>
+                            <p class="text-gray-700 leading-relaxed">
+                                توجد عتبة معلوماتية حرجة (threshold) تحتها يفشل القيد البنيوي في منع الحرب، وفوقها يصبح فاعلاً بدرجة عالية.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Database Section -->
+        <section id="database" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">قاعدة البيانات الأكاديمية</h2>
+                    <p class="text-xl text-gray-600 mb-2 lang-en">Academic Database</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+                    <p class="text-lg text-gray-600 mt-6">313 مرجعاً أكاديمياً شاملاً</p>
+                    <p class="text-gray-500 mt-2">313 references • 313 citations • 12 research fields</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto">
+                    <!-- Statistics -->
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <div class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+                            <div class="text-5xl font-bold text-blue-700 mb-2">313</div>
+                            <p class="text-gray-700 font-medium">مرجع أكاديمي</p>
+                            <p class="text-sm text-gray-500 lang-en">Academic References</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+                            <div class="text-5xl font-bold text-purple-700 mb-2">313</div>
+                            <p class="text-gray-700 font-medium">استشهاد</p>
+                            <p class="text-sm text-gray-500 lang-en">Citations</p>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md p-8 text-center card-hover">
+                            <div class="text-5xl font-bold text-green-700 mb-2">12</div>
+                            <p class="text-gray-700 font-medium">مجال بحثي</p>
+                            <p class="text-sm text-gray-500 lang-en">Research Fields</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Research Fields -->
+                    <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">المجالات البحثية الرئيسية</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">الواقعية البنيوية</h4>
+                                    <p class="text-sm text-gray-600">والتز، ميرشايمر، لابس</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">نظريات المساومة</h4>
+                                    <p class="text-sm text-gray-600">فيرون، باول، ريتر</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">نظرية المعلومات</h4>
+                                    <p class="text-sm text-gray-600">شانون، بايز، كولباك</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">دراسات السلام</h4>
+                                    <p class="text-sm text-gray-600">جالتونج، بولدينج، دويتش</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">التعلم الاستراتيجي</h4>
+                                    <p class="text-sm text-gray-600">ليفي، جيرفيس، تيتلوك</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">نظرية الألعاب</h4>
+                                    <p class="text-sm text-gray-600">شيلينج، أومان، هارساني</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 mb-1">الاقتصاد السياسي</h4>
+                                    <p class="text-sm text-gray-600">كيوهان، جيلبين، كراسنر</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 text-center">
+                            <p class="text-gray-700 mb-4">قاعدة البيانات متاحة للباحثين والأكاديميين</p>
+                            <a href="#contact" class="inline-block bg-blue-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+                                طلب الوصول إلى قاعدة البيانات
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">التواصل</h2>
+                    <p class="text-xl text-gray-600 lang-en">Contact</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto mt-4"></div>
+                    <p class="text-lg text-gray-600 mt-4">للاستفسارات الأكاديمية والتعاون البحثي</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <!-- Researcher -->
+                        <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                            <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">زاهر العيسى</h3>
+                            <p class="text-sm text-gray-600 mb-3">الباحث</p>
+                            <p class="text-xs text-gray-500 mb-4">باحث في نظريات العلاقات الدولية وحروب المستقبل</p>
+                            <a href="mailto:zmalessi@dah.edu.sa" class="text-blue-700 hover:text-blue-800 font-medium">
+                                zmalessi@dah.edu.sa
+                            </a>
+                        </div>
+                        
+                        <!-- Supervisor -->
+                        <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">د. صالح الحربي</h3>
+                            <p class="text-sm text-gray-600 mb-3">المشرف الأكاديمي</p>
+                            <p class="text-xs text-gray-500 mb-4">أستاذ العلاقات الدولية - جامعة الملك عبدالعزيز</p>
+                            <a href="mailto:sharbi@dah.edu.sa" class="text-purple-700 hover:text-purple-800 font-medium">
+                                sharbi@dah.edu.sa
+                            </a>
+                        </div>
+                        
+                        <!-- Academic Advisor -->
+                        <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">د. دارين عبدالمحسن</h3>
+                            <p class="text-sm text-gray-600 mb-3">المرشدة الأكاديمية</p>
+                            <p class="text-xs text-gray-500 mb-4">رئيس قسم العلاقات الدولية والدبلوماسية - جامعة دار الحكمة</p>
+                            <a href="mailto:dabdulmohsen@dah.edu.sa" class="text-green-700 hover:text-green-800 font-medium">
+                                dabdulmohsen@dah.edu.sa
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">أرسل رسالة</h3>
+                        <form class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-medium mb-2">
+                                        الاسم الكامل <span class="text-red-600">*</span>
+                                    </label>
+                                    <input type="text" id="name" name="name" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                           placeholder="أدخل اسمك الكامل">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-medium mb-2">
+                                        البريد الإلكتروني <span class="text-red-600">*</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                           placeholder="example@email.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">
+                                    الموضوع <span class="text-red-600">*</span>
+                                </label>
+                                <input type="text" id="subject" name="subject" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                       placeholder="موضوع الرسالة">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">
+                                    الرسالة <span class="text-red-600">*</span>
+                                </label>
+                                <textarea id="message" name="message" rows="6" required 
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                                          placeholder="اكتب رسالتك هنا..."></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="bg-blue-700 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-800 transition">
+                                    إرسال الرسالة
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">عن البحث</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        دراسة أكاديمية تدمج بين الواقعية البنيوية ونظريات المعلومات في العلاقات الدولية
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-ar.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-home text-blue-400 ml-2"></i>الرئيسية</a></li>
+                        <li><a href="dashboard-hub.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chart-line text-green-400 ml-2"></i>لوحة التحكم</a></li>
+                        <li><a href="mathematical-framework-ar.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-square-root-alt text-purple-400 ml-2"></i>الإطار الرياضي</a></li>
+                        <li><a href="3d-surface-plot-ar.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-cube text-blue-500 ml-2"></i>الرسم ثلاثي الأبعاد</a></li>
+                        <li><a href="quantitative-analysis.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chart-bar text-cyan-400 ml-2"></i>التحليل الكمي</a></li>
+                        <li><a href="citation-network.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-project-diagram text-red-400 ml-2"></i>شبكة الاستشهادات</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">جامعة دار الحكمة</h3>
+                    <p class="text-gray-400 mb-4 lang-en">Dar Al-Hekma University</p>
+                    <p class="text-gray-400">قسم العلاقات الدولية والدبلوماسية</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 جامعة دار الحكمة | DAR AL-HEKMA UNIVERSITY
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    جميع الحقوق محفوظة | All Rights Reserved
+                </p>
+                <p class="text-gray-500 text-sm mt-2 lang-en">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" id="backToTop" 
+            class="fixed bottom-8 left-8 bg-blue-700 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-800 transition opacity-0 pointer-events-none"
+            aria-label="العودة إلى الأعلى">
+        </button>
+    
+    <script>
+        // Copyright Modal Management
+        function acceptCopyright() {
+            const modal = document.getElementById('copyrightModal');
+            modal.classList.remove('active');
+            // Store acceptance in localStorage to show only once per session
+            localStorage.setItem('copyrightAccepted', 'true');
+        }
+        
+        // Check if user already accepted in this session
+        window.addEventListener('DOMContentLoaded', function() {
+            const copyrightAccepted = localStorage.getItem('copyrightAccepted');
+            const modal = document.getElementById('copyrightModal');
+            
+            // Show modal only if not accepted in this session
+            if (!copyrightAccepted) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        });
+        
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            menu.classList.toggle('active');
+            const isExpanded = menu.classList.contains('active');
+            btn.setAttribute('aria-expanded', isExpanded);
+        }
+        
+        
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('شكراً لتواصلك! سنرد عليك قريباً.\nThank you for your message! We will respond soon.');
+            event.target.reset();
+        }
+        
+        // Back to Top Button
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Show/Hide Back to Top Button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.pointerEvents = 'auto';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.pointerEvents = 'none';
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.remove('active');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
+    
+    <!-- Secret Admin Access: Press Ctrl+Shift+A -->
+    <script>
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+Shift+A للوصول السري إلى صفحة تسجيل الدخول
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                window.location.href = 'admin-login.html';
+            }
+        });
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

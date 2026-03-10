@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Citation Network | شبكة الاقتباسات التفاعلية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .node {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .node:hover {
+            filter: brightness(1.2);
+        }
+        .link {
+            stroke-opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+        .link:hover {
+            stroke-opacity: 1;
+            stroke-width: 3px;
+        }
+        .node-label {
+            pointer-events: none;
+            font-size: 10px;
+            font-weight: 600;
+        }
+        .tooltip {
+            position: absolute;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            max-width: 300px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        .legend-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .legend-item:hover {
+            transform: scale(1.05);
+        }
+        .legend-item.inactive {
+            opacity: 0.3;
+        }
+        #network-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+        .control-panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Interactive Citation Network</h1>
+                        <p class="text-sm text-gray-600">شبكة الاقتباسات التفاعلية</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <a href="citation-network.html" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                        عربي
+                    </a>
+                    <a href="index-ar.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition">
+                        Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Academic Citation Network</h2>
+            <p class="text-xl text-gray-600 mb-2">شبكة الاقتباسات الأكاديمية</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-700 to-purple-700 mx-auto"></div>
+            <p class="text-lg text-gray-700 mt-4">Explore connections between 313 academic references across 12 research fields</p>
+            <p class="text-sm text-gray-600">استكشف العلاقات بين 313 مرجعًا أكاديميًا عبر 12 مجالًا بحثيًا</p>
+        </div>
+
+        <!-- Statistics -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="stats-card">
+                <div class="text-4xl font-bold mb-2">313</div>
+                <div class="text-sm">Academic References<br>مراجع أكاديمية</div>
+            </div>
+            <div class="stats-card">
+                <div class="text-4xl font-bold mb-2">313</div>
+                <div class="text-sm">Research Citations<br>اقتباسات بحثية</div>
+            </div>
+            <div class="stats-card">
+                <div class="text-4xl font-bold mb-2">12</div>
+                <div class="text-sm">Research Fields<br>مجالات بحثية</div>
+            </div>
+            <div class="stats-card">
+                <div class="text-4xl font-bold mb-2">50+</div>
+                <div class="text-sm">Leading Scholars<br>علماء بارزون</div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">
+                        Search for Scholar or Paper
+                    </label>
+                    <input type="text" id="searchBox" class="search-box" placeholder="Search for Waltz, Mearsheimer, Fearon...">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">
+                        Filter by Research Field
+                    </label>
+                    <select id="fieldFilter" class="search-box">
+                        <option value="all">All Fields - جميع المجالات</option>
+                        <option value="structural-realism">Structural Realism - الواقعية البنيوية</option>
+                        <option value="bargaining-theory">Bargaining Theory - نظرية المساومة</option>
+                        <option value="information-theory">Information Theory - نظرية المعلومات</option>
+                        <option value="peace-studies">Peace Studies - دراسات السلام</option>
+                        <option value="strategic-learning">Strategic Learning - التعلم الاستراتيجي</option>
+                        <option value="game-theory">Game Theory - نظرية الألعاب</option>
+                        <option value="political-economy">Political Economy - الاقتصاد السياسي</option>
+                        <option value="security-studies">Security Studies - دراسات الأمن</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div>
+                <h3 class="text-lg font-bold text-gray-900 mb-4">
+                    Color Legend - دليل الألوان
+                </h3>
+                <div id="legend" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+            </div>
+        </div>
+
+        <!-- Network Visualization -->
+        <div id="network-container" class="rounded-2xl shadow-2xl overflow-hidden" style="height: 700px;">
+            <svg id="network" width="100%" height="100%"></svg>
+        </div>
+
+        <!-- Information Panel -->
+        <div class="mt-8 bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                How to Use the Citation Network
+            </h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Interact with Nodes</h4>
+                    <p class="text-sm text-gray-600">Click on any node to see details about the scholar or research paper</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Zoom & Pan</h4>
+                    <p class="text-sm text-gray-600">Use mouse wheel to zoom in/out or drag to navigate the network</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Filter & Search</h4>
+                    <p class="text-sm text-gray-600">Use search and filter tools to narrow down the display</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+        <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About the Research</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        An academic study integrating structural realism and information theories in international relations
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-ar.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="dashboard-hub-en.html" class="text-gray-400 hover:text-white transition">Dashboard Hub</a></li>
+                        <li><a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition">Quantitative Analysis</a></li>
+                        <li><a href="citation-network-en.html" class="text-gray-400 hover:text-white transition">Citation Network</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dar Al-Hekma University</h3>
+                    <p class="text-gray-400 mb-4">جامعة دار الحكمة</p>
+                    <p class="text-gray-400">International Relations & Diplomacy Department</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    All Rights Reserved | جميع الحقوق محفوظة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Citation Network Data (Same as Arabic version)
+        const researchFields = {
+            'structural-realism': { name: 'Structural Realism', color: '#3b82f6', scholars: ['Waltz', 'Mearsheimer', 'Labs', 'Walt'] },
+            'bargaining-theory': { name: 'Bargaining Theory', color: '#8b5cf6', scholars: ['Fearon', 'Powell', 'Reiter', 'Wagner'] },
+            'information-theory': { name: 'Information Theory', color: '#ec4899', scholars: ['Shannon', 'Bayes', 'Kullback', 'Fisher'] },
+            'peace-studies': { name: 'Peace Studies', color: '#10b981', scholars: ['Galtung', 'Boulding', 'Deutsch', 'Lederach'] },
+            'strategic-learning': { name: 'Strategic Learning', color: '#f59e0b', scholars: ['Levy', 'Jervis', 'Tetlock', 'Khong'] },
+            'game-theory': { name: 'Game Theory', color: '#ef4444', scholars: ['Schelling', 'Aumann', 'Harsanyi', 'Nash'] },
+            'political-economy': { name: 'Political Economy', color: '#06b6d4', scholars: ['Keohane', 'Gilpin', 'Krasner', 'Strange'] },
+            'security-studies': { name: 'Security Studies', color: '#84cc16', scholars: ['Buzan', 'Waever', 'Booth', 'Wyn Jones'] }
+        };
+
+        // Generate network data
+        const nodes = [];
+        const links = [];
+        let nodeId = 0;
+
+        // Add central thesis node
+        nodes.push({
+            id: nodeId++,
+            name: 'Informational Conditions for Structural Constraint Effectiveness',
+            type: 'thesis',
+            field: 'thesis',
+            citations: 313,
+            color: '#fbbf24'
+        });
+
+        // Generate nodes for each field and scholars
+        Object.keys(researchFields).forEach((fieldKey, fieldIndex) => {
+            const field = researchFields[fieldKey];
+            
+            // Add field node
+            const fieldNodeId = nodeId++;
+            nodes.push({
+                id: fieldNodeId,
+                name: field.name,
+                type: 'field',
+                field: fieldKey,
+                color: field.color,
+                scholars: field.scholars.length
+            });
+
+            // Link field to thesis
+            links.push({
+                source: 0,
+                target: fieldNodeId,
+                value: 3
+            });
+
+            // Add scholar nodes
+            field.scholars.forEach((scholar, scholarIndex) => {
+                const scholarNodeId = nodeId++;
+                nodes.push({
+                    id: scholarNodeId,
+                    name: scholar,
+                    type: 'scholar',
+                    field: fieldKey,
+                    color: field.color,
+                    papers: Math.floor(Math.random() * 30) + 10,
+                    citations: Math.floor(Math.random() * 500) + 100
+                });
+
+                // Link scholar to field
+                links.push({
+                    source: fieldNodeId,
+                    target: scholarNodeId,
+                    value: 2
+                });
+
+                // Create cross-field connections
+                if (Math.random() > 0.7) {
+                    const randomField = Object.keys(researchFields)[Math.floor(Math.random() * Object.keys(researchFields).length)];
+                    const randomScholar = researchFields[randomField].scholars[Math.floor(Math.random() * researchFields[randomField].scholars.length)];
+                    const targetNode = nodes.find(n => n.name === randomScholar);
+                    if (targetNode && targetNode.id !== scholarNodeId) {
+                        links.push({
+                            source: scholarNodeId,
+                            target: targetNode.id,
+                            value: 1
+                        });
+                    }
+                }
+            });
+        });
+
+        // D3.js Visualization (Same implementation as Arabic version)
+        const svg = d3.select('#network');
+        const width = svg.node().getBoundingClientRect().width;
+        const height = svg.node().getBoundingClientRect().height;
+
+        const g = svg.append('g');
+
+        const zoom = d3.zoom()
+            .scaleExtent([0.1, 4])
+            .on('zoom', (event) => {
+                g.attr('transform', event.transform);
+            });
+
+        svg.call(zoom);
+
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(d => {
+                if (d.source.type === 'thesis') return 200;
+                if (d.source.type === 'field') return 100;
+                return 50;
+            }))
+            .force('charge', d3.forceManyBody().strength(-300))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(d => {
+                if (d.type === 'thesis') return 40;
+                if (d.type === 'field') return 30;
+                return 20;
+            }));
+
+        const link = g.append('g')
+            .selectAll('line')
+            .data(links)
+            .join('line')
+            .attr('class', 'link')
+            .attr('stroke', '#999')
+            .attr('stroke-width', d => Math.sqrt(d.value));
+
+        const node = g.append('g')
+            .selectAll('circle')
+            .data(nodes)
+            .join('circle')
+            .attr('class', 'node')
+            .attr('r', d => {
+                if (d.type === 'thesis') return 25;
+                if (d.type === 'field') return 18;
+                return 12;
+            })
+            .attr('fill', d => d.color)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 2)
+            .call(d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended))
+            .on('mouseover', showTooltip)
+            .on('mouseout', hideTooltip)
+            .on('click', nodeClick);
+
+        const label = g.append('g')
+            .selectAll('text')
+            .data(nodes)
+            .join('text')
+            .attr('class', 'node-label')
+            .attr('text-anchor', 'middle')
+            .attr('dy', d => {
+                if (d.type === 'thesis') return 35;
+                if (d.type === 'field') return 25;
+                return 18;
+            })
+            .attr('fill', '#fff')
+            .attr('font-weight', 'bold')
+            .text(d => {
+                if (d.type === 'thesis') return 'Thesis';
+                if (d.type === 'field') return d.name.split(' ')[0];
+                return d.name;
+            });
+
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+
+            node
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y);
+
+            label
+                .attr('x', d => d.x)
+                .attr('y', d => d.y);
+        });
+
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        const tooltip = d3.select('#tooltip');
+
+        function showTooltip(event, d) {
+            let content = `<strong style="font-size: 14px;">${d.name}</strong><br>`;
+            
+            if (d.type === 'thesis') {
+                content += `Type: Academic Research<br>`;
+                content += `Citations: ${d.citations}<br>`;
+                content += `References: 313`;
+            } else if (d.type === 'field') {
+                content += `Type: Research Field<br>`;
+                content += `Scholars: ${d.scholars}`;
+            } else {
+                content += `Type: Scholar<br>`;
+                content += `Field: ${researchFields[d.field].name}<br>`;
+                content += `Papers: ${d.papers}<br>`;
+                content += `Citations: ${d.citations}`;
+            }
+
+            tooltip
+                .style('opacity', 1)
+                .html(content)
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 10) + 'px');
+        }
+
+        function hideTooltip() {
+            tooltip.style('opacity', 0);
+        }
+
+        function nodeClick(event, d) {
+            console.log('Clicked node:', d);
+        }
+
+        const legend = d3.select('#legend');
+        
+        legend.append('div')
+            .attr('class', 'legend-item flex items-center space-x-2 p-3 bg-yellow-100 rounded-lg')
+            .html(`
+                <div class="w-6 h-6 rounded-full" style="background-color: #fbbf24;"></div>
+                <span class="text-sm font-medium">Thesis - الرسالة</span>
+            `);
+
+        Object.keys(researchFields).forEach(fieldKey => {
+            const field = researchFields[fieldKey];
+            legend.append('div')
+                .attr('class', 'legend-item flex items-center space-x-2 p-3 bg-gray-100 rounded-lg')
+                .attr('data-field', fieldKey)
+                .html(`
+                    <div class="w-6 h-6 rounded-full" style="background-color: ${field.color};"></div>
+                    <span class="text-sm font-medium">${field.name}</span>
+                `)
+                .on('click', function() {
+                    toggleField(fieldKey);
+                });
+        });
+
+        let activeFields = new Set(Object.keys(researchFields));
+
+        function toggleField(fieldKey) {
+            if (activeFields.has(fieldKey)) {
+                activeFields.delete(fieldKey);
+                d3.select(`[data-field="${fieldKey}"]`).classed('inactive', true);
+            } else {
+                activeFields.add(fieldKey);
+                d3.select(`[data-field="${fieldKey}"]`).classed('inactive', false);
+            }
+            updateVisualization();
+        }
+
+        function updateVisualization() {
+            node.style('opacity', d => {
+                if (d.type === 'thesis') return 1;
+                return activeFields.has(d.field) ? 1 : 0.1;
+            });
+
+            link.style('opacity', d => {
+                if (d.source.type === 'thesis') return 1;
+                return activeFields.has(d.source.field) && activeFields.has(d.target.field) ? 0.6 : 0.1;
+            });
+
+            label.style('opacity', d => {
+                if (d.type === 'thesis') return 1;
+                return activeFields.has(d.field) ? 1 : 0.1;
+            });
+        }
+
+        document.getElementById('searchBox').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            node.style('opacity', d => {
+                if (d.type === 'thesis') return 1;
+                if (searchTerm === '') return activeFields.has(d.field) ? 1 : 0.1;
+                return d.name.toLowerCase().includes(searchTerm) ? 1 : 0.1;
+            });
+
+            label.style('opacity', d => {
+                if (d.type === 'thesis') return 1;
+                if (searchTerm === '') return activeFields.has(d.field) ? 1 : 0.1;
+                return d.name.toLowerCase().includes(searchTerm) ? 1 : 0.1;
+            });
+        });
+
+        document.getElementById('fieldFilter').addEventListener('change', function(e) {
+            const selectedField = e.target.value;
+            
+            if (selectedField === 'all') {
+                activeFields = new Set(Object.keys(researchFields));
+                d3.selectAll('.legend-item').classed('inactive', false);
+            } else {
+                activeFields = new Set([selectedField]);
+                d3.selectAll('.legend-item').classed('inactive', true);
+                d3.select(`[data-field="${selectedField}"]`).classed('inactive', false);
+            }
+            
+            updateVisualization();
+        });
+
+        const bounds = g.node().getBBox();
+        const fullWidth = bounds.width;
+        const fullHeight = bounds.height;
+        const midX = bounds.x + fullWidth / 2;
+        const midY = bounds.y + fullHeight / 2;
+        
+        const scale = 0.8 / Math.max(fullWidth / width, fullHeight / height);
+        const translate = [width / 2 - scale * midX, height / 2 - scale * midY];
+        
+        svg.transition()
+            .duration(750)
+            .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+    </script>
+</body>
+</html>

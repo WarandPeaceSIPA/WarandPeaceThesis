@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mathematical Framework: Complete equations and theoretical models used in the research">
+    <meta name="keywords" content="mathematical models, game theory, Bayesian learning, information theory, structural realism">
+    <title>Mathematical Framework | الإطار الرياضي</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- MathJax for LaTeX equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            line-height: 1.8;
+        }
+        
+        .lang-ar {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #3b82f6;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        /* Section Cards */
+        .math-section {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .math-section:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Equation Boxes */
+        .equation-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        
+        .equation-box.highlight {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+        
+        /* Variable Cards */
+        .variable-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        /* Key Finding Box */
+        .key-finding {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            border: 3px solid #10b981;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        /* Language Toggle */
+        .lang-toggle {
+            position: fixed;
+            top: 5rem;
+            right: 1rem;
+            z-index: 2000;
+            background: rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid #3b82f6;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-toggle:hover {
+            background: rgba(59, 130, 246, 0.4);
+            transform: scale(1.05);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .math-section {
+                padding: 1.5rem 1rem;
+            }
+            
+            .equation-box {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* MathJax Styling */
+        mjx-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        
+        /* Section Icons */
+        .section-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        /* Progress Indicator */
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(30, 41, 59, 0.8);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+    <!-- Theme System CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle" onclick="toggleLanguage()">
+        <span id="lang-icon"><i class="fa-solid fa-language text-purple-400"></i></span>
+        <span id="lang-text">العربية</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">
+                        <span class="en">Mathematical Framework</span>
+                        <span class="ar" style="display:none;">الإطار الرياضي</span>
+                    </h1>
+                    <p class="text-sm md:text-base text-gray-300 mt-1">
+                        <span class="en">Complete Equations & Theoretical Models</span>
+                        <span class="ar" style="display:none;">المعادلات الكاملة والنماذج النظرية</span>
+                    </p>
+                </div>
+                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition">
+                    <span class="en">Home</span>
+                    <span class="ar" style="display:none;">الرئيسية</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+
+        <!-- Introduction -->
+        <div class="math-section">
+            <div class="text-center mb-6">
+                <span class="section-icon"><i class="fa-solid fa-ruler-combined text-blue-400"></i></span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="en">Mathematical Foundation</span>
+                    <span class="ar" style="display:none;">الأساس الرياضي</span>
+                </h2>
+                <p class="text-lg text-gray-300">
+                    <span class="en">This page presents all mathematical equations and models used in the research, demonstrating how the core argument leads to the final results.</span>
+                    <span class="ar" style="display:none;">تعرض هذه الصفحة جميع المعادلات والنماذج الرياضية المستخدمة في البحث، موضحة كيف تؤدي الحجة الأساسية إلى النتائج النهائية.</span>
+                </p>
+            </div>
+            
+            <div class="key-finding">
+                <h3 class="text-2xl font-bold text-green-400 mb-3">
+                    <span class="en">Core Research Argument</span>
+                    <span class="ar" style="display:none;">الحجة البحثية الأساسية</span>
+                </h3>
+                <p class="text-xl mb-2">
+                    <span class="en"><strong>Structural constraints alone are insufficient for peace.</strong></span>
+                    <span class="ar" style="display:none;"><strong>القيود البنيوية وحدها غير كافية للسلام.</strong></span>
+                </p>
+                <p class="text-lg">
+                    <span class="en">High-quality information (I) is the critical variable that enables structural constraints (S) to produce convergence (C), which leads to peace.</span>
+                    <span class="ar" style="display:none;">المعلومات عالية الجودة (م) هي المتغير الحاسم الذي يمكّن القيود البنيوية (ق) من إنتاج التقارب (ت)، مما يؤدي إلى السلام.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 1: Core Variables -->
+        <div class="math-section">
+            <span class="section-icon"><i class="fa-solid fa-calculator text-purple-400"></i></span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">1. Core Variables Definition</span>
+                <span class="ar" style="display:none;">1. تعريف المتغيرات الأساسية</span>
+            </h2>
+            
+            <div class="variable-card">
+                <h3 class="text-xl font-bold text-blue-400 mb-2">
+                    <span class="en">S: Structural Constraint Strength</span>
+                    <span class="ar" style="display:none;">ق: قوة القيد البنيوي</span>
+                </h3>
+                <div class="equation-box">
+                    <p class="text-center text-lg mb-2">
+                        <span class="en">Scale: 0-10</span>
+                        <span class="ar" style="display:none;">المقياس: 0-10</span>
+                    </p>
+                    \[ S = f(\text{Power Balance}, \text{Alliance Structure}, \text{Military Capabilities}) \]
+                </div>
+                <p class="text-gray-300 mt-2">
+                    <span class="en">Measures the strength of structural barriers to war (balance of power, deterrence, alliances).</span>
+                    <span class="ar" style="display:none;">يقيس قوة الحواجز البنيوية أمام الحرب (توازن القوى، الردع، التحالفات).</span>
+                </p>
+            </div>
+
+            <div class="variable-card">
+                <h3 class="text-xl font-bold text-green-400 mb-2">
+                    <span class="en">I: Information Quality</span>
+                    <span class="ar" style="display:none;">م: جودة المعلومات</span>
+                </h3>
+                <div class="equation-box">
+                    <p class="text-center text-lg mb-2">
+                        <span class="en">Scale: 0-10</span>
+                        <span class="ar" style="display:none;">المقياس: 0-10</span>
+                    </p>
+                    \[ I = f(\text{Accuracy}, \text{Completeness}, \text{Timeliness}, \text{Communication Channels}) \]
+                </div>
+                <p class="text-gray-300 mt-2">
+                    <span class="en">Measures the quality and accuracy of information available to decision-makers.</span>
+                    <span class="ar" style="display:none;">يقيس جودة ودقة المعلومات المتاحة لصناع القرار.</span>
+                </p>
+            </div>
+
+            <div class="variable-card">
+                <h3 class="text-xl font-bold text-purple-400 mb-2">
+                    <span class="en">C: Expectation Convergence</span>
+                    <span class="ar" style="display:none;">ت: تقارب التوقعات</span>
+                </h3>
+                <div class="equation-box">
+                    <p class="text-center text-lg mb-2">
+                        <span class="en">Scale: 0-10</span>
+                        <span class="ar" style="display:none;">المقياس: 0-10</span>
+                    </p>
+                    \[ C = f(\text{Shared Understanding}, \text{Agreement Level}, \text{Mutual Beliefs}) \]
+                </div>
+                <p class="text-gray-300 mt-2">
+                    <span class="en">Measures the degree of shared understanding and agreement between conflicting parties.</span>
+                    <span class="ar" style="display:none;">يقيس درجة الفهم المشترك والاتفاق بين الأطراف المتصارعة.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 2: Core Relationship -->
+        <div class="math-section">
+            <span class="section-icon"><i class="fa-solid fa-link text-blue-400"></i></span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">2. Core Theoretical Relationship</span>
+                <span class="ar" style="display:none;">2. العلاقة النظرية الأساسية</span>
+            </h2>
+            
+            <div class="equation-box highlight">
+                <h3 class="text-xl font-bold text-center mb-3">
+                    <span class="en">Main Research Equation</span>
+                    <span class="ar" style="display:none;">المعادلة البحثية الرئيسية</span>
+                </h3>
+                \[ \text{Peace Outcome} = g(S, I, C) \]
+                \[ \text{where: } C = h(S, I) \]
+                <p class="text-center mt-3 text-lg">
+                    <span class="en">Therefore:</span>
+                    <span class="ar" style="display:none;">لذلك:</span>
+                </p>
+                \[ \text{Peace Outcome} = g(S, I, h(S, I)) \]
+            </div>
+
+            <p class="text-gray-300 text-lg mt-4">
+                <span class="en"><strong>Key Insight:</strong> Convergence (C) is a function of both Structural Constraints (S) AND Information Quality (I). This is the core argument that distinguishes this research from traditional structural realism.</span>
+                <span class="ar" style="display:none;"><strong>الفكرة الأساسية:</strong> التقارب (ت) هو دالة للقيود البنيوية (ق) والمعلومات (م) معاً. هذه هي الحجة الأساسية التي تميز هذا البحث عن الواقعية البنيوية التقليدية.</span>
+            </p>
+        </div>
+
+        <!-- Section 3: Bayesian Learning Model -->
+        <div class="math-section">
+            <span class="section-icon"><i class="fa-solid fa-chart-bar text-green-400"></i></span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">3. Bayesian Learning Model</span>
+                <span class="ar" style="display:none;">3. نموذج التعلم البايزي</span>
+            </h2>
+            
+            <p class="text-gray-300 mb-4">
+                <span class="en">Information quality affects how actors update their beliefs about opponents' capabilities and intentions.</span>
+                <span class="ar" style="display:none;">تؤثر جودة المعلومات على كيفية تحديث الفاعلين لمعتقداتهم حول قدرات ونوايا الخصوم.</span>
+            </p>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Bayes' Theorem for Belief Updating</span>
+                    <span class="ar" style="display:none;">نظرية بايز لتحديث المعتقدات</span>
+                </h3>
+                \[ P(\theta | D) = \frac{P(D | \theta) \cdot P(\theta)}{P(D)} \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Where: θ = opponent's true type, D = observed data/information</span>
+                    <span class="ar" style="display:none;">حيث: θ = النوع الحقيقي للخصم، D = البيانات/المعلومات المرصودة</span>
+                </p>
+            </div>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Information Quality Impact</span>
+                    <span class="ar" style="display:none;">تأثير جودة المعلومات</span>
+                </h3>
+                \[ \text{Posterior Variance} = \frac{1}{\frac{1}{\text{Prior Variance}} + \frac{I}{\text{Signal Noise}}} \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Higher I (information quality) → Lower posterior variance → More accurate beliefs → Higher convergence (C)</span>
+                    <span class="ar" style="display:none;">م أعلى (جودة معلومات) ← تباين لاحق أقل ← معتقدات أكثر دقة ← تقارب أعلى (ت)</span>
+                </p>
+            </div>
+
+            <div class="key-finding">
+                <h3 class="text-xl font-bold text-green-400 mb-2">
+                    <span class="en">Connection to Core Argument</span>
+                    <span class="ar" style="display:none;">الارتباط بالحجة الأساسية</span>
+                </h3>
+                <p class="text-lg">
+                    <span class="en">Bayesian learning shows mathematically HOW information quality (I) leads to convergence (C) by reducing uncertainty about opponents' types.</span>
+                    <span class="ar" style="display:none;">يُظهر التعلم البايزي رياضياً كيف تؤدي جودة المعلومات (م) إلى التقارب (ت) من خلال تقليل عدم اليقين حول أنواع الخصوم.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 4: Information Theory -->
+        <div class="math-section">
+            <span class="section-icon"><i class="fa-solid fa-lightbulb text-yellow-300"></i></span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">4. Information Theory Framework</span>
+                <span class="ar" style="display:none;">4. إطار نظرية المعلومات</span>
+            </h2>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Shannon Entropy (Uncertainty Measure)</span>
+                    <span class="ar" style="display:none;">إنتروبيا شانون (قياس عدم اليقين)</span>
+                </h3>
+                \[ H(X) = -\sum_{i=1}^{n} p(x_i) \log_2 p(x_i) \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Measures uncertainty in the information environment</span>
+                    <span class="ar" style="display:none;">يقيس عدم اليقين في البيئة المعلوماتية</span>
+                </p>
+            </div>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Mutual Information (Shared Knowledge)</span>
+                    <span class="ar" style="display:none;">المعلومات المتبادلة (المعرفة المشتركة)</span>
+                </h3>
+                \[ I(X;Y) = \sum_{x,y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)} \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Measures how much information actors share about each other</span>
+                    <span class="ar" style="display:none;">يقيس مقدار المعلومات التي يتشاركها الفاعلون عن بعضهم البعض</span>
+                </p>
+            </div>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Kullback-Leibler Divergence (Belief Distance)</span>
+                    <span class="ar" style="display:none;">تباعد كولباك-ليبلر (مسافة المعتقدات)</span>
+                </h3>
+                \[ D_{KL}(P \| Q) = \sum_{i} P(i) \log \frac{P(i)}{Q(i)} \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Measures distance between two probability distributions (beliefs)</span>
+                    <span class="ar" style="display:none;">يقيس المسافة بين توزيعين احتماليين (معتقدات)</span>
+                </p>
+            </div>
+
+            <div class="key-finding">
+                <h3 class="text-xl font-bold text-green-400 mb-2">
+                    <span class="en">Connection to Core Argument</span>
+                    <span class="ar" style="display:none;">الارتباط بالحجة الأساسية</span>
+                </h3>
+                <p class="text-lg">
+                    <span class="en">Higher I → Lower H(X) (less uncertainty) + Higher I(X;Y) (more shared info) + Lower D_KL (closer beliefs) = Higher Convergence (C)</span>
+                    <span class="ar" style="display:none;">م أعلى ← H(X) أقل (عدم يقين أقل) + I(X;Y) أعلى (معلومات مشتركة أكثر) + D_KL أقل (معتقدات أقرب) = تقارب أعلى (ت)</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 5: Game Theory -->
+        <div class="math-section">
+            <span class="section-icon">🎮</span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">5. Game Theory Models</span>
+                <span class="ar" style="display:none;">5. نماذج نظرية الألعاب</span>
+            </h2>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Crisis Bargaining Game</span>
+                    <span class="ar" style="display:none;">لعبة المساومة في الأزمات</span>
+                </h3>
+                <p class="text-sm mb-2">
+                    <span class="en">Two actors (A, B) bargaining over resource X ∈ [0,1]</span>
+                    <span class="ar" style="display:none;">فاعلان (أ، ب) يتفاوضان على مورد X ∈ [0,1]</span>
+                </p>
+                \[ U_A(x) = x - c_A \cdot \mathbb{1}_{\text{war}} \]
+                \[ U_B(x) = (1-x) - c_B \cdot \mathbb{1}_{\text{war}} \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Where c_A, c_B are costs of war</span>
+                    <span class="ar" style="display:none;">حيث c_A, c_B هي تكاليف الحرب</span>
+                </p>
+            </div>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Bargaining Range (Peace Zone)</span>
+                    <span class="ar" style="display:none;">نطاق المساومة (منطقة السلام)</span>
+                </h3>
+                \[ \text{Bargaining Range} = [p_A - c_A, p_A + c_B] \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Where p_A = probability that A wins if war occurs</span>
+                    <span class="ar" style="display:none;">حيث p_A = احتمال فوز أ إذا حدثت الحرب</span>
+                </p>
+                <p class="text-sm mt-2">
+                    <span class="en"><strong>Peace occurs if:</strong> Bargaining range is non-empty</span>
+                    <span class="ar" style="display:none;"><strong>يحدث السلام إذا:</strong> كان نطاق المساومة غير فارغ</span>
+                </p>
+            </div>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Information Asymmetry Problem</span>
+                    <span class="ar" style="display:none;">مشكلة عدم تماثل المعلومات</span>
+                </h3>
+                <p class="text-sm mb-2">
+                    <span class="en">When information quality (I) is low:</span>
+                    <span class="ar" style="display:none;">عندما تكون جودة المعلومات (م) منخفضة:</span>
+                </p>
+                \[ \hat{p}_A \neq p_A \quad \text{and} \quad \hat{p}_B \neq p_B \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Actors have different beliefs (^p) about true win probability (p)</span>
+                    <span class="ar" style="display:none;">الفاعلون لديهم معتقدات مختلفة (^p) حول احتمال الفوز الحقيقي (p)</span>
+                </p>
+                <p class="text-sm mt-2">
+                    <span class="en"><strong>Result:</strong> Bargaining range appears empty even when it's not → War</span>
+                    <span class="ar" style="display:none;"><strong>النتيجة:</strong> يبدو نطاق المساومة فارغاً حتى لو لم يكن كذلك ← حرب</span>
+                </p>
+            </div>
+
+            <div class="key-finding">
+                <h3 class="text-xl font-bold text-green-400 mb-2">
+                    <span class="en">Connection to Core Argument</span>
+                    <span class="ar" style="display:none;">الارتباط بالحجة الأساسية</span>
+                </h3>
+                <p class="text-lg">
+                    <span class="en">High I → Accurate beliefs (^p ≈ p) → Actors agree on bargaining range → Convergence (C) → Peace</span>
+                    <span class="ar" style="display:none;">م عالية ← معتقدات دقيقة (^p ≈ p) ← الفاعلون يتفقون على نطاق المساومة ← تقارب (ت) ← سلام</span>
+                </p>
+                <p class="text-lg mt-2">
+                    <span class="en">Low I → Inaccurate beliefs (^p ≠ p) → Disagreement on range → No convergence → War</span>
+                    <span class="ar" style="display:none;">م منخفضة ← معتقدات غير دقيقة (^p ≠ p) ← خلاف على النطاق ← لا تقارب ← حرب</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 6: Structural Realism -->
+        <div class="math-section">
+            <span class="section-icon">⚖️</span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">6. Structural Realism Framework</span>
+                <span class="ar" style="display:none;">6. إطار الواقعية البنيوية</span>
+            </h2>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Balance of Power Index</span>
+                    <span class="ar" style="display:none;">مؤشر توازن القوى</span>
+                </h3>
+                \[ S = f\left(\frac{P_A}{P_B}, \text{Alliances}, \text{Geography}, \text{Technology}\right) \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Where P_A, P_B are power capabilities of actors A and B</span>
+                    <span class="ar" style="display:none;">حيث P_A, P_B هي قدرات القوة للفاعلين أ و ب</span>
+                </p>
+            </div>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Traditional Structural Realism Prediction</span>
+                    <span class="ar" style="display:none;">التنبؤ التقليدي للواقعية البنيوية</span>
+                </h3>
+                \[ \text{Peace} = \begin{cases} 
+                \text{High probability} & \text{if } S \geq S_{\text{threshold}} \\
+                \text{Low probability} & \text{if } S < S_{\text{threshold}}
+                \end{cases} \]
+                <p class="text-sm text-red-400 mt-2">
+                    <span class="en"><i class="fa-solid fa-times-circle text-red-400"></i> Problem: This model ignores information quality (I) and convergence (C)</span>
+                    <span class="ar" style="display:none;"><i class="fa-solid fa-times-circle text-red-400"></i> المشكلة: هذا النموذج يتجاهل جودة المعلومات (م) والتقارب (ت)</span>
+                </p>
+            </div>
+
+            <div class="equation-box highlight">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Enhanced Model (This Research)</span>
+                    <span class="ar" style="display:none;">النموذج المحسّن (هذا البحث)</span>
+                </h3>
+                \[ \text{Peace} = \begin{cases} 
+                \text{High probability} & \text{if } S \geq S_{\text{threshold}} \textbf{ AND } I \geq I_{\text{threshold}} \\
+                \text{Low probability} & \text{otherwise}
+                \end{cases} \]
+                <p class="text-sm text-green-400 mt-2">
+                    <span class="en"><i class="fa-solid fa-check-circle text-green-400"></i> Improvement: Incorporates information quality as a necessary condition</span>
+                    <span class="ar" style="display:none;"><i class="fa-solid fa-check-circle text-green-400"></i> التحسين: يدمج جودة المعلومات كشرط ضروري</span>
+                </p>
+            </div>
+
+            <div class="key-finding">
+                <h3 class="text-xl font-bold text-green-400 mb-2">
+                    <span class="en">Connection to Core Argument</span>
+                    <span class="ar" style="display:none;">الارتباط بالحجة الأساسية</span>
+                </h3>
+                <p class="text-lg">
+                    <span class="en">Structural constraints (S) create the POTENTIAL for peace, but information quality (I) determines whether that potential is REALIZED through convergence (C).</span>
+                    <span class="ar" style="display:none;">القيود البنيوية (ق) تخلق إمكانية السلام، لكن جودة المعلومات (م) تحدد ما إذا كانت هذه الإمكانية ستتحقق من خلال التقارب (ت).</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 7: Empirical Model -->
+        <div class="math-section">
+            <span class="section-icon"><i class="fa-solid fa-chart-line text-cyan-400"></i></span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">7. Empirical Statistical Model</span>
+                <span class="ar" style="display:none;">7. النموذج الإحصائي التجريبي</span>
+            </h2>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Logistic Regression Model</span>
+                    <span class="ar" style="display:none;">نموذج الانحدار اللوجستي</span>
+                </h3>
+                \[ \log\left(\frac{P(\text{Peace})}{P(\text{War})}\right) = \beta_0 + \beta_S \cdot S + \beta_I \cdot I + \beta_C \cdot C + \beta_{SI} \cdot (S \times I) \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">Tests the interaction effect between S and I on peace outcomes</span>
+                    <span class="ar" style="display:none;">يختبر تأثير التفاعل بين ق و م على نتائج السلام</span>
+                </p>
+            </div>
+
+            <div class="equation-box">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Mediation Model</span>
+                    <span class="ar" style="display:none;">نموذج الوساطة</span>
+                </h3>
+                <p class="text-sm mb-2">
+                    <span class="en">Testing if C mediates the relationship between (S,I) and Peace:</span>
+                    <span class="ar" style="display:none;">اختبار ما إذا كان ت يتوسط العلاقة بين (ق،م) والسلام:</span>
+                </p>
+                \[ C = \alpha_0 + \alpha_S \cdot S + \alpha_I \cdot I + \varepsilon_1 \]
+                \[ \text{Peace} = \gamma_0 + \gamma_S \cdot S + \gamma_I \cdot I + \gamma_C \cdot C + \varepsilon_2 \]
+                <p class="text-sm text-gray-400 mt-2">
+                    <span class="en">If γ_C is significant and γ_S, γ_I decrease → C mediates the effect</span>
+                    <span class="ar" style="display:none;">إذا كان γ_C معنوياً و γ_S, γ_I تنخفض ← ت يتوسط التأثير</span>
+                </p>
+            </div>
+
+            <div class="equation-box highlight">
+                <h3 class="text-lg font-bold mb-2">
+                    <span class="en">Critical Threshold Discovery</span>
+                    <span class="ar" style="display:none;">اكتشاف العتبة الحرجة</span>
+                </h3>
+                \[ P(\text{Peace} | I \geq 7) = 1.0 \quad \text{(14/14 cases)} \]
+                \[ P(\text{War} | I < 7) = 1.0 \quad \text{(14/14 cases)} \]
+                <p class="text-sm text-green-400 mt-2">
+                    <span class="en"><i class="fa-solid fa-check-circle text-green-400"></i> Perfect classification: I = 7 is the critical threshold</span>
+                    <span class="ar" style="display:none;"><i class="fa-solid fa-check-circle text-green-400"></i> تصنيف مثالي: م = 7 هي العتبة الحرجة</span>
+                </p>
+            </div>
+
+            <div class="key-finding">
+                <h3 class="text-xl font-bold text-green-400 mb-2">
+                    <span class="en">Empirical Validation of Core Argument</span>
+                    <span class="ar" style="display:none;">التحقق التجريبي من الحجة الأساسية</span>
+                </h3>
+                <p class="text-lg">
+                    <span class="en">Across 28 historical cases (1910-2022), information quality (I ≥ 7) perfectly predicts peace outcomes, confirming that I is the critical variable that enables S to produce C and peace.</span>
+                    <span class="ar" style="display:none;">عبر 28 حالة تاريخية (1910-2022)، جودة المعلومات (م ≥ 7) تتنبأ بشكل مثالي بنتائج السلام، مما يؤكد أن م هي المتغير الحاسم الذي يمكّن ق من إنتاج ت والسلام.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 8: Final Synthesis -->
+        <div class="math-section">
+            <span class="section-icon"><i class="fa-solid fa-bullseye text-red-400"></i></span>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                <span class="en">8. Mathematical Synthesis: From Core Argument to Final Results</span>
+                <span class="ar" style="display:none;">8. التوليف الرياضي: من الحجة الأساسية إلى النتائج النهائية</span>
+            </h2>
+
+            <div class="equation-box highlight">
+                <h3 class="text-xl font-bold text-center mb-4">
+                    <span class="en">Complete Causal Chain</span>
+                    <span class="ar" style="display:none;">السلسلة السببية الكاملة</span>
+                </h3>
+                
+                <div class="text-lg space-y-4">
+                    <p><strong>Step 1:</strong> <span class="en">Structural Constraints (S) exist</span><span class="ar" style="display:none;">القيود البنيوية (ق) موجودة</span></p>
+                    \[ S = f(\text{Power Balance}, \text{Alliances}, \text{Deterrence}) \]
+                    
+                    <p><strong>Step 2:</strong> <span class="en">Information Quality (I) determines belief accuracy</span><span class="ar" style="display:none;">جودة المعلومات (م) تحدد دقة المعتقدات</span></p>
+                    \[ \text{High } I \implies \hat{p}_A \approx p_A, \hat{p}_B \approx p_B \quad \text{(Bayesian Learning)} \]
+                    
+                    <p><strong>Step 3:</strong> <span class="en">Accurate beliefs enable convergence</span><span class="ar" style="display:none;">المعتقدات الدقيقة تمكّن التقارب</span></p>
+                    \[ C = h(S, I) \quad \text{where } \frac{\partial C}{\partial I} > 0 \quad \text{(Information Theory)} \]
+                    
+                    <p><strong>Step 4:</strong> <span class="en">Convergence creates bargaining range</span><span class="ar" style="display:none;">التقارب يخلق نطاق المساومة</span></p>
+                    \[ C > C_{\text{threshold}} \implies \text{Bargaining Range} \neq \emptyset \quad \text{(Game Theory)} \]
+                    
+                    <p><strong>Step 5:</strong> <span class="en">Non-empty bargaining range → Peace</span><span class="ar" style="display:none;">نطاق مساومة غير فارغ ← سلام</span></p>
+                    \[ \text{Bargaining Range} \neq \emptyset \implies \text{Peace Outcome} \]
+                </div>
+            </div>
+
+            <div class="key-finding">
+                <h3 class="text-2xl font-bold text-green-400 mb-3">
+                    <span class="en">Final Mathematical Conclusion</span>
+                    <span class="ar" style="display:none;">الاستنتاج الرياضي النهائي</span>
+                </h3>
+                <div class="text-xl space-y-3">
+                    <p>
+                        <span class="en"><i class="fa-solid fa-check-circle text-green-400"></i> <strong>Traditional Model (Incomplete):</strong></span>
+                        <span class="ar" style="display:none;"><i class="fa-solid fa-check-circle text-green-400"></i> <strong>النموذج التقليدي (غير مكتمل):</strong></span>
+                    </p>
+                    \[ \text{Peace} = g(S) \]
+                    
+                    <p>
+                        <span class="en"><i class="fa-solid fa-check-circle text-green-400"></i> <strong>Enhanced Model (This Research):</strong></span>
+                        <span class="ar" style="display:none;"><i class="fa-solid fa-check-circle text-green-400"></i> <strong>النموذج المحسّن (هذا البحث):</strong></span>
+                    </p>
+                    \[ \text{Peace} = g(S, I, C) \quad \text{where } C = h(S, I) \]
+                    
+                    <p class="mt-4">
+                        <span class="en"><i class="fa-solid fa-check-circle text-green-400"></i> <strong>Core Finding:</strong> I ≥ 7 is necessary for peace (100% accuracy across 28 cases)</span>
+                        <span class="ar" style="display:none;"><i class="fa-solid fa-check-circle text-green-400"></i> <strong>النتيجة الأساسية:</strong> م ≥ 7 ضروري للسلام (دقة 100% عبر 28 حالة)</span>
+                    </p>
+                    
+                    <p class="text-2xl mt-4 text-center">
+                        \[ \boxed{S + I \rightarrow C \rightarrow \text{Peace}} \]
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="text-center mt-12">
+            <a href="index.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition mr-4">
+                <span class="en">Back to Home</span>
+            </a>
+            <a href="interactive-3d-surface-plot.html" 
+               class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                <span class="en"><i class="fa-solid fa-bullseye text-red-400"></i> View 3D Surface Plot</span>
+                <span class="ar" style="display:none;">العودة للرئيسية</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">
+                &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+            </p>
+            <p class="text-gray-500 text-sm mt-2">
+                All Rights Reserved | جميع الحقوق محفوظة
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Language Toggle
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const direction = currentLang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.documentElement.setAttribute('dir', direction);
+            document.documentElement.setAttribute('lang', currentLang);
+            
+            document.querySelectorAll('.en').forEach(el => {
+                el.style.display = currentLang === 'en' ? '' : 'none';
+            });
+            document.querySelectorAll('.ar').forEach(el => {
+                el.style.display = currentLang === 'ar' ? '' : 'none';
+            });
+            
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'العربية' : 'English';
+        }
+
+        // Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+            
+            document.getElementById('progress-bar').style.width = scrollProgress + '%';
+        });
+    </script>
+
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

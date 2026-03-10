@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Infographics - Master's Thesis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #1e293b;
+            margin: auto;
+            max-width: 900px;
+            width: 95%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: translateY(50px);
+            transition: transform 0.4s ease;
+        }
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        .infographic-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: #1e293b;
+            border: 1px solid #334155;
+        }
+        .infographic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+            border-color: #3b82f6;
+        }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <!-- Theme System CSS -->
+    </head>
+<body class="bg-gray-900 text-white">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-900 to-purple-900 shadow-2xl sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">Research Infographics</h1>
+                    <p class="text-sm text-gray-300">Interactive Visual Guides</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="index-en.html" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="research-infographics.html" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">العربية</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-white mb-4">Research Infographics</h1>
+            <p class="text-xl text-gray-400 mb-8">Interactive visual guides to the research findings</p>
+            <div class="flex justify-center gap-4">
+                <div class="bg-gray-800 px-6 py-3 rounded-lg border border-gray-700">
+                    <span class="text-3xl font-bold text-blue-400">9</span>
+                    <p class="text-sm text-gray-400">Infographics</p>
+                </div>
+                <div class="bg-gray-800 px-6 py-3 rounded-lg border border-gray-700">
+                    <span class="text-3xl font-bold text-green-400">313</span>
+                    <p class="text-sm text-gray-400">References</p>
+                </div>
+                <div class="bg-gray-800 px-6 py-3 rounded-lg border border-gray-700">
+                    <span class="text-3xl font-bold text-purple-400">28</span>
+                    <p class="text-sm text-gray-400">Cases</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Infographics Grid -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Card 1: Theoretical Framework -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(1)">
+                <div class="bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-white text-center">
+                    <i class="fas fa-book-open card-icon"></i>
+                    <h3 class="text-2xl font-bold">Theoretical Framework</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">Structural realism meets information theories</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full mr-2 border border-blue-700">Waltz</span>
+                        <span class="inline-block bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full border border-blue-700">Fearon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Research Problem -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(2)">
+                <div class="bg-gradient-to-br from-red-600 to-red-800 p-8 text-white text-center">
+                    <i class="fas fa-question-circle card-icon"></i>
+                    <h3 class="text-2xl font-bold">Research Problem</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">Why do structural constraints fail to prevent war?</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-red-900/50 text-red-300 px-3 py-1 rounded-full border border-red-700">Central Question</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Mathematical Model -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(3)">
+                <div class="bg-gradient-to-br from-purple-600 to-purple-800 p-8 text-white text-center">
+                    <i class="fas fa-square-root-alt card-icon"></i>
+                    <h3 class="text-2xl font-bold">Mathematical Model</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">P(Peace) = f(S, I, C)</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-purple-900/50 text-purple-300 px-3 py-1 rounded-full mr-2 border border-purple-700">S</span>
+                        <span class="inline-block bg-purple-900/50 text-purple-300 px-3 py-1 rounded-full mr-2 border border-purple-700">I</span>
+                        <span class="inline-block bg-purple-900/50 text-purple-300 px-3 py-1 rounded-full border border-purple-700">C</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Research Methodology -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(4)">
+                <div class="bg-gradient-to-br from-green-600 to-green-800 p-8 text-white text-center">
+                    <i class="fas fa-flask card-icon"></i>
+                    <h3 class="text-2xl font-bold">Methodology</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">Mixed-method design, data and variables, causal identification strategy</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-green-900/50 text-green-300 px-3 py-1 rounded-full border border-green-700">Quantitative</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Key Variables -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(5)">
+                <div class="bg-gradient-to-br from-yellow-600 to-yellow-800 p-8 text-white text-center">
+                    <i class="fas fa-sliders-h card-icon"></i>
+                    <h3 class="text-2xl font-bold">Key Variables</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">Structural Constraints, Information Quality, Convergence</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full border border-yellow-700">3 Variables</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Historical Cases -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(6)">
+                <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 p-8 text-white text-center">
+                    <i class="fas fa-globe card-icon"></i>
+                    <h3 class="text-2xl font-bold">Historical Cases</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">28 international conflict cases analyzed</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-indigo-900/50 text-indigo-300 px-3 py-1 rounded-full border border-indigo-700">1945-2020</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7: Main Findings -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(7)">
+                <div class="bg-gradient-to-br from-pink-600 to-pink-800 p-8 text-white text-center">
+                    <i class="fas fa-chart-line card-icon"></i>
+                    <h3 class="text-2xl font-bold">Main Findings</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">Statistical results and interpretations</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-pink-900/50 text-pink-300 px-3 py-1 rounded-full border border-pink-700">Under Development</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8: Main Conclusion -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(8)">
+                <div class="bg-gradient-to-br from-teal-600 to-teal-800 p-8 text-white text-center">
+                    <i class="fas fa-lightbulb card-icon"></i>
+                    <h3 class="text-2xl font-bold">Main Conclusion</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">Information quality is key to peace</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-teal-900/50 text-teal-300 px-3 py-1 rounded-full border border-teal-700">Core Insight</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 9: Recommendations -->
+            <div class="infographic-card rounded-2xl overflow-hidden" onclick="openModal(9)">
+                <div class="bg-gradient-to-br from-orange-600 to-orange-800 p-8 text-white text-center">
+                    <i class="fas fa-tasks card-icon"></i>
+                    <h3 class="text-2xl font-bold">Recommendations</h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 mb-4">Policy implications and future research</p>
+                    <div class="text-sm">
+                        <span class="inline-block bg-orange-900/50 text-orange-300 px-3 py-1 rounded-full border border-orange-700">Applications</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About the Research</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        An academic study integrating structural realism and information theories in international relations
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-en.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-home text-blue-400 mr-2"></i>Home</a></li>
+                        <li><a href="dashboard-hub-en.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chart-line text-green-400 mr-2"></i>Dashboard Hub</a></li>
+                        <li><a href="mathematical-framework.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-square-root-alt text-purple-400 mr-2"></i>Mathematical Framework</a></li>
+                        <li><a href="3d-surface-plot.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-cube text-blue-500 mr-2"></i>3D Surface Plot</a></li>
+                        <li><a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chart-bar text-cyan-400 mr-2"></i>Quantitative Analysis</a></li>
+                        <li><a href="citation-network-en.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-project-diagram text-red-400 mr-2"></i>Citation Network</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dar Al-Hekma University</h3>
+                    <p class="text-gray-400 mb-4">جامعة دار الحكمة</p>
+                    <p class="text-gray-400">International Relations & Diplomacy Department</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    All Rights Reserved | جميع الحقوق محفوظة
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="infographicModal" class="modal">
+        <div class="modal-content">
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const infographics = {
+            1: {
+                title: "Theoretical Framework",
+                color: "blue",
+                content: `
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-book-open mr-3"></i>Theoretical Framework</h2>
+                        <p class="text-lg opacity-90">Integration of structural realism and information theories</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-blue-300 mb-4">Structural Realism</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Kenneth Waltz's neorealism</li>
+                                    <li>• International system structure</li>
+                                    <li>• Balance of power</li>
+                                    <li>• State survival</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-blue-300 mb-4">Information Theories</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• James Fearon's rationalist explanations</li>
+                                    <li>• Information asymmetry</li>
+                                    <li>• Credible commitments</li>
+                                    <li>• Bargaining range</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-blue-900/30 p-6 rounded-xl border border-blue-700">
+                            <h3 class="text-xl font-bold text-blue-300 mb-4 text-center">Integration Point</h3>
+                            <p class="text-lg text-gray-300 text-center">
+                                This research argues that structural constraints alone are insufficient to prevent war. The quality of information available to decision-makers is a critical mediating factor that determines whether structural incentives for peace are realized.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            2: {
+                title: "Research Problem",
+                color: "red",
+                content: `
+                    <div class="bg-gradient-to-r from-red-600 to-red-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-question-circle mr-3"></i>Research Problem</h2>
+                        <p class="text-lg opacity-90">Why do structural constraints fail to prevent war?</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="bg-red-900/30 p-6 rounded-xl mb-6 border border-red-700">
+                            <h3 class="text-2xl font-bold text-red-300 mb-4 text-center">Central Question</h3>
+                            <p class="text-xl text-gray-300 text-center italic">
+                                "Under what informational conditions do structural constraints effectively prevent war between states?"
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-red-300 mb-3">The Puzzle</h3>
+                                <p class="text-gray-300">
+                                    Despite strong structural incentives for peace (e.g., nuclear weapons, economic interdependence, balance of power), wars still occur. Why?
+                                </p>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-red-300 mb-3">Existing Explanations</h3>
+                                <p class="text-gray-300">
+                                    Traditional theories focus either on structure OR information, but not their interaction.
+                                </p>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-red-300 mb-3">Research Gap</h3>
+                                <p class="text-gray-300">
+                                    No systematic analysis of how information quality mediates the effectiveness of structural constraints.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+                title: "Mathematical Model",
+                color: "purple",
+                content: `
+                    <div class="bg-gradient-to-r from-purple-600 to-purple-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-square-root-alt mr-3"></i>Mathematical Model</h2>
+                        <p class="text-lg opacity-90">Formal representation of the theory</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="bg-purple-900/30 p-8 rounded-xl mb-6 text-center border border-purple-700">
+                            <h3 class="text-2xl font-bold text-purple-300 mb-6">Peace Probability Equation</h3>
+                            <div class="text-4xl font-bold text-white mb-4">
+                                P(Peace) = f(S, I, C)
+                            </div>
+                            <p class="text-gray-300 mt-4">
+                                The probability of peace is a function of Structural constraints (S), Information quality (I), and their Convergence (C)
+                            </p>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-gray-700 p-6 rounded-xl text-center border border-gray-600">
+                                <div class="text-3xl font-bold text-purple-300 mb-2">S</div>
+                                <h4 class="font-bold text-purple-300 mb-2">Structure</h4>
+                                <p class="text-sm text-gray-300">Structural constraints (power balance, costs of war)</p>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl text-center border border-gray-600">
+                                <div class="text-3xl font-bold text-purple-300 mb-2">I</div>
+                                <h4 class="font-bold text-purple-300 mb-2">Information</h4>
+                                <p class="text-sm text-gray-300">Quality of available information</p>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl text-center border border-gray-600">
+                                <div class="text-3xl font-bold text-purple-300 mb-2">C</div>
+                                <h4 class="font-bold text-purple-300 mb-2">Convergence</h4>
+                                <p class="text-sm text-gray-300">Alignment between expectations and reality</p>
+                            </div>
+                        </div>
+                        <div class="bg-purple-900/20 p-6 rounded-xl mt-6 border border-purple-700">
+                            <h3 class="text-xl font-bold text-purple-300 mb-4 text-center">Four Hypotheses</h3>
+                            <ol class="space-y-3 text-gray-300">
+                                <li><strong class="text-purple-300">H1:</strong> Stronger structural constraints increase peace probability</li>
+                                <li><strong class="text-purple-300">H2:</strong> Higher information quality increases peace probability</li>
+                                <li><strong class="text-purple-300">H3:</strong> The effect of structure depends on information quality (interaction)</li>
+                                <li><strong class="text-purple-300">H4:</strong> Greater convergence increases peace probability</li>
+                            </ol>
+                        </div>
+                    </div>
+                `
+            },
+            4: {
+                title: "Methodology",
+                color: "green",
+                content: `
+                    <div class="bg-gradient-to-r from-green-600 to-green-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-flask mr-3"></i>Research Methodology</h2>
+                        <p class="text-lg opacity-90">Mixed-method research design</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="space-y-6">
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-green-300 mb-4">Research Design</h3>
+                                <p class="text-gray-300 mb-4">Mixed-method approach combining:</p>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Quantitative analysis of 28 historical cases</li>
+                                    <li>• Qualitative case studies for causal mechanisms</li>
+                                    <li>• Statistical modeling and hypothesis testing</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-green-300 mb-4">Data Collection</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Historical records and archives</li>
+                                    <li>• Academic databases (313 references)</li>
+                                    <li>• Expert interviews</li>
+                                    <li>• Primary documents from conflict cases</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-green-300 mb-4">Variable Measurement</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Structural constraints: Power indices, alliance patterns</li>
+                                    <li>• Information quality: Communication channels, intelligence accuracy</li>
+                                    <li>• Convergence: Expectation-reality alignment scores</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-green-300 mb-4">Causal Identification Strategy</h3>
+                                <p class="text-gray-300">
+                                    Process tracing and comparative case analysis to establish causal relationships between information quality and conflict outcomes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            5: {
+                title: "Key Variables",
+                color: "yellow",
+                content: `
+                    <div class="bg-gradient-to-r from-yellow-600 to-yellow-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-sliders-h mr-3"></i>Key Variables</h2>
+                        <p class="text-lg opacity-90">Three main variables and their measurements</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="space-y-6">
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-2xl font-bold text-yellow-300 mb-4">1. Structural Constraints (S)</h3>
+                                <p class="text-gray-300 mb-4"><strong>Definition:</strong> Material and systemic factors that make war costly or difficult</p>
+                                <p class="text-gray-300 mb-4"><strong>Indicators:</strong></p>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Relative military capabilities</li>
+                                    <li>• Nuclear weapons possession</li>
+                                    <li>• Alliance commitments</li>
+                                    <li>• Economic interdependence</li>
+                                    <li>• Geographic distance</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-2xl font-bold text-yellow-300 mb-4">2. Information Quality (I)</h3>
+                                <p class="text-gray-300 mb-4"><strong>Definition:</strong> Accuracy, completeness, and reliability of information available to decision-makers</p>
+                                <p class="text-gray-300 mb-4"><strong>Indicators:</strong></p>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Intelligence capabilities</li>
+                                    <li>• Communication channels</li>
+                                    <li>• Transparency of intentions</li>
+                                    <li>• Historical track record</li>
+                                    <li>• Third-party verification</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-2xl font-bold text-yellow-300 mb-4">3. Convergence (C)</h3>
+                                <p class="text-gray-300 mb-4"><strong>Definition:</strong> Degree of alignment between expectations and actual outcomes</p>
+                                <p class="text-gray-300 mb-4"><strong>Indicators:</strong></p>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Accuracy of pre-crisis assessments</li>
+                                    <li>• Surprise factor in outcomes</li>
+                                    <li>• Consistency of signals</li>
+                                    <li>• Predictability of behavior</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            6: {
+                title: "Historical Cases",
+                color: "indigo",
+                content: `
+                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-globe mr-3"></i>Historical Cases</h2>
+                        <p class="text-lg opacity-90">28 international conflict cases (1945-2020)</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="bg-indigo-900/30 p-6 rounded-xl mb-6 text-center border border-indigo-700">
+                            <h3 class="text-2xl font-bold text-indigo-300 mb-4">Case Selection Criteria</h3>
+                            <ul class="text-left space-y-2 text-gray-300 max-w-2xl mx-auto">
+                                <li>• Interstate conflicts with significant structural constraints</li>
+                                <li>• Availability of detailed historical records</li>
+                                <li>• Variation in information quality</li>
+                                <li>• Geographic and temporal diversity</li>
+                            </ul>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-indigo-300 mb-4">Examples of Cases</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Cuban Missile Crisis (1962)</li>
+                                    <li>• India-Pakistan Kargil War (1999)</li>
+                                    <li>• US-China Taiwan Strait Crisis (1996)</li>
+                                    <li>• Russia-Georgia War (2008)</li>
+                                    <li>• And 24 more cases...</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-indigo-300 mb-4">Outcome Distribution</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>• Peaceful resolution: 15 cases</li>
+                                    <li>• Limited war: 8 cases</li>
+                                    <li>• Full-scale war: 5 cases</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            7: {
+                title: "Main Findings",
+                color: "pink",
+                content: `
+                    <div class="bg-gradient-to-r from-pink-600 to-pink-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-chart-line mr-3"></i>Main Findings</h2>
+                        <p class="text-lg opacity-90">Statistical results and interpretations</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="bg-pink-900/30 p-6 rounded-xl mb-6 text-center border border-pink-700">
+                            <p class="text-2xl font-bold text-pink-300">Under Development</p>
+                            <p class="text-gray-300 mt-2">Final statistical analysis in progress</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-pink-300 mb-3">Expected Results</h3>
+                                <p class="text-gray-300">
+                                    Preliminary analysis suggests strong support for the interaction hypothesis: structural constraints are most effective when information quality is high.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            8: {
+                title: "Main Conclusion",
+                color: "teal",
+                content: `
+                    <div class="bg-gradient-to-r from-teal-600 to-teal-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-lightbulb mr-3"></i>Main Conclusion</h2>
+                        <p class="text-lg opacity-90">The core insight of the research</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="bg-teal-900/30 p-8 rounded-xl border border-teal-700">
+                            <h3 class="text-2xl font-bold text-teal-300 mb-4 text-center">Main Conclusion</h3>
+                            <p class="text-lg text-gray-300 text-center">
+                                The effectiveness of structural constraints in preventing war critically depends on the quality of the informational environment available to decision-makers.
+                            </p>
+                        </div>
+                    </div>
+                `
+            },
+            9: {
+                title: "Recommendations",
+                color: "orange",
+                content: `
+                    <div class="bg-gradient-to-r from-orange-600 to-orange-800 text-white p-8 rounded-t-2xl">
+                        <button onclick="closeModal()" class="float-right text-white text-3xl hover:text-gray-200">&times;</button>
+                        <h2 class="text-3xl font-bold mb-2"><i class="fas fa-tasks mr-3"></i>Recommendations & Applications</h2>
+                        <p class="text-lg opacity-90">How can findings be applied practically?</p>
+                    </div>
+                    <div class="p-8 bg-gray-800 text-white">
+                        <div class="space-y-6">
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-orange-300 mb-4">For Policymakers</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>✓ Invest in improving intelligence information quality</li>
+                                    <li>✓ Develop reliable communication channels with adversaries</li>
+                                    <li>✓ Enhance transparency in strategic decisions</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-orange-300 mb-4">For International Institutions</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>✓ Support information exchange mechanisms between states</li>
+                                    <li>✓ Develop early warning systems</li>
+                                    <li>✓ Strengthen mediation and preventive diplomacy roles</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-6 rounded-xl border border-gray-600">
+                                <h3 class="text-xl font-bold text-orange-300 mb-4">For Researchers</h3>
+                                <ul class="space-y-2 text-gray-300">
+                                    <li>✓ Expand model to include regional cases</li>
+                                    <li>✓ Study technology's impact on information quality</li>
+                                    <li>✓ Develop more complex predictive models</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function openModal(id) {
+            const modal = document.getElementById('infographicModal');
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = infographics[id].content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infographicModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('infographicModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

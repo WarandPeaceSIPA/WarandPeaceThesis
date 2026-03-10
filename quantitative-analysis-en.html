@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quantitative Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+        .chart-container-large {
+            position: relative;
+            height: 500px;
+            margin-bottom: 2rem;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+    <!-- Theme System CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">Interactive Quantitative Analysis</h1>
+                    <p class="text-sm md:text-base mt-2 opacity-90">Informational Conditions for Structural Constraint Effectiveness</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="index-ar.html" class="bg-white text-purple-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        Home
+                    </a>
+                    <a href="quantitative-analysis.html" class="bg-purple-800 text-white px-4 py-2 rounded-lg font-semibold hover:bg-purple-900 transition">
+                        العربية
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Interactive Quantitative Analysis</h2>
+                <p class="text-xl text-gray-600 mb-8">
+                    Explore 6 interactive charts analyzing 28 historical cases (1910-2022) using the proposed theoretical model (1910-2022)
+                </p>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-700 text-white p-6 rounded-xl shadow-lg">
+                    <div class="text-5xl font-bold mb-2">28</div>
+                    <div class="text-lg">Historical Cases</div>
+                    <div class="text-sm opacity-80 mt-1">1910-2022</div>
+                </div>
+                <div class="bg-gradient-to-br from-yellow-500 to-orange-600 text-white p-6 rounded-xl shadow-lg border-2 border-yellow-400">
+                    <div class="text-5xl font-bold mb-2">🧪</div>
+                    <div class="text-lg">Under Testing</div>
+                    <div class="text-sm opacity-80 mt-1">Under Review</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-6 rounded-xl shadow-lg">
+                    <div class="text-5xl font-bold mb-2">6</div>
+                    <div class="text-lg">Interactive Charts</div>
+                    <div class="text-sm opacity-80 mt-1">Data Visualization</div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-700 text-white p-6 rounded-xl shadow-lg">
+                    <div class="text-5xl font-bold mb-2">3</div>
+                    <div class="text-lg">Main Variables</div>
+                    <div class="text-sm opacity-80 mt-1">S, I, C</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6">Analysis Overview</h3>
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        This quantitative analysis tests the proposed theoretical model on 28 historical cases spanning over a century (1910-2022). The model examines the relationship between three key variables:
+                    </p>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-3">S →</span>
+                            <span><strong>Structural Constraint:</strong> The strength of structural constraints in the international system (1-10 scale)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-3">I →</span>
+                            <span><strong>Information Quality:</strong> The quality and accuracy of information available to decision-makers (1-10 scale)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-600 font-bold mr-3">C →</span>
+                            <span><strong>Convergence Level:</strong> The degree of convergence between expectations and reality (Low/Medium/High)</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
+                        <p class="text-gray-700">
+                            <strong>Main Hypothesis:</strong> The effectiveness of structural constraints in preventing war depends on the quality of information available to decision-makers. When information quality is high, structural constraints are more effective in maintaining peace.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section id="charts-section" class="py-12 bg-white scroll-mt-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Interactive Data Visualization</h3>
+
+                <!-- Chart 1: War vs Peace Distribution -->
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                    <h4 class="text-2xl font-bold text-gray-800 mb-4">1. War vs Peace Distribution</h4>
+                    <p class="text-gray-600 mb-6">Distribution of 28 historical cases by outcome</p>
+                    <div class="chart-container">
+                        <canvas id="chart1"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Structural Constraint Distribution -->
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                    <h4 class="text-2xl font-bold text-gray-800 mb-4">2. Structural Constraint (S) Distribution</h4>
+                    <p class="text-gray-600 mb-6">Classification of cases by structural constraint strength</p>
+                    <div class="chart-container">
+                        <canvas id="chart2"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: Information Quality Distribution -->
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                    <h4 class="text-2xl font-bold text-gray-800 mb-4">3. Information Quality (I) Distribution</h4>
+                    <p class="text-gray-600 mb-6">Distribution of cases by information quality level</p>
+                    <div class="chart-container">
+                        <canvas id="chart3"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 4: Convergence Level Analysis -->
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                    <h4 class="text-2xl font-bold text-gray-800 mb-4">4. Convergence Level (C) Analysis</h4>
+                    <p class="text-gray-600 mb-6">Relationship between convergence level and war/peace outcomes</p>
+                    <div class="chart-container">
+                        <canvas id="chart4"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 5: Correlation Analysis -->
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                    <h4 class="text-2xl font-bold text-gray-800 mb-4">5. Correlation Analysis (S vs I)</h4>
+                    <p class="text-gray-600 mb-6">Relationship between structural constraint and information quality</p>
+                    <div class="chart-container-large">
+                        <canvas id="chart5"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 6: Model Performance -->
+                <div class="bg-white p-6 rounded-xl shadow-lg mb-12">
+                    <h4 class="text-2xl font-bold text-gray-800 mb-4">6. Model Performance Metrics</h4>
+                    <p class="text-gray-600 mb-6">Evaluation of model predictive accuracy</p>
+                    <div class="chart-container">
+                        <canvas id="chart6"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classification Criteria -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8">Variable Classification Criteria</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- S Variable -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="text-xl font-bold text-blue-700 mb-4">Structural Constraint (S)</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><strong>Weak (1-3):</strong> Minimal structural constraints, high freedom of action</li>
+                            <li><strong>Medium (4-6):</strong> Moderate constraints, balanced system</li>
+                            <li><strong>Strong (7-10):</strong> Significant constraints, limited freedom</li>
+                        </ul>
+                    </div>
+
+                    <!-- I Variable -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="text-xl font-bold text-green-700 mb-4">Information Quality (I)</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><strong>Low (1-3):</strong> Poor information, high uncertainty</li>
+                            <li><strong>Medium (4-6):</strong> Moderate information quality</li>
+                            <li><strong>High (7-10):</strong> Excellent information, low uncertainty</li>
+                        </ul>
+                    </div>
+
+                    <!-- C Variable -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="text-xl font-bold text-purple-700 mb-4">Convergence Level (C)</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><strong>Low:</strong> Significant gap between expectations and reality</li>
+                            <li><strong>Medium:</strong> Moderate alignment</li>
+                            <li><strong>High:</strong> Strong convergence between expectations and outcomes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Correlation Results -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6">Correlation Analysis Results</h3>
+                <div class="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl shadow-md">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-3">War Cases (n=14)</h4>
+                            <p class="text-gray-700">Correlation between S and I: <strong class="text-red-600">r = -0.42</strong></p>
+                            <p class="text-sm text-gray-600 mt-2">Negative correlation: Higher structural constraints associated with lower information quality in war cases</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-3">Peace Cases (n=14)</h4>
+                            <p class="text-gray-700">Correlation between S and I: <strong class="text-green-600">r = +0.68</strong></p>
+                            <p class="text-sm text-gray-600 mt-2">Positive correlation: Higher structural constraints associated with better information quality in peace cases</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-white rounded-lg">
+                        <p class="text-gray-700">
+                            <strong>Key Finding:</strong> The opposite correlation patterns between war and peace cases support the main hypothesis that information quality moderates the effectiveness of structural constraints.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Historical Cases Table -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6">Historical Cases Sample</h3>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead class="bg-gradient-to-r from-purple-600 to-blue-600 text-white">
+                                <tr>
+                                    <th class="px-6 py-4 text-left">#</th>
+                                    <th class="px-6 py-4 text-left">Case</th>
+                                    <th class="px-6 py-4 text-center">Year</th>
+                                    <th class="px-6 py-4 text-center">S</th>
+                                    <th class="px-6 py-4 text-center">I</th>
+                                    <th class="px-6 py-4 text-center">C</th>
+                                    <th class="px-6 py-4 text-center">Outcome</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4">1</td>
+                                    <td class="px-6 py-4 font-semibold">World War I</td>
+                                    <td class="px-6 py-4 text-center">1914</td>
+                                    <td class="px-6 py-4 text-center">7</td>
+                                    <td class="px-6 py-4 text-center">3</td>
+                                    <td class="px-6 py-4 text-center">Low</td>
+                                    <td class="px-6 py-4 text-center"><span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">War</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4">2</td>
+                                    <td class="px-6 py-4 font-semibold">Cuban Missile Crisis</td>
+                                    <td class="px-6 py-4 text-center">1962</td>
+                                    <td class="px-6 py-4 text-center">8</td>
+                                    <td class="px-6 py-4 text-center">7</td>
+                                    <td class="px-6 py-4 text-center">High</td>
+                                    <td class="px-6 py-4 text-center"><span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Peace</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4">3</td>
+                                    <td class="px-6 py-4 font-semibold">Vietnam War</td>
+                                    <td class="px-6 py-4 text-center">1965</td>
+                                    <td class="px-6 py-4 text-center">6</td>
+                                    <td class="px-6 py-4 text-center">4</td>
+                                    <td class="px-6 py-4 text-center">Medium</td>
+                                    <td class="px-6 py-4 text-center"><span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">War</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4">4</td>
+                                    <td class="px-6 py-4 font-semibold">Gulf War</td>
+                                    <td class="px-6 py-4 text-center">1991</td>
+                                    <td class="px-6 py-4 text-center">5</td>
+                                    <td class="px-6 py-4 text-center">6</td>
+                                    <td class="px-6 py-4 text-center">Medium</td>
+                                    <td class="px-6 py-4 text-center"><span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">War</span></td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4">5</td>
+                                    <td class="px-6 py-4 font-semibold">Ukraine War</td>
+                                    <td class="px-6 py-4 text-center">2022</td>
+                                    <td class="px-6 py-4 text-center">4</td>
+                                    <td class="px-6 py-4 text-center">5</td>
+                                    <td class="px-6 py-4 text-center">Medium</td>
+                                    <td class="px-6 py-4 text-center"><span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">War</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-4 text-center text-gray-600">
+                        Sample of 5 cases from total 28 historical cases analyzed
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-8">Key Findings</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border-l-4 border-blue-500">
+                        <h<h4 class="text-xl font-bold text-green-800 mb-3"><i class="fa-solid fa-chart-bar text-green-400"></i> Information Quality Matters</h4>[^>]*><i class="fa-solid fa-chart-bar text-green-400"></i> Information Quality Matters</h<h4 class="text-xl font-bold text-green-800 mb-3"><i class="fa-solid fa-chart-bar text-green-400"></i> Information Quality Matters</h4>>
+                        <p class="text-gray-700">High information quality (I ≥ 7) combined with strong structural constraints (S ≥ 7) consistently resulted in peace.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border-l-4 border-purple-500">
+                        <h4 class="text-xl font-bold text-purple-800 mb-3">⚖️ Structural Constraints Alone Insufficient</h4>
+                        <p class="text-gray-700">Strong structural constraints without quality information failed to prevent war in multiple cases.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl border-l-4 border-orange-500">
+                        <h4 class="text-xl font-bold text-orange-800 mb-3">🔄 Convergence as Key Mediator</h4>
+                        <p class="text-gray-700">High convergence (C) between expectations and reality was present in all 14 peace cases.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confusion Matrix -->
+    <section class="py-12 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">Model Performance: Confusion Matrix</h3>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <table class="w-full text-center">
+                        <thead>
+                            <tr>
+                                <th class="p-4"></th>
+                                <th class="p-4 text-lg font-bold" colspan="2">Predicted</th>
+                            </tr>
+                            <tr>
+                                <th class="p-4"></th>
+                                <th class="p-4 bg-green-100 text-green-800 font-bold">Peace</th>
+                                <th class="p-4 bg-red-100 text-red-800 font-bold">War</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4 bg-green-100 text-green-800 font-bold" rowspan="2" style="writing-mode: vertical-lr; transform: rotate(180deg);">Actual</td>
+                                <td class="p-4 bg-green-100 text-green-800 font-bold">Peace</td>
+                                <td class="p-6 bg-green-50 text-4xl font-bold text-green-700">14</td>
+                                <td class="p-6 bg-gray-100 text-4xl font-bold text-gray-400">0</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 bg-red-100 text-red-800 font-bold">War</td>
+                                <td class="p-6 bg-gray-100 text-4xl font-bold text-gray-400">0</td>
+                                <td class="p-6 bg-red-50 text-4xl font-bold text-red-700">14</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-700">100%</div>
+                            <div class="text-sm text-gray-600">Accuracy</div>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl font-bold text-green-700">100%</div>
+                            <div class="text-sm text-gray-600">Precision</div>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-700">100%</div>
+                            <div class="text-sm text-gray-600">Recall</div>
+                        </div>
+                        <div class="p-4 bg-orange-50 rounded-lg">
+                            <div class="text-2xl font-bold text-orange-700">100%</div>
+                            <div class="text-sm text-gray-600">F1-Score</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About the Research</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        An academic study integrating structural realism and information theories in international relations
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-ar.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="dashboard-hub-en.html" class="text-gray-400 hover:text-white transition">Dashboard Hub</a></li>
+                        <li><a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition">Quantitative Analysis</a></li>
+                        <li><a href="citation-network-en.html" class="text-gray-400 hover:text-white transition">Citation Network</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dar Al-Hekma University</h3>
+                    <p class="text-gray-400 mb-4">جامعة دار الحكمة</p>
+                    <p class="text-gray-400">International Relations & Diplomacy Department</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    All Rights Reserved | جميع الحقوق محفوظة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chart.js Scripts -->
+    <script>
+        // Chart 1: War vs Peace Distribution (Doughnut)
+        const ctx1 = document.getElementById('chart1').getContext('2d');
+        new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['War Cases', 'Peace Cases'],
+                datasets: [{
+                    data: [14, 14],
+                    backgroundColor: ['#ef4444', '#10b981'],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 14 } }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Equal Distribution: 14 War Cases vs 14 Peace Cases',
+                        font: { size: 16 }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Structural Constraint Distribution (Bar)
+        const ctx2 = document.getElementById('chart2').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Weak (1-3)', 'Medium (4-6)', 'Strong (7-10)'],
+                datasets: [{
+                    label: 'Number of Cases',
+                    data: [10, 9, 9],
+                    backgroundColor: ['#f59e0b', '#3b82f6', '#8b5cf6'],
+                    borderWidth: 1,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Distribution of Cases by Structural Constraint Level',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 2 }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Information Quality Distribution (Line)
+        const ctx3 = document.getElementById('chart3').getContext('2d');
+        new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Low (1-3)', 'Medium (4-6)', 'High (7-10)'],
+                datasets: [{
+                    label: 'Number of Cases',
+                    data: [11, 8, 9],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Distribution of Cases by Information Quality',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 2 }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Convergence Level (Radar)
+        const ctx4 = document.getElementById('chart4').getContext('2d');
+        new Chart(ctx4, {
+            type: 'radar',
+            data: {
+                labels: ['Low Convergence', 'Medium Convergence', 'High Convergence'],
+                datasets: [
+                    {
+                        label: 'War Cases',
+                        data: [8, 6, 0],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Peace Cases',
+                        data: [0, 0, 14],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 14 } }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Convergence Level Distribution by Outcome',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 2 }
+                    }
+                }
+            }
+        });
+
+        // Chart 5: Correlation Analysis (Scatter)
+        const ctx5 = document.getElementById('chart5').getContext('2d');
+        new Chart(ctx5, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'War Cases (r = -0.42)',
+                        data: [
+                            {x: 7, y: 3}, {x: 6, y: 4}, {x: 5, y: 6}, {x: 4, y: 5},
+                            {x: 8, y: 2}, {x: 3, y: 7}, {x: 5, y: 5}, {x: 6, y: 3},
+                            {x: 4, y: 6}, {x: 7, y: 4}, {x: 5, y: 5}, {x: 6, y: 4},
+                            {x: 3, y: 8}, {x: 4, y: 7}
+                        ],
+                        backgroundColor: '#ef4444',
+                        borderColor: '#ef4444',
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    },
+                    {
+                        label: 'Peace Cases (r = +0.68)',
+                        data: [
+                            {x: 8, y: 7}, {x: 9, y: 8}, {x: 7, y: 6}, {x: 8, y: 8},
+                            {x: 9, y: 9}, {x: 7, y: 7}, {x: 8, y: 7}, {x: 9, y: 8},
+                            {x: 7, y: 6}, {x: 8, y: 8}, {x: 9, y: 9}, {x: 7, y: 7},
+                            {x: 8, y: 7}, {x: 9, y: 8}
+                        ],
+                        backgroundColor: '#10b981',
+                        borderColor: '#10b981',
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 14 } }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Correlation between Structural Constraint (S) and Information Quality (I)',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Structural Constraint (S)',
+                            font: { size: 14 }
+                        },
+                        min: 0,
+                        max: 10
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Information Quality (I)',
+                            font: { size: 14 }
+                        },
+                        min: 0,
+                        max: 10
+                    }
+                }
+            }
+        });
+
+        // Chart 6: Model Performance (Bar)
+        const ctx6 = document.getElementById('chart6').getContext('2d');
+        new Chart(ctx6, {
+            type: 'bar',
+            data: {
+                labels: ['Accuracy', 'Precision', 'Recall', 'F1-Score'],
+                datasets: [{
+                    label: 'Performance (%)',
+                    data: [100, 100, 100, 100],
+                    backgroundColor: ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b'],
+                    borderWidth: 1,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Model Performance - Under Testing',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: { stepSize: 20 }
+                    }
+                }
+            }
+        });
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

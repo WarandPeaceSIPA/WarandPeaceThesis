@@ -1,0 +1,373 @@
+/**
+ * Dual Theme Stylesheet for Thesis Website
+ * Light & Dark Theme Support with CSS Variables
+ * Version: 1.0
+ * Last Updated: 2026-03-10
+ */
+
+/* ============================================
+   ROOT VARIABLES - DARK THEME (DEFAULT)
+   ============================================ */
+:root,
+:root.dark-theme {
+    /* Background Colors */
+    --bg-primary: #0f172a;      /* gray-900 */
+    --bg-secondary: #1e293b;    /* gray-800 */
+    --bg-tertiary: #334155;     /* gray-700 */
+    --bg-card: #1e293b;         /* gray-800 */
+    --bg-hover: #334155;        /* gray-700 */
+    
+    /* Text Colors */
+    --text-primary: #ffffff;     /* white */
+    --text-secondary: #e5e7eb;   /* gray-200 */
+    --text-tertiary: #d1d5db;    /* gray-300 */
+    --text-muted: #9ca3af;       /* gray-400 */
+    
+    /* Border Colors */
+    --border-primary: #374151;   /* gray-700 */
+    --border-secondary: #4b5563; /* gray-600 */
+    
+    /* Brand Colors */
+    --color-blue: #3b82f6;       /* blue-500 */
+    --color-purple: #a855f7;     /* purple-500 */
+    --color-green: #10b981;      /* green-500 */
+    --color-red: #ef4444;        /* red-500 */
+    --color-cyan: #06b6d4;       /* cyan-500 */
+    --color-orange: #f97316;     /* orange-500 */
+    --color-pink: #ec4899;       /* pink-500 */
+    --color-yellow: #eab308;     /* yellow-500 */
+    
+    /* Light variants for dark theme */
+    --color-blue-light: #60a5fa;    /* blue-400 */
+    --color-purple-light: #c084fc;  /* purple-400 */
+    --color-green-light: #4ade80;   /* green-400 */
+    --color-red-light: #f87171;     /* red-400 */
+    --color-cyan-light: #22d3ee;    /* cyan-400 */
+    --color-orange-light: #fb923c;  /* orange-400 */
+    --color-pink-light: #f472b6;    /* pink-400 */
+    --color-yellow-light: #facc15;  /* yellow-400 */
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+    
+    /* Overlay */
+    --overlay-bg: rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================
+   LIGHT THEME VARIABLES
+   ============================================ */
+:root.light-theme {
+    /* Background Colors */
+    --bg-primary: #ffffff;       /* white */
+    --bg-secondary: #f9fafb;     /* gray-50 */
+    --bg-tertiary: #f3f4f6;      /* gray-100 */
+    --bg-card: #ffffff;          /* white */
+    --bg-hover: #f3f4f6;         /* gray-100 */
+    
+    /* Text Colors */
+    --text-primary: #111827;     /* gray-900 */
+    --text-secondary: #374151;   /* gray-700 */
+    --text-tertiary: #4b5563;    /* gray-600 */
+    --text-muted: #6b7280;       /* gray-500 */
+    
+    /* Border Colors */
+    --border-primary: #e5e7eb;   /* gray-200 */
+    --border-secondary: #d1d5db; /* gray-300 */
+    
+    /* Brand Colors - Darker variants for light theme */
+    --color-blue: #2563eb;       /* blue-600 */
+    --color-purple: #9333ea;     /* purple-600 */
+    --color-green: #059669;      /* green-600 */
+    --color-red: #dc2626;        /* red-600 */
+    --color-cyan: #0891b2;       /* cyan-600 */
+    --color-orange: #ea580c;     /* orange-600 */
+    --color-pink: #db2777;       /* pink-600 */
+    --color-yellow: #ca8a04;     /* yellow-600 */
+    
+    /* Light variants for light theme */
+    --color-blue-light: #3b82f6;    /* blue-500 */
+    --color-purple-light: #a855f7;  /* purple-500 */
+    --color-green-light: #10b981;   /* green-500 */
+    --color-red-light: #ef4444;     /* red-500 */
+    --color-cyan-light: #06b6d4;    /* cyan-500 */
+    --color-orange-light: #f97316;  /* orange-500 */
+    --color-pink-light: #ec4899;    /* pink-500 */
+    --color-yellow-light: #eab308;  /* yellow-500 */
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Overlay */
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   GLOBAL THEME STYLES
+   ============================================ */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================
+   NAVIGATION STYLES
+   ============================================ */
+.sticky-nav {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.light-theme .sticky-nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.dark-theme .sticky-nav {
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--color-blue);
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+.card,
+.bg-gray-800,
+.dashboard-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.card:hover,
+.card-hover:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-5px);
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+.btn-primary {
+    background-color: var(--color-blue);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-gradient {
+    background: linear-gradient(135deg, #1e40af 0%, #7c3aed 50%, #059669 100%);
+}
+
+.light-theme .hero-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #9333ea 50%, #059669 100%);
+}
+
+/* ============================================
+   TEXT COLORS
+   ============================================ */
+.text-white { color: var(--text-primary) !important; }
+.text-gray-200 { color: var(--text-secondary) !important; }
+.text-gray-300 { color: var(--text-tertiary) !important; }
+.text-gray-400 { color: var(--text-muted) !important; }
+
+/* ============================================
+   BACKGROUND COLORS
+   ============================================ */
+.bg-gray-900 { background-color: var(--bg-primary) !important; }
+.bg-gray-800 { background-color: var(--bg-secondary) !important; }
+.bg-gray-700 { background-color: var(--bg-tertiary) !important; }
+
+/* ============================================
+   BORDER COLORS
+   ============================================ */
+.border-gray-700 { border-color: var(--border-primary) !important; }
+.border-gray-600 { border-color: var(--border-secondary) !important; }
+
+/* ============================================
+   FOOTER STYLES
+   ============================================ */
+footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-primary);
+}
+
+footer a {
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--text-primary);
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+input,
+textarea,
+select {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.light-theme input::placeholder,
+.light-theme textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* ============================================
+   THEME TOGGLE BUTTON
+   ============================================ */
+#theme-toggle {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card);
+    border: 2px solid var(--border-primary);
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: var(--shadow-xl);
+}
+
+#theme-toggle i {
+    font-size: 1.5rem;
+    color: var(--color-yellow);
+    transition: all 0.3s ease;
+}
+
+.light-theme #theme-toggle i {
+    color: var(--color-blue);
+}
+
+/* ============================================
+   CHART STYLES (Chart.js)
+   ============================================ */
+.light-theme .chart-container {
+    background-color: var(--bg-card);
+}
+
+/* ============================================
+   CODE BLOCKS
+   ============================================ */
+pre,
+code {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+}
+
+/* ============================================
+   BADGES
+   ============================================ */
+.badge-fixed {
+    background-color: var(--color-blue);
+    color: white;
+}
+
+.badge-new {
+    background-color: var(--color-green);
+    color: white;
+}
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+.spinner {
+    border-color: var(--border-primary);
+    border-top-color: var(--color-blue);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+*:focus-visible {
+    outline: 3px solid var(--color-purple);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    #theme-toggle {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    #theme-toggle i {
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================================
+   SMOOTH TRANSITIONS
+   ============================================ */
+* {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    #theme-toggle {
+        display: none;
+    }
+    
+    body {
+        background-color: white;
+        color: black;
+    }
+}

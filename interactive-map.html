@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخريطة التفاعلية - 28 حالة تاريخية</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .leaflet-popup-content {
+            font-family: 'Cairo', sans-serif;
+            text-align: right;
+            direction: rtl;
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .filter-btn.active {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+    <!-- Theme System CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+    <!-- Header -->
+    <header class="bg-gradient-to-l from-blue-900 to-purple-900 text-white shadow-2xl">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold">الخريطة التفاعلية العالمية</h1>
+                    <p class="text-sm opacity-90">28 حالة تاريخية (1910-2022)</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="index-ar.html" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition">الرئيسية</a>
+                    <a href="interactive-map-en.html" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">English</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <!-- Introduction -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">التوزيع الجغرافي للحالات التاريخية</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                استكشف التوزيع الجغرافي لـ 28 حالة تاريخية عبر القارات والعصور (1910-2022)
+            </p>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="stat-card">
+                <div class="text-4xl font-bold mb-2">28</div>
+                <div class="text-lg">إجمالي الحالات</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <div class="text-4xl font-bold mb-2" id="warCount">14</div>
+                <div class="text-lg">حالات حرب</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <div class="text-4xl font-bold mb-2" id="peaceCount">14</div>
+                <div class="text-lg">حالات سلام</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <div class="text-4xl font-bold mb-2">112</div>
+                <div class="text-lg">سنة تاريخية</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <h<h3 class="text-2xl font-bold text-gray-900 mb-4"><i class="fa-solid fa-search text-gray-400"></i> تصفية الحالات</h3>[^>]*><i class="fa-solid fa-search text-gray-400"></i> تصفية الحالات</h<h3 class="text-2xl font-bold text-gray-900 mb-4"><i class="fa-solid fa-search text-gray-400"></i> تصفية الحالات</h3>>
+            <div class="flex flex-wrap gap-4">
+                <button onclick="filterCases('all')" class="filter-btn active px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold" id="btn-all">
+                    الكل (28)
+                </button>
+                <button onclick="filterCases('war')" class="filter-btn px-6 py-3 bg-red-600 text-white rounded-lg font-semibold" id="btn-war">
+                    حرب (14)
+                </button>
+                <button onclick="filterCases('peace')" class="filter-btn px-6 py-3 bg-green-600 text-white rounded-lg font-semibold" id="btn-peace">
+                    سلام (14)
+                </button>
+                <button onclick="filterCases('1910-1950')" class="filter-btn px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold" id="btn-1910-1950">
+                    1910-1950 (8)
+                </button>
+                <button onclick="filterCases('1951-1990')" class="filter-btn px-6 py-3 bg-indigo-600 text-white rounded-lg font-semibold" id="btn-1951-1990">
+                    1951-1990 (10)
+                </button>
+                <button onclick="filterCases('1991-2022')" class="filter-btn px-6 py-3 bg-pink-600 text-white rounded-lg font-semibold" id="btn-1991-2022">
+                    1991-2022 (10)
+                </button>
+            </div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+            <div id="map"></div>
+        </div>
+
+        <!-- Regional Statistics -->
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h<h3 class="text-2xl font-bold text-gray-900 mb-6"><i class="fa-solid fa-chart-bar text-green-400"></i> التوزيع حسب المنطقة</h3>[^>]*><i class="fa-solid fa-chart-bar text-green-400"></i> التوزيع حسب المنطقة</h<h3 class="text-2xl font-bold text-gray-900 mb-6"><i class="fa-solid fa-chart-bar text-green-400"></i> التوزيع حسب المنطقة</h3>>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="border-2 border-blue-200 rounded-xl p-6">
+                    <h4 class="text-xl font-bold text-blue-900 mb-4">أوروبا</h4>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">8</div>
+                    <div class="text-sm text-gray-600">حالات (4 حرب، 4 سلام)</div>
+                </div>
+                <div class="border-2 border-green-200 rounded-xl p-6">
+                    <h4 class="text-xl font-bold text-green-900 mb-4">آسيا</h4>
+                    <div class="text-3xl font-bold text-green-600 mb-2">10</div>
+                    <div class="text-sm text-gray-600">حالات (5 حرب، 5 سلام)</div>
+                </div>
+                <div class="border-2 border-orange-200 rounded-xl p-6">
+                    <h4 class="text-xl font-bold text-orange-900 mb-4">الشرق الأوسط</h4>
+                    <div class="text-3xl font-bold text-orange-600 mb-2">6</div>
+                    <div class="text-sm text-gray-600">حالات (3 حرب، 3 سلام)</div>
+                </div>
+                <div class="border-2 border-purple-200 rounded-xl p-6">
+                    <h4 class="text-xl font-bold text-purple-900 mb-4">أمريكا</h4>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">3</div>
+                    <div class="text-sm text-gray-600">حالات (1 حرب، 2 سلام)</div>
+                </div>
+                <div class="border-2 border-pink-200 rounded-xl p-6">
+                    <h4 class="text-xl font-bold text-pink-900 mb-4">أفريقيا</h4>
+                    <div class="text-3xl font-bold text-pink-600 mb-2">1</div>
+                    <div class="text-sm text-gray-600">حالات (1 حرب، 0 سلام)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-12 mt-20">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">عن البحث</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        دراسة أكاديمية تدمج بين الواقعية البنيوية ونظريات المعلومات في العلاقات الدولية
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-ar.html" class="text-gray-400 hover:text-white transition">الصفحة الرئيسية</a></li>
+                        <li><a href="dashboard-hub.html" class="text-gray-400 hover:text-white transition">مركز لوحة التحكم</a></li>
+                        <li><a href="quantitative-analysis.html" class="text-gray-400 hover:text-white transition">التحليل الكمي</a></li>
+                        <li><a href="citation-network.html" class="text-gray-400 hover:text-white transition">شبكة الاستشهادات</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">الجامعة</h3>
+                    <p class="text-gray-400">جامعة دار الحكمة</p>
+                    <p class="text-gray-400 mt-2">جدة، المملكة العربية السعودية</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2026 DAR AL-HEKMA UNIVERSITY. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([30, 10], 2);
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Define all 28 historical cases with geographic coordinates
+        const cases = [
+            // War Cases (14)
+            {id: 1, name: 'الحرب العالمية الأولى', nameEn: 'World War I', year: 1914, lat: 50.0, lon: 10.0, outcome: 'war', s: 3, i: 2, c: 1, region: 'Europe'},
+            {id: 2, name: 'حرب فيتنام', nameEn: 'Vietnam War', year: 1965, lat: 16.0, lon: 106.0, outcome: 'war', s: 4, i: 3, c: 2, region: 'Asia'},
+            {id: 3, name: 'حرب الخليج الأولى', nameEn: 'Gulf War I', year: 1991, lat: 29.5, lon: 47.0, outcome: 'war', s: 5, i: 4, c: 2, region: 'Middle East'},
+            {id: 4, name: 'حرب العراق', nameEn: 'Iraq War', year: 2003, lat: 33.0, lon: 44.0, outcome: 'war', s: 4, i: 3, c: 2, region: 'Middle East'},
+            {id: 5, name: 'الحرب العالمية الثانية', nameEn: 'World War II', year: 1939, lat: 52.0, lon: 13.0, outcome: 'war', s: 3, i: 2, c: 1, region: 'Europe'},
+            {id: 6, name: 'الحرب الكورية', nameEn: 'Korean War', year: 1950, lat: 38.0, lon: 127.0, outcome: 'war', s: 6, i: 4, c: 2, region: 'Asia'},
+            {id: 7, name: 'حرب فوكلاند', nameEn: 'Falklands War', year: 1982, lat: -51.7, lon: -59.0, outcome: 'war', s: 5, i: 5, c: 3, region: 'America'},
+            {id: 8, name: 'الحرب الروسية الجورجية', nameEn: 'Russo-Georgian War', year: 2008, lat: 42.0, lon: 43.5, outcome: 'war', s: 6, i: 5, c: 3, region: 'Europe'},
+            {id: 9, name: 'حرب الخليج الثانية', nameEn: 'Gulf War II', year: 1990, lat: 29.0, lon: 48.0, outcome: 'war', s: 7, i: 6, c: 3, region: 'Middle East'},
+            {id: 10, name: 'حرب أفغانستان', nameEn: 'Afghanistan War', year: 2001, lat: 34.5, lon: 69.0, outcome: 'war', s: 5, i: 4, c: 2, region: 'Asia'},
+            {id: 11, name: 'الحرب الأهلية السورية', nameEn: 'Syrian Civil War', year: 2011, lat: 35.0, lon: 38.0, outcome: 'war', s: 4, i: 3, c: 2, region: 'Middle East'},
+            {id: 12, name: 'حرب البوسنة', nameEn: 'Bosnian War', year: 1992, lat: 44.0, lon: 18.0, outcome: 'war', s: 5, i: 4, c: 2, region: 'Europe'},
+            {id: 13, name: 'الحرب الروسية الأوكرانية', nameEn: 'Russo-Ukrainian War', year: 2022, lat: 50.5, lon: 30.5, outcome: 'war', s: 6, i: 5, c: 3, region: 'Europe'},
+            {id: 14, name: 'حرب السويس', nameEn: 'Suez Crisis', year: 1956, lat: 30.0, lon: 32.5, outcome: 'war', s: 5, i: 4, c: 2, region: 'Africa'},
+            
+            // Peace Cases (14)
+            {id: 15, name: 'أزمة الصواريخ الكوبية', nameEn: 'Cuban Missile Crisis', year: 1962, lat: 23.0, lon: -82.0, outcome: 'peace', s: 9, i: 8, c: 7, region: 'America'},
+            {id: 16, name: 'أزمة برلين', nameEn: 'Berlin Crisis', year: 1961, lat: 52.5, lon: 13.4, outcome: 'peace', s: 8, i: 7, c: 6, region: 'Europe'},
+            {id: 17, name: 'الأزمة الهندية الباكستانية', nameEn: 'India-Pakistan Crisis', year: 1999, lat: 34.5, lon: 76.0, outcome: 'peace', s: 7, i: 7, c: 6, region: 'Asia'},
+            {id: 18, name: 'أزمة تايوان', nameEn: 'Taiwan Crisis', year: 1996, lat: 25.0, lon: 121.5, outcome: 'peace', s: 8, i: 8, c: 7, region: 'Asia'},
+            {id: 19, name: 'الأزمة الكورية الشمالية', nameEn: 'North Korea Crisis', year: 2017, lat: 40.0, lon: 127.0, outcome: 'peace', s: 8, i: 7, c: 6, region: 'Asia'},
+            {id: 20, name: 'أزمة الخليج', nameEn: 'Gulf Crisis', year: 2019, lat: 26.0, lon: 50.5, outcome: 'peace', s: 7, i: 7, c: 6, region: 'Middle East'},
+            {id: 21, name: 'الاتفاقية النووية الإيرانية', nameEn: 'Iran Nuclear Deal', year: 2015, lat: 35.7, lon: 51.4, outcome: 'peace', s: 8, i: 8, c: 7, region: 'Middle East'},
+            {id: 22, name: 'أزمة جزر سبراتلي', nameEn: 'Spratly Islands Crisis', year: 2016, lat: 10.0, lon: 114.0, outcome: 'peace', s: 7, i: 7, c: 6, region: 'Asia'},
+            {id: 23, name: 'اتفاقية السلام المصرية الإسرائيلية', nameEn: 'Egypt-Israel Peace', year: 1979, lat: 30.0, lon: 31.0, outcome: 'peace', s: 8, i: 8, c: 7, region: 'Middle East'},
+            {id: 24, name: 'معاهدة ماستريخت', nameEn: 'Maastricht Treaty', year: 1992, lat: 50.8, lon: 5.7, outcome: 'peace', s: 9, i: 9, c: 8, region: 'Europe'},
+            {id: 25, name: 'اتفاقية دايتون', nameEn: 'Dayton Agreement', year: 1995, lat: 44.0, lon: 18.0, outcome: 'peace', s: 8, i: 7, c: 6, region: 'Europe'},
+            {id: 26, name: 'الانفراج الأمريكي الصيني', nameEn: 'US-China Détente', year: 1972, lat: 39.9, lon: 116.4, outcome: 'peace', s: 8, i: 8, c: 7, region: 'Asia'},
+            {id: 27, name: 'معاهدة INF', nameEn: 'INF Treaty', year: 1987, lat: 55.8, lon: 37.6, outcome: 'peace', s: 9, i: 8, c: 7, region: 'Europe'},
+            {id: 28, name: 'اتفاقية أوسلو', nameEn: 'Oslo Accords', year: 1993, lat: 31.8, lon: 35.2, outcome: 'peace', s: 7, i: 7, c: 6, region: 'Middle East'}
+        ];
+
+        let markers = [];
+        let currentFilter = 'all';
+
+        // Create custom icons
+        const warIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#ef4444; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 10px rgba(0,0,0,0.3);'></div>",
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        const peaceIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#10b981; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 10px rgba(0,0,0,0.3);'></div>",
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        // Function to add markers
+        function addMarkers(filteredCases) {
+            // Clear existing markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+
+            filteredCases.forEach(caseData => {
+                const icon = caseData.outcome === 'war' ? warIcon : peaceIcon;
+                const marker = L.marker([caseData.lat, caseData.lon], {icon: icon}).addTo(map);
+                
+                const popupContent = `
+                    <div style="min-width: 250px;">
+                        <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 10px; color: ${caseData.outcome === 'war' ? '#ef4444' : '#10b981'};">
+                            ${caseData.name}
+                        </h3>
+                        <p style="font-size: 14px; color: #666; margin-bottom: 8px;">
+                            <strong>السنة:</strong> ${caseData.year}
+                        </p>
+                        <p style="font-size: 14px; color: #666; margin-bottom: 8px;">
+                            <strong>المنطقة:</strong> ${caseData.region}
+                        </p>
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd;">
+                            <p style="font-size: 13px; color: #666; margin-bottom: 5px;">
+                                <strong>S (القيد البنيوي):</strong> ${caseData.s}/10
+                            </p>
+                            <p style="font-size: 13px; color: #666; margin-bottom: 5px;">
+                                <strong>I (جودة المعلومات):</strong> ${caseData.i}/10
+                            </p>
+                            <p style="font-size: 13px; color: #666; margin-bottom: 5px;">
+                                <strong>C (التقارب):</strong> ${caseData.c}/10
+                            </p>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <span style="background-color: ${caseData.outcome === 'war' ? '#ef4444' : '#10b981'}; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 14px;">
+                                ${caseData.outcome === 'war' ? 'حرب' : 'سلام'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                
+                marker.bindPopup(popupContent);
+                markers.push(marker);
+            });
+        }
+
+        // Initial load - show all cases
+        addMarkers(cases);
+
+        // Filter function
+        function filterCases(filter) {
+            currentFilter = filter;
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            document.getElementById('btn-' + filter).classList.add('active');
+            
+            let filteredCases = cases;
+            
+            if (filter === 'war') {
+                filteredCases = cases.filter(c => c.outcome === 'war');
+            } else if (filter === 'peace') {
+                filteredCases = cases.filter(c => c.outcome === 'peace');
+            } else if (filter === '1910-1950') {
+                filteredCases = cases.filter(c => c.year >= 1910 && c.year <= 1950);
+            } else if (filter === '1951-1990') {
+                filteredCases = cases.filter(c => c.year >= 1951 && c.year <= 1990);
+            } else if (filter === '1991-2022') {
+                filteredCases = cases.filter(c => c.year >= 1991 && c.year <= 2022);
+            }
+            
+            addMarkers(filteredCases);
+            
+            // Update statistics
+            const warCount = filteredCases.filter(c => c.outcome === 'war').length;
+            const peaceCount = filteredCases.filter(c => c.outcome === 'peace').length;
+            
+            document.getElementById('warCount').textContent = warCount;
+            document.getElementById('peaceCount').textContent = peaceCount;
+        }
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

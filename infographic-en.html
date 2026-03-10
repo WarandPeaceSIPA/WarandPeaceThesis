@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Infographic - Informational Conditions for Structural Constraint Effectiveness">
+    <title>Interactive Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .connection-line {
+            stroke: #667eea;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5, 5;
+            animation: dash 20s linear infinite;
+        }
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -100;
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        .progress-bar {
+            height: 8px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+    </style>
+    <!-- Theme System CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index-ar.html" class="text-2xl font-bold">
+                        Interactive Infographic
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index-ar.html" class="px-4 py-2 hover:bg-white/10 rounded-lg transition">
+                        Home
+                    </a>
+                    <a href="dashboard-en.html" class="px-4 py-2 hover:bg-white/10 rounded-lg transition">
+                        Dashboard
+                    </a>
+                    <a href="infographic.html" class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition" aria-label="Switch Language">
+                        AR
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Hero Section -->
+        <section class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                Visual Research Journey
+            </h1>
+            <p class="text-xl text-gray-600">
+                Exploring the informational conditions for structural constraint effectiveness
+            </p>
+        </section>
+
+        <!-- Peace Model Visualization -->
+        <section class="bg-white rounded-xl shadow-lg p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">
+                The Peace Model
+            </h2>
+
+            <div class="relative">
+                <!-- SVG for connections -->
+                <svg class="absolute inset-0 w-full h-full" style="z-index: 0;">
+                    <line class="connection-line" x1="50%" y1="20%" x2="25%" y2="50%"></line>
+                    <line class="connection-line" x1="50%" y1="20%" x2="50%" y2="50%"></line>
+                    <line class="connection-line" x1="50%" y1="20%" x2="75%" y2="50%"></line>
+                    <line class="connection-line" x1="25%" y1="50%" x2="50%" y2="80%"></line>
+                    <line class="connection-line" x1="50%" y1="50%" x2="50%" y2="80%"></line>
+                    <line class="connection-line" x1="75%" y1="50%" x2="50%" y2="80%"></line>
+                </svg>
+
+                <!-- Model Components -->
+                <div class="relative z-10 grid grid-cols-1 gap-8">
+                    <!-- Central Theory -->
+                    <div class="flex justify-center">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full p-8 w-48 h-48 flex items-center justify-center text-center shadow-2xl card-hover cursor-pointer" onclick="openModal('theory')">
+                            <div>
+                                <h3 class="text-lg font-bold">Peace Theory</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Three Variables -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-blue-100 rounded-xl p-6 shadow-lg card-hover cursor-pointer" onclick="openModal('structural')">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Structural Constraint (S)</h3>
+                                <p class="text-gray-600">Material and structural factors limiting state actions</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-100 rounded-xl p-6 shadow-lg card-hover cursor-pointer" onclick="openModal('information')">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Information (I)</h3>
+                                <p class="text-gray-600">Availability and accuracy of information</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-100 rounded-xl p-6 shadow-lg card-hover cursor-pointer" onclick="openModal('communication')">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Communication (C)</h3>
+                                <p class="text-gray-600">Effectiveness of communication channels</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outcome -->
+                    <div class="flex justify-center">
+                        <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-xl p-8 shadow-2xl card-hover cursor-pointer" onclick="openModal('outcome')">
+                            <div class="text-center">
+                                <h3 class="text-2xl font-bold mb-2">Peace Outcome</h3>
+                                <p class="text-lg">Constraint Effectiveness</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Historical Case Studies -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">
+                Historical Case Studies
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- WWI Case Study -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 rounded-full p-3 mr-4">
+                            </div>
+                        <h3 class="text-xl font-bold text-gray-900">World War I</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Failure of structural constraints due to information deficits</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Structural Constraint</span>
+                                <span class="text-blue-600 font-semibold">40%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 40%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Information</span>
+                                <span class="text-purple-600 font-semibold">30%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 30%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Communication</span>
+                                <span class="text-green-600 font-semibold">20%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openModal('ww1')" class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                        Read More
+                    </button>
+                </div>
+
+                <!-- Cuban Missile Crisis -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 rounded-full p-3 mr-4">
+                            </div>
+                        <h3 class="text-xl font-bold text-gray-900">Cuban Missile Crisis</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Success through effective information and communication</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Structural Constraint</span>
+                                <span class="text-blue-600 font-semibold">85%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Information</span>
+                                <span class="text-purple-600 font-semibold">70%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Communication</span>
+                                <span class="text-green-600 font-semibold">90%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openModal('cuban')" class="mt-6 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+                        Read More
+                    </button>
+                </div>
+
+                <!-- Ukraine 2022 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-100 rounded-full p-3 mr-4">
+                            </div>
+                        <h3 class="text-xl font-bold text-gray-900">Ukraine 2022</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Mixed results with high information but moderate communication</p>
+                    
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Structural Constraint</span>
+                                <span class="text-blue-600 font-semibold">60%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Information</span>
+                                <span class="text-purple-600 font-semibold">80%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Communication</span>
+                                <span class="text-green-600 font-semibold">65%</span>
+                            </div>
+                            <div class="bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openModal('ukraine')" class="mt-6 w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 transition">
+                        Read More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Four Hypotheses -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">
+                Research Hypotheses
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 shadow-lg card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">
+                            H1
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Information Quality Hypothesis</h3>
+                            <p class="text-gray-700">The quality and accuracy of information significantly impacts the effectiveness of structural constraints in preventing conflict.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 shadow-lg card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">
+                            H2
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Communication Channel Hypothesis</h3>
+                            <p class="text-gray-700">Effective communication channels between actors enhance the constraining power of structural factors in international relations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 shadow-lg card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">
+                            H3
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Interactive Effect Hypothesis</h3>
+                            <p class="text-gray-700">The interaction between information availability and communication effectiveness creates synergistic effects on structural constraint outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 shadow-lg card-hover">
+                    <div class="flex items-start">
+                        <div class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg mr-4 flex-shrink-0">
+                            H4
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2">Historical Context Hypothesis</h3>
+                            <p class="text-gray-700">Historical precedents and contextual factors moderate the relationship between informational conditions and structural constraint effectiveness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+        <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About the Research</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        An academic study integrating structural realism and information theories in international relations
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-ar.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="dashboard-hub-en.html" class="text-gray-400 hover:text-white transition">Dashboard Hub</a></li>
+                        <li><a href="quantitative-analysis-en.html" class="text-gray-400 hover:text-white transition">Quantitative Analysis</a></li>
+                        <li><a href="citation-network-en.html" class="text-gray-400 hover:text-white transition">Citation Network</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dar Al-Hekma University</h3>
+                    <p class="text-gray-400 mb-4">جامعة دار الحكمة</p>
+                    <p class="text-gray-400">International Relations & Diplomacy Department</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 DAR AL-HEKMA UNIVERSITY | جامعة دار الحكمة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    All Rights Reserved | جميع الحقوق محفوظة
+                </p>
+                <p class="text-gray-500 text-sm mt-2">
+                    International Relations Research
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const modalContents = {
+            theory: {
+                title: 'Peace Theory Framework',
+                content: `
+                    <p class="mb-4">This research develops a comprehensive theoretical framework that integrates structural realism with information theory to explain peace outcomes in international relations.</p>
+                    <h4 class="font-bold mb-2">Key Components:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Structural constraints as material limitations on state behavior</li>
+                        <li>Information quality as a moderating factor</li>
+                        <li>Communication effectiveness as an enabling mechanism</li>
+                        <li>Historical context as a conditioning variable</li>
+                    </ul>
+                `
+            },
+            structural: {
+                title: 'Structural Constraint (S)',
+                content: `
+                    <p class="mb-4">Structural constraints refer to the material and systemic factors that limit state actions in international relations.</p>
+                    <h4 class="font-bold mb-2">Elements Include:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Military capabilities and balance of power</li>
+                        <li>Economic interdependence and trade relationships</li>
+                        <li>Geographic and resource constraints</li>
+                        <li>Alliance structures and commitments</li>
+                        <li>International institutional frameworks</li>
+                    </ul>
+                `
+            },
+            information: {
+                title: 'Information (I)',
+                content: `
+                    <p class="mb-4">Information availability and accuracy play crucial roles in determining how structural constraints affect state behavior.</p>
+                    <h4 class="font-bold mb-2">Key Aspects:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Intelligence gathering and analysis capabilities</li>
+                        <li>Transparency of intentions and capabilities</li>
+                        <li>Media coverage and public information</li>
+                        <li>Verification mechanisms and monitoring systems</li>
+                        <li>Information asymmetries between actors</li>
+                    </ul>
+                `
+            },
+            communication: {
+                title: 'Communication (C)',
+                content: `
+                    <p class="mb-4">Effective communication channels enable actors to share information, signal intentions, and coordinate responses.</p>
+                    <h4 class="font-bold mb-2">Communication Forms:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Diplomatic channels and negotiations</li>
+                        <li>Backchannel communications</li>
+                        <li>Public statements and declarations</li>
+                        <li>International forums and organizations</li>
+                        <li>Crisis communication mechanisms</li>
+                    </ul>
+                `
+            },
+            outcome: {
+                title: 'Peace Outcome',
+                content: `
+                    <p class="mb-4">The effectiveness of structural constraints in maintaining peace depends on the quality of information and communication.</p>
+                    <h4 class="font-bold mb-2">Outcome Factors:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Prevention of miscalculation and misperception</li>
+                        <li>Facilitation of peaceful dispute resolution</li>
+                        <li>Enhancement of deterrence credibility</li>
+                        <li>Promotion of mutual understanding</li>
+                        <li>Reduction of uncertainty and risk</li>
+                    </ul>
+                `
+            },
+            ww1: {
+                title: 'World War I Case Study',
+                content: `
+                    <p class="mb-4">The outbreak of World War I demonstrates how information deficits and communication failures can undermine structural constraints.</p>
+                    <h4 class="font-bold mb-2">Key Findings:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Structural constraints existed but were insufficient</li>
+                        <li>Poor information about adversaries' intentions and capabilities</li>
+                        <li>Ineffective communication during the July Crisis</li>
+                        <li>Mobilization schedules limited diplomatic flexibility</li>
+                        <li>Miscalculations about war duration and costs</li>
+                    </ul>
+                `
+            },
+            cuban: {
+                title: 'Cuban Missile Crisis Case Study',
+                content: `
+                    <p class="mb-4">The peaceful resolution of the Cuban Missile Crisis highlights the importance of information and communication in crisis management.</p>
+                    <h4 class="font-bold mb-2">Success Factors:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Clear intelligence about Soviet missile deployment</li>
+                        <li>Multiple communication channels (official and backchannel)</li>
+                        <li>Effective signaling of intentions and red lines</li>
+                        <li>Time for deliberation and decision-making</li>
+                        <li>Face-saving solutions through communication</li>
+                    </ul>
+                `
+            },
+            ukraine: {
+                title: 'Ukraine 2022 Case Study',
+                content: `
+                    <p class="mb-4">The Ukraine conflict demonstrates how modern information environments affect structural constraint effectiveness.</p>
+                    <h4 class="font-bold mb-2">Contemporary Challenges:</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>High information availability but contested narratives</li>
+                        <li>Real-time media coverage and social media impact</li>
+                        <li>Communication channels exist but trust is limited</li>
+                        <li>Economic constraints present but effectiveness debated</li>
+                        <li>Information warfare and disinformation campaigns</li>
+                    </ul>
+                `
+            }
+        };
+
+        function openModal(contentKey) {
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modalContent');
+            const content = modalContents[contentKey];
+            
+            modalContent.innerHTML = `
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">${content.title}</h2>
+                ${content.content}
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

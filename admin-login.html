@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - لوحة التحكم | Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #3b82f6;
+            outline: none;
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-login:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transform: scale(1.02);
+        }
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+    <!-- Theme System CSS -->
+    </head>
+<body class="min-h-screen flex items-center justify-center text-white p-4">
+    
+    <div class="w-full max-w-md">
+        <!-- Logo/Icon -->
+        <div class="text-center mb-8">
+            <div class="inline-block floating-icon">
+                <i class="fas fa-shield-alt text-7xl text-blue-400 mb-4"></i>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">لوحة التحكم الإدارية</h1>
+            <p class="text-gray-400">Admin Control Panel</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="login-card rounded-2xl p-8">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold mb-2">تسجيل الدخول</h2>
+                <p class="text-gray-400 text-sm">يرجى إدخال بيانات الدخول للمتابعة</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                <span id="errorText">اسم المستخدم أو كلمة المرور غير صحيحة</span>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="space-y-5">
+                    <!-- Username -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 flex items-center gap-2">
+                            <i class="fas fa-user text-blue-400"></i>
+                            اسم المستخدم / Username
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            class="input-field w-full px-4 py-3 rounded-lg" 
+                            placeholder="أدخل اسم المستخدم"
+                            required
+                            autocomplete="username"
+                        >
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 flex items-center gap-2">
+                            <i class="fas fa-lock text-blue-400"></i>
+                            كلمة المرور / Password
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="input-field w-full px-4 py-3 rounded-lg pr-12" 
+                                placeholder="أدخل كلمة المرور"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <button 
+                                type="button" 
+                                onclick="togglePassword()" 
+                                class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition"
+                            >
+                                <i id="eyeIcon" class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="rememberMe" class="w-4 h-4 rounded">
+                            <span class="text-sm text-gray-300">تذكرني</span>
+                        </label>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button 
+                        type="submit" 
+                        class="btn-login w-full py-3 rounded-lg font-bold text-white flex items-center justify-center gap-2"
+                    >
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>تسجيل الدخول</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Back to Home -->
+            <div class="mt-6 text-center">
+                <a href="index.html" class="text-blue-400 hover:text-blue-300 transition text-sm flex items-center justify-center gap-2">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>العودة إلى الصفحة الرئيسية</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Security Notice -->
+        <div class="mt-6 text-center text-gray-400 text-xs">
+            <i class="fas fa-lock mr-1"></i>
+            هذه الصفحة محمية ومخصصة للمسؤولين فقط
+        </div>
+    </div>
+
+    <script>
+        // الكود المشفر لكلمة المرور (SHA-256 hash)
+        // كلمة المرور الافتراضية: "admin2026"
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            // هذا هو hash لكلمة المرور - يجب تغييرها
+            passwordHash: '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918' // admin
+        };
+
+        // دالة تشفير كلمة المرور
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // التحقق من حالة تسجيل الدخول عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            const loginTime = sessionStorage.getItem('adminLoginTime');
+            
+            // التحقق من صلاحية الجلسة (24 ساعة)
+            if (isLoggedIn === 'true' && loginTime) {
+                const now = new Date().getTime();
+                const elapsed = now - parseInt(loginTime);
+                const hours = elapsed / (1000 * 60 * 60);
+                
+                if (hours < 24) {
+                    // الجلسة صالحة - إعادة التوجيه إلى لوحة التحكم
+                    window.location.href = 'admin-panel.html';
+                } else {
+                    // انتهت صلاحية الجلسة
+                    sessionStorage.removeItem('adminLoggedIn');
+                    sessionStorage.removeItem('adminLoginTime');
+                }
+            }
+        });
+
+        // معالجة تسجيل الدخول
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            // إخفاء رسالة الخطأ
+            errorMessage.style.display = 'none';
+            
+            try {
+                // تشفير كلمة المرور المدخلة
+                const hashedPassword = await hashPassword(password);
+                
+                // التحقق من بيانات الدخول
+                if (username === ADMIN_CREDENTIALS.username && 
+                    hashedPassword === ADMIN_CREDENTIALS.passwordHash) {
+                    
+                    // تسجيل الدخول ناجح
+                    sessionStorage.setItem('adminLoggedIn', 'true');
+                    sessionStorage.setItem('adminLoginTime', new Date().getTime().toString());
+                    
+                    // حفظ "تذكرني" إذا كان مفعلاً
+                    if (document.getElementById('rememberMe').checked) {
+                        localStorage.setItem('adminRemember', 'true');
+                    }
+                    
+                    // إعادة التوجيه إلى لوحة التحكم
+                    window.location.href = 'admin-panel.html';
+                    
+                } else {
+                    // بيانات خاطئة
+                    showError('اسم المستخدم أو كلمة المرور غير صحيحة');
+                }
+                
+            } catch (error) {
+                showError('حدث خطأ في عملية تسجيل الدخول');
+                console.error('Login error:', error);
+            }
+            
+            return false;
+        }
+
+        // عرض رسالة الخطأ
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorMessage.style.display = 'block';
+            
+            // اهتزاز الحقول
+            document.getElementById('loginForm').classList.add('shake');
+            setTimeout(() => {
+                document.getElementById('loginForm').classList.remove('shake');
+            }, 500);
+        }
+
+        // إظهار/إخفاء كلمة المرور
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+        // منع النسخ واللصق في حقل كلمة المرور
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordField = document.getElementById('password');
+            passwordField.addEventListener('paste', function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+<!-- Theme Toggle Button Component -->
+<!-- Insert this before closing </body> tag on all pages -->
+
+<!-- Theme Switcher Script -->
+<style>
+/* Theme Toggle Button Styles - Embedded for immediate loading */
+.theme-toggle-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--bg-card, #1e293b);
+    border: 2px solid var(--border-primary, #374151);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#sun-icon {
+    color: #facc15;
+}
+
+#moon-icon {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        top: 80px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .theme-toggle-btn i {
+        font-size: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.theme-toggle-btn:focus-visible {
+    outline: 3px solid #a855f7;
+    outline-offset: 2px;
+}
+</style>
+
+</body>
+</html>

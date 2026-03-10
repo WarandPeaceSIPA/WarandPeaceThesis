@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="قصة مصورة متحركة: كيف تمنع جودة المعلومات والقيود البنيوية الحرب">
+    <meta name="keywords" content="الواقعية البنيوية، نظرية المعلومات، منع الحرب، دراسات السلام">
+    <title>قصة مصورة: علم السلام | Visual Story: The Science of Peace</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arabic UI Text', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Mobile-First Header */
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            color: #94a3b8;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 2000;
+            background: rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid #3b82f6;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-toggle:hover {
+            background: rgba(59, 130, 246, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Story Container */
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Panel Styles */
+        .panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 2px solid transparent;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .panel.highlight {
+            border-color: #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Panel Header */
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .panel-icon {
+            font-size: clamp(2rem, 8vw, 4rem);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .panel-title {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .panel-title h2 {
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            margin-bottom: 0.3rem;
+            color: #3b82f6;
+        }
+
+        .panel-title p {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #94a3b8;
+        }
+
+        /* Panel Content */
+        .panel-content {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            line-height: 1.8;
+        }
+
+        .panel-content p {
+            margin-bottom: 1rem;
+        }
+
+        .panel-content strong {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        /* Visual Elements */
+        .visual-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .visual-box h3 {
+            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+            margin-bottom: 1rem;
+            color: #60a5fa;
+        }
+
+        /* Formula Display */
+        .formula {
+            background: rgba(139, 92, 246, 0.2);
+            border: 2px solid #8b5cf6;
+            border-radius: 15px;
+            padding: 2rem 1rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .formula .highlight {
+            color: #a78bfa;
+            font-size: 1.2em;
+        }
+
+        /* Variable Cards */
+        .variable-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .variable-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .variable-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .variable-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .variable-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #60a5fa;
+        }
+
+        .variable-card .range {
+            font-size: 1.2rem;
+            color: #a78bfa;
+            margin: 0.5rem 0;
+        }
+
+        .variable-card p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        .variable-card h4 {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            color: #f1f5f9;
+        }
+
+        /* Outcome Comparison */
+        .outcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .outcome-card {
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .outcome-card.war {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+            border: 2px solid #ef4444;
+        }
+
+        .outcome-card.peace {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            border: 2px solid #10b981;
+        }
+
+        .outcome-card .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .outcome-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .outcome-card.war h3 {
+            color: #f87171;
+        }
+
+        .outcome-card.peace h3 {
+            color: #34d399;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            font-size: 2rem;
+            color: #3b82f6;
+            z-index: 999;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .panel {
+                padding: 1.5rem 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .variable-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .outcome-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle" onclick="toggleLanguage()">
+        <span id="lang-icon"><i class="fa-solid fa-language text-purple-400"></i></span>
+        <span id="lang-text">English</span>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>علم السلام</h1>
+        <p>كيف تمنع جودة المعلومات والقيود البنيوية الحرب</p>
+    </div>
+
+    <!-- Story Container -->
+    <div class="story-container">
+
+        <!-- Panel 1: Introduction -->
+        <div class="panel" data-panel="1">
+            <div class="panel-header">
+                <span class="panel-icon"><i class="fa-solid fa-globe text-teal-400"></i></span>
+                <div class="panel-title">
+                    <h2>السؤال الكبير</h2>
+                    <p>لماذا تنتهي بعض الصراعات بالحرب بينما تنتهي أخرى بالسلام؟</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <p>
+                    لقرون، كافح العلماء للإجابة على هذا السؤال. <strong>لماذا حدثت الحرب العالمية الثانية، بينما لم تتصاعد أزمة الصواريخ الكوبية إلى حرب نووية؟</strong>
+                </p>
+
+                <div class="visual-box">
+                    <h<h3><i class="fa-solid fa-chart-bar text-green-400"></i> بحثنا: 28 حالة تاريخية (1910-2022)</h3>[^>]*><i class="fa-solid fa-chart-bar text-green-400"></i> بحثنا: 28 حالة تاريخية (1910-2022)</h<h3><i class="fa-solid fa-chart-bar text-green-400"></i> بحثنا: 28 حالة تاريخية (1910-2022)</h3>>
+                    <p>14 حرباً • 14 حالة سلام • 313 مرجعاً أكاديمياً</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 2: The Three Variables -->
+        <div class="panel" data-panel="2">
+            <div class="panel-header">
+                <span class="panel-icon">🔬</span>
+                <div class="panel-title">
+                    <h2>ثلاثة متغيرات رئيسية</h2>
+                    <p>اللبنات الأساسية لنموذجنا</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <p>
+                    يحدد بحثنا <strong>ثلاثة متغيرات حاسمة</strong> تحدد ما إذا كان الصراع سينتهي بالحرب أم بالسلام:
+                </p>
+
+                <div class="variable-grid">
+                    <div class="variable-card">
+                        <span class="icon">⚖️</span>
+                        <h3>ق</h3>
+                        <div class="range">0-10</div>
+                        <h4>القيد البنيوي</h4>
+                        <p>توازن القوى بين الدول. ما مدى قوة الحواجز أمام الحرب؟</p>
+                    </div>
+
+                    <div class="variable-card">
+                        <span class="icon"><i class="fa-solid fa-lightbulb text-yellow-300"></i></span>
+                        <h3>م</h3>
+                        <div class="range">0-10</div>
+                        <h4>جودة المعلومات</h4>
+                        <p>ما مدى دقة المعلومات المتاحة لصناع القرار؟</p>
+                    </div>
+
+                    <div class="variable-card">
+                        <span class="icon">🤝</span>
+                        <h3>ت</h3>
+                        <div class="range">0-10</div>
+                        <h4>التقارب</h4>
+                        <p>درجة الفهم المشترك والاتفاق بين الأطراف.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 3: The Core Discovery -->
+        <div class="panel" data-panel="3">
+            <div class="panel-header">
+                <span class="panel-icon"><i class="fa-solid fa-lightbulb text-yellow-300"></i></span>
+                <div class="panel-title">
+                    <h2>الاكتشاف الأساسي</h2>
+                    <p>جودة المعلومات هي المحور</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <p>
+                    ركزت النظريات التقليدية فقط على <strong>القيد البنيوي (ق)</strong> - توازن القوى. لكن بحثنا يكشف شيئاً ثورياً:
+                </p>
+
+                <div class="formula">
+                    <span class="highlight">ق + م</span> ← ت ← سلام
+                </div>
+
+                <div class="visual-box">
+                    <h<h3><i class="fa-solid fa-bullseye text-red-400"></i> الفكرة الحاسمة</h3>[^>]*><i class="fa-solid fa-bullseye text-red-400"></i> الفكرة الحاسمة</h<h3><i class="fa-solid fa-bullseye text-red-400"></i> الفكرة الحاسمة</h3>>
+                    <p>
+                        <strong>القيود البنيوية وحدها ليست كافية.</strong> حتى مع توازنات قوى قوية، يمكن أن تحدث الحروب إذا كانت جودة المعلومات ضعيفة. لكن عندما تجمع بين قيود بنيوية عالية (ق) وجودة معلومات عالية (م)، تخلق التقارب (ت) - والتقارب يؤدي إلى السلام.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 4: War vs Peace Comparison -->
+        <div class="panel" data-panel="4">
+            <div class="panel-header">
+                <span class="panel-icon">⚔️</span>
+                <div class="panel-title">
+                    <h2>الحرب مقابل السلام: النمط</h2>
+                    <p>ما الذي يفصل بين نتائج الصراع؟</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div class="outcome-grid">
+                    <div class="outcome-card war">
+                        <span class="icon">⚔️</span>
+                        <h3>حالات الحرب</h3>
+                        <div style="font-size: 1.2rem; margin: 1rem 0;">
+                            <p><strong>ق:</strong> منخفض (2-6)</p>
+                            <p><strong>م:</strong> منخفض (2-5)</p>
+                            <p><strong>ت:</strong> منخفض جداً (1-3)</p>
+                        </div>
+                        <p>أمثلة: الحرب العالمية الثانية (ق=3، م=2، ت=1)، حرب العراق (ق=4، م=3، ت=2)</p>
+                    </div>
+
+                    <div class="outcome-card peace">
+                        <span class="icon">🕊️</span>
+                        <h3>حالات السلام</h3>
+                        <div style="font-size: 1.2rem; margin: 1rem 0;">
+                            <p><strong>ق:</strong> عالٍ (7-9)</p>
+                            <p><strong>م:</strong> عالٍ (7-9)</p>
+                            <p><strong>ت:</strong> عالٍ (6-8)</p>
+                        </div>
+                        <p>أمثلة: أزمة الصواريخ الكوبية (ق=9، م=8، ت=7)، معاهدة ماستريخت (ق=9، م=9، ت=8)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 5: The Critical Threshold -->
+        <div class="panel" data-panel="5">
+            <div class="panel-header">
+                <span class="panel-icon"><i class="fa-solid fa-bullseye text-red-400"></i></span>
+                <div class="panel-title">
+                    <h2>العتبة الحرجة</h2>
+                    <p>الرقم السحري: م ≥ 7</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <p>
+                    يكشف تحليلنا لـ 28 حالة عن <strong>عتبة حرجة</strong>:
+                </p>
+
+                <div class="visual-box">
+                    <h<h3><i class="fa-solid fa-chart-bar text-green-400"></i> دقة تنبؤية 100%</h3>[^>]*><i class="fa-solid fa-chart-bar text-green-400"></i> دقة تنبؤية 100%</h<h3><i class="fa-solid fa-chart-bar text-green-400"></i> دقة تنبؤية 100%</h3>>
+                    <p style="font-size: 1.3rem; margin-top: 1rem;">
+                        عندما تكون <strong>جودة المعلومات (م) ≥ 7</strong>، تحدث نتائج السلام <strong>بنسبة 100%</strong> (14 من 14 حالة).
+                    </p>
+                    <p style="font-size: 1.3rem; margin-top: 1rem;">
+                        عندما تكون <strong>جودة المعلومات (م) < 7</strong>، تحدث نتائج الحرب <strong>بنسبة 100%</strong> (14 من 14 حالة).
+                    </p>
+                </div>
+
+                <div class="formula">
+                    م ≥ 7 ← سلام | م < 7 ← حرب
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 6: Real-World Examples -->
+        <div class="panel" data-panel="6">
+            <div class="panel-header">
+                <span class="panel-icon">📚</span>
+                <div class="panel-title">
+                    <h2>أمثلة من الواقع</h2>
+                    <p>النظرية تلتقي التاريخ</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div class="visual-box">
+                    <h3>🕊️ أزمة الصواريخ الكوبية (1962) - سلام</h3>
+                    <p>
+                        <strong>ق = 9</strong> (قيود بنيوية عالية جداً: الردع النووي)<br>
+                        <strong>م = 8</strong> (جودة معلومات عالية: خط ساخن مباشر، تواصل واضح)<br>
+                        <strong>ت = 7</strong> (تقارب عالٍ: كلا الطرفين فهم الدمار المتبادل)<br>
+                        <strong>النتيجة: سلام</strong> - اتفاق سري، إزالة الصواريخ، تجنب الحرب
+                    </p>
+                </div>
+
+                <div class="visual-box" style="margin-top: 2rem;">
+                    <h3>⚔️ الحرب العالمية الثانية (1939) - حرب</h3>
+                    <p>
+                        <strong>ق = 3</strong> (قيود بنيوية منخفضة: فشل سياسة الاسترضاء)<br>
+                        <strong>م = 2</strong> (جودة معلومات منخفضة جداً: استخبارات ضعيفة، أحكام خاطئة)<br>
+                        <strong>ت = 1</strong> (تقارب منخفض جداً: لا فهم مشترك)<br>
+                        <strong>النتيجة: حرب</strong> - 70 مليون قتيل، 6 سنوات من الدمار
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 7: Policy Implications -->
+        <div class="panel" data-panel="7">
+            <div class="panel-header">
+                <span class="panel-icon">🎓</span>
+                <div class="panel-title">
+                    <h2>ماذا يعني هذا للسلام</h2>
+                    <p>التطبيقات العملية</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <p>
+                    يوفر بحثنا <strong>رؤى قابلة للتطبيق</strong> لصناع السياسات والدبلوماسيين:
+                </p>
+
+                <div class="variable-grid">
+                    <div class="variable-card">
+                        <span class="icon">📡</span>
+                        <h3>تحسين التواصل</h3>
+                        <p>إنشاء خطوط ساخنة وقنوات مباشرة ورسائل واضحة بين الخصوم المحتملين.</p>
+                    </div>
+
+                    <div class="variable-card">
+                        <span class="icon"><i class="fa-solid fa-search text-gray-400"></i></span>
+                        <h3>تعزيز الاستخبارات</h3>
+                        <p>الاستثمار في قدرات جمع وتحليل المعلومات الاستخبارية الدقيقة في الوقت الفعلي.</p>
+                    </div>
+
+                    <div class="variable-card">
+                        <span class="icon">🤝</span>
+                        <h3>بناء الشفافية</h3>
+                        <p>إنشاء آليات تحقق وتدابير بناء الثقة لتقليل عدم اليقين.</p>
+                    </div>
+                </div>
+
+                <div class="visual-box" style="margin-top: 2rem;">
+                    <h<h3><i class="fa-solid fa-globe text-teal-400"></i> الخلاصة</h3>[^>]*><i class="fa-solid fa-globe text-teal-400"></i> الخلاصة</h<h3><i class="fa-solid fa-globe text-teal-400"></i> الخلاصة</h3>>
+                    <p style="font-size: 1.2rem;">
+                        <strong>جودة المعلومات هي مفتاح السلام.</strong> من خلال ضمان حصول صناع القرار على معلومات دقيقة وفي الوقت المناسب وقنوات اتصال واضحة، يمكننا منع تصاعد الصراعات إلى حرب - حتى عندما لا تكون القيود البنيوية مثالية.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel 8: Conclusion -->
+        <div class="panel" data-panel="8">
+            <div class="panel-header">
+                <span class="panel-icon"><i class="fa-solid fa-bullseye text-red-400"></i></span>
+                <div class="panel-title">
+                    <h2>الطريق إلى الأمام</h2>
+                    <p>بناء عالم أكثر سلاماً</p>
+                </div>
+            </div>
+            <div class="panel-content">
+                <div class="formula">
+                    معلومات أفضل ← قرارات أفضل ← سلام دائم
+                </div>
+
+                <p style="font-size: 1.2rem; text-align: center; margin-top: 2rem;">
+                    يوضح هذا البحث أن <strong>السلام ليس فقط عن القوة</strong> - بل عن <strong>المعرفة والتواصل والفهم</strong>. من خلال التركيز على تحسين جودة المعلومات وخلق التقارب، يمكننا بناء نظام دولي أكثر استقراراً وسلاماً.
+                </p>
+
+                <div class="visual-box" style="margin-top: 2rem;">
+                    <h3>📚 بناءً على بحث شامل</h3>
+                    <p>28 حالة تاريخية • 313 مرجعاً أكاديمياً • 112 عاماً من البيانات (1910-2022)</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="index-ar.html" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; text-decoration: none; border-radius: 50px; font-size: 1.2rem; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-home text-blue-400"></i> العودة إلى لوحة التحكم الرئيسية
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scroll-indicator">⬇️</div>
+
+    <script>
+        // Language Toggle
+        function toggleLanguage() {
+            window.location.href = 'visual-storytelling.html';
+        }
+
+        // Scroll Animations
+        const panels = document.querySelectorAll('.panel');
+        const progressBar = document.getElementById('progress-bar');
+        const scrollIndicator = document.getElementById('scroll-indicator');
+
+        function checkScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+            
+            progressBar.style.width = scrollProgress + '%';
+
+            // Show/hide scroll indicator
+            if (scrollProgress > 10) {
+                scrollIndicator.style.opacity = '0';
+            } else {
+                scrollIndicator.style.opacity = '1';
+            }
+
+            // Animate panels on scroll
+            panels.forEach(panel => {
+                const panelTop = panel.getBoundingClientRect().top;
+                const panelBottom = panel.getBoundingClientRect().bottom;
+                
+                if (panelTop < window.innerHeight * 0.8 && panelBottom > 0) {
+                    panel.classList.add('visible');
+                    
+                    // Highlight panel when in center of viewport
+                    if (panelTop < window.innerHeight * 0.5 && panelBottom > window.innerHeight * 0.5) {
+                        panel.classList.add('highlight');
+                    } else {
+                        panel.classList.remove('highlight');
+                    }
+                }
+            });
+        }
+
+        // Initial check
+        checkScroll();
+
+        // Listen to scroll events
+        window.addEventListener('scroll', checkScroll);
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add touch-friendly interactions for mobile
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.variable-card, .outcome-card').forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                card.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>
