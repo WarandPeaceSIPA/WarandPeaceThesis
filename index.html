@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta name="description" content="Informational Conditions for Structural Constraint Effectiveness: Expectation Convergence and the Possibility of Peace - Academic Research in International Relations">
     <meta name="keywords" content="International Relations, Structural Realism, Information Theory, Peace, War, Bayesian Learning">
-    <meta name="author" content="Zaher Al-Issa">
+    <meta name="author" content="Zaher Al-Issi">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Informational Conditions for Structural Constraint Effectiveness">
@@ -224,13 +225,13 @@
                         </div>
                     </div>
                     
-                    <div class="flex flex-col md:flex-row gap-4 justify-center flex-wrap">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
                         
-                        <a href="interactive-map.html" class="bg-yellow-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-700 transition shadow-lg"> Interactive Historical Map</a>
-                        <a href="interactive-system-structure.html" class="bg-indigo-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-indigo-700 transition shadow-lg"> System Structure Map</a>
+                        <a href="interactive-system-structure.html" class="w-full bg-indigo-600 text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-indigo-700 transition shadow-lg"> Interactive Historical Map</a>
+                        <a href="interactive-map.html" class="w-full bg-yellow-600 text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-yellow-700 transition shadow-lg"> System Structure Map</a>
                       
                             
-                        <a href="#summary" class="bg-white text-blue-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
+                        <a href="summary"  class="w-full bg-white text-blue-700 px-6 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition shadow-lg">
                             
                             <svg class="inline-block w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="grad-book-btn" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -257,12 +258,11 @@
         <circle cx="12" cy="18" r="0.8" fill="url(#grad-calc-btn)"/>
         <circle cx="15.5" cy="18" r="0.8" fill="url(#grad-calc-btn)"/>
     </svg> Mathematical Framework
-                        </a>
-                        <a href="3d-surface-plot.html" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg">
+                        <a ref="3d-surface-plot.html" class="w-full bg-blue-600 text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg">
                             
                             <i class="fa-solid fa-chart-line text-cyan-400"></i> 3D Surface Plot
                         </a>
-                        <a href="#database" class="bg-cyan-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-cyan-700 transition shadow-lg">
+                        <a href="#database" class="w-full bg-yellow-600 text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-yellow-700 transition shadow-lg">
                             
                             <svg class="inline-block w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="grad-db-btn" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -274,7 +274,7 @@
         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" stroke="url(#grad-db-btn)" stroke-width="2" fill="none"/>
     </svg> Explore Database
                         </a>
-                        <a href="dashboard-hub-en.html" class="bg-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition shadow-lg">
+                        <a href="dashboard-hub-en.html" class="w-full bg-green-600 text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition shadow-lg">
                             
                             <svg class="inline-block w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="grad-chart-btn" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -878,14 +878,17 @@
             }
         });
     </script>
-    
     <!-- Secret Admin Access: Press Ctrl+Shift+A -->
     <script>
-        document.addEventListener('keydown', function(e) {
-            // Ctrl+Shift+A للوصول السري إلى صفحة تسجيل الدخول
-            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-                e.preventDefault();
-                window.location.href = 'admin-login.html';
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: "smooth"});
+        }
+        window.addEventListener("scroll", function () {
+            const btn = document.getElementById("backToTop");
+            if (window.scrollY > 300) {
+                btn.classList.remove("opacity-0","pointer-events-none");
+            } else {
+                btn.classList.add("opacity-0","pointer-events-none");
             }
         });
     </script>
