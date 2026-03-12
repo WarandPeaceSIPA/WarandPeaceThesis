@@ -137,10 +137,47 @@
             font-size: 0.875rem;
             margin-bottom: 1rem;
         }
+        .hero-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+padding:16px;
+border-radius:10px;
+font-weight:bold;
+font-size:18px;
+color:white;
+transition:0.3s;
+box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+.hero-btn:hover{
+transform:translateY(-3px);
+}
     </style>
     <!-- Theme System CSS -->
     </head>
 <body class="bg-gray-50 text-gray-900">
+    <script>
+
+function switchLanguage(lang){
+
+if(lang === "ar"){
+
+document.getElementById("hero-en").style.display="none";
+document.getElementById("hero-ar").style.display="grid";
+
+document.body.dir="rtl";
+
+}else{
+
+document.getElementById("hero-en").style.display="grid";
+document.getElementById("hero-ar").style.display="none";
+
+document.body.dir="ltr";}
+}
+
+</script>
     
     <!-- Skip to Content Link for Accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -191,12 +228,33 @@
                 </div>
             </div>
         </div>
+        <div class="font-bold text-xl">
+IR Research
+</div>
+
+<div class="flex gap-4">
+
+<a href="index.html">Home</a>
+<a href="dashboard-hub-en.html">Dashboard</a>
+
+<button onclick="switchLanguage('ar')" class="px-3 py-1 bg-gray-200 rounded">
+العربية
+</button>
+
+<button onclick="switchLanguage('en')" class="px-3 py-1 bg-gray-200 rounded">
+English
+</button>
+
+</div>
+
     </nav>
     
     <!-- Main Content -->
     <main id="main-content">
         
         <!-- Hero Section -->
+        
+       
         <section id="home" class="hero-gradient text-white py-20 md:py-32" role="banner">
             <div class="container mx-auto px-4 text-center">
                 <div class="max-w-4xl mx-auto">
@@ -224,7 +282,94 @@
                             <p class="font-bold text-lg">Dr. Dareen Al-Abdul Mohsen</p>
                         </div>
                     </div>
-                    
+                    <div class="max-w-5xl mx-auto">
+
+<!-- ENGLISH BUTTONS -->
+<div id="hero-en" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<a href="interactive-system-structure.html"
+class="hero-btn bg-indigo-600">
+<i class="fa-solid fa-globe"></i>
+Interactive Historical Map
+</a>
+
+<a href="interactive-map.html"
+class="hero-btn bg-yellow-600">
+<i class="fa-solid fa-map"></i>
+System Structure Map
+</a>
+
+<a href="#summary"
+class="hero-btn bg-white text-blue-700">
+<i class="fa-solid fa-book"></i>
+Read Summary
+</a>
+
+<a href="mathematical-framework.html"
+class="hero-btn bg-purple-600">
+<i class="fa-solid fa-calculator"></i>
+Mathematical Framework
+</a>
+
+<a href="3d-surface-plot.html"
+class="hero-btn bg-blue-600">
+<i class="fa-solid fa-chart-line"></i>
+3D Surface Plot
+</a>
+
+<a href="dashboard-hub-en.html"
+class="hero-btn bg-green-600">
+<i class="fa-solid fa-chart-pie"></i>
+Dashboard
+</a>
+
+</div>
+
+
+<!-- ARABIC BUTTONS -->
+<div id="hero-ar" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 hidden">
+
+<a href="interactive-system-structure.html"
+class="hero-btn bg-indigo-600">
+<i class="fa-solid fa-globe"></i>
+الخريطة التاريخية التفاعلية
+</a>
+
+<a href="interactive-map.html"
+class="hero-btn bg-yellow-600">
+<i class="fa-solid fa-map"></i>
+خريطة بنية النظام
+</a>
+
+<a href="#summary"
+class="hero-btn bg-white text-blue-700">
+<i class="fa-solid fa-book"></i>
+قراءة الملخص
+</a>
+
+<a href="mathematical-framework.html"
+class="hero-btn bg-purple-600">
+<i class="fa-solid fa-calculator"></i>
+الإطار الرياضي
+</a>
+
+<a href="3d-surface-plot.html"
+class="hero-btn bg-blue-600">
+<i class="fa-solid fa-chart-line"></i>
+الرسم ثلاثي الأبعاد
+</a>
+
+<a href="dashboard-hub.html"
+class="hero-btn bg-green-600">
+<i class="fa-solid fa-chart-pie"></i>
+لوحة البيانات
+</a>
+
+</div>
+
+</div>
+
+                    <!---
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
                         
                         <a href="interactive-system-structure.html" class="w-full bg-indigo-600 text-white px-6 py-4 rounded-lg font-bold text-lg hover:bg-indigo-700 transition shadow-lg"> Interactive Historical Map</a>
